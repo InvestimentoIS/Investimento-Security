@@ -39,7 +39,7 @@ app.post('/api/generate-address', async (req, res) => {
             }
         }, {
             headers: {
-                'X-CC-Api-Key': '5fb7fe97-3853-416b-88bb-f1b7bd7a3b6d',
+                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
                 'X-CC-Version': '2018-03-22'
             },
             timeout: 10000  // Aumentar o tempo de espera para 10 segundos
@@ -77,7 +77,7 @@ app.get('/api/check-payment/:chargeId', async (req, res) => {
     try {
         const response = await axios.get(`https://api.commerce.coinbase.com/charges/${chargeId}`, {
             headers: {
-                'X-CC-Api-Key': '5fb7fe97-3853-416b-88bb-f1b7bd7a3b6d',
+                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
                 'X-CC-Version': '2018-03-22'
             },
             timeout: 10000  // Aumentar o tempo de espera para 10 segundos
