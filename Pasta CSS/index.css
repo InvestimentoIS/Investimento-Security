@@ -1,0 +1,252 @@
+/* Pasta CSS/index.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #003366;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo {
+    width: 140px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li {
+    margin-left: 20px;
+    position: relative; /* Permite a posição absoluta do dropdown */
+}
+
+.nav ul li a {
+    color: #4DA6FF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffcc00;
+}
+
+.login-btn, .register-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.login-btn {
+    background-color: #ffcc00; /* Cor diferenciada para o botão de Login */
+    color: #003366;
+}
+
+.register-btn {
+    background-color: #ff5733; /* Cor diferenciada para o botão de Cadastro */
+}
+
+.login-btn:hover, .register-btn:hover {
+    background-color: #ff9933; /* Mudança de cor ao passar o mouse */
+}
+
+.user-info {
+    font-size: 1.1em;
+    margin-right: 20px;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.menu-icon {
+    cursor: pointer;
+    font-size: 2em;
+    transition: transform 0.3s ease-in-out;
+    color: #ffffff;
+}
+
+.menu-icon:hover {
+    color: #ffcc00;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* Posiciona o menu dropdown abaixo do ícone */
+    right: 0;
+    background-color: #003366;
+    color: white;
+    list-style-type: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 1000;
+}
+
+.dropdown li {
+    padding: 10px 20px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.dropdown li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown li:hover {
+    background-color: #4DA6FF;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-image: url('Pasta Imagens/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #003366;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+/* Estilo para a seção de recursos */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.feature-item {
+    text-align: center;
+    max-width: 220px;
+}
+
+.feature-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    font-size: 1.2em;
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    color: #666666;
+    font-size: 0.95em;
+}
+
+/* Estilo para a calculadora de investimentos */
+.investment-calculator {
+    background-color: #e0e0e0;
+    padding: 20px 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.investment-calculator h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.investment-calculator .form-group {
+    margin-bottom: 15px;
+}
+
+.investment-calculator label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.investment-calculator input,
+.investment-calculator select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.investment-calculator button {
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.investment-calculator button:hover {
+    background-color: #00224d;
+}
+
+.investment-calculator .result {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #003366;
+}
+
+/* Tornando o site responsivo para dispositivos móveis */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .dropdown {
+        width: 100%; /* O menu dropdown ocupará toda a largura no modo móvel */
+        left: 0;
+        right: 0;
+    }
+}

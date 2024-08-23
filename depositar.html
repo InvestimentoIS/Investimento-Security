@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depositar em Criptomoedas</title>
+    <link rel="stylesheet" href="Pasta CSS/depositar.css">
+</head>
+<body>
+    <header class="header">
+        <img src="Fotos/Logo-Repete-1.png" alt="Logo da Empresa" class="logo">
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="investidores.html">Investidores</a></li>
+                <li><a href="acoes.html">Ações</a></li>
+                <li><a href="guia-investimento.html">Guia para Investir</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="deposito-container">
+            <h1>Depositar em Criptomoedas</h1>
+            <form id="depositoForm">
+                <label for="cryptoType">Escolha a Criptomoeda:</label>
+                <select id="cryptoType">
+                    <option value="BTC">Bitcoin (BTC)</option>
+                    <option value="ETH">Ethereum (ETH)</option>
+                    <option value="USDC">USDCerc20 (USDC)</option>
+                </select>
+                
+                <label for="depositAmount">Valor do Depósito ($):</label>
+                <input type="number" id="depositAmount" min="1" placeholder="Mínimo de $1" required>
+                
+                <button type="submit">Gerar Endereço de Depósito</button>
+            </form>
+            <div id="depositInfo" style="display:none;">
+                <p>Endereço de Depósito (expira em 20 minutos):</p>
+                <p id="depositAddress"></p>
+                <p>QR Code:</p>
+                <img id="qrCodeImage" alt="QR Code" />
+                <p id="countdown"></p>
+                <button id="checkPayment" style="display:none;">Verificar Pagamento</button>
+            </div>
+            <div id="statusMessage"></div> <!-- Para exibir mensagens de status -->
+        </section>
+    </main>
+    <script src="Pasta JS/depositar.js"></script>
+</body>
+</html>

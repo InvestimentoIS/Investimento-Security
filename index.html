@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="Pasta CSS/index.css">
+</head>
+<body>
+    <header class="header">
+        <img src="Fotos/Logo-Repete-1.png" alt="Logo da Empresa" class="logo">
+        <nav class="nav">
+            <ul id="nav-list">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="investidores.html">Investidores</a></li>
+                <li><a href="acoes.html">Ações</a></li>
+                <li><a href="guia-investimento.html">Guia para Investir</a></li>
+                <li class="auth-links"><a href="login.html" class="login-btn">Login</a></li>
+                <li class="auth-links"><a href="register.html" class="register-btn">Cadastro</a></li>
+                <li class="user-info" style="display: none;"><span>Saldo 1.000,00 €</span></li> <!-- Inicialmente oculto -->
+                <li class="user-menu" style="display: none;"> <!-- Inicialmente oculto -->
+                    <div class="menu-icon" id="user-menu-icon">⋮</div>
+                    <ul class="dropdown" id="user-dropdown">
+                        <li><a href="#">Detalhe da conta</a></li>
+                        <li><a href="#">QT de ações</a></li>
+                        <li><a href="#">Comprar ações</a></li>
+                        <li><a href="#">Vender ações</a></li>
+                        <li><a href="#">Depositar</a></li>
+                        <li><a href="#">Retirada</a></li>
+                        <li><a href="#">IT Banck</a></li>
+                        <li><a href="#" id="logout">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Bem-vindo ao Nosso Site de Investimentos</h1>
+            <p>Explore o mundo dos investimentos e aprenda a fazer seu dinheiro crescer!</p>
+        </section>
+
+        <!-- Seção com Quatro Colunas -->
+        <section class="features">
+            <div class="feature-item">
+                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Estratégia de Investimento">
+                <h3>Estratégia de Investimento</h3>
+                <p>Aprenda as melhores estratégias para maximizar seus retornos no mercado de ações.</p>
+            </div>
+            <div class="feature-item">
+                <img src="Fotos/vecteezy_trader-holding-graph-chart-with-arrow-for-analysis-stock_7039565.jpg" alt="Diversificação">
+                <h3>Diversificação</h3>
+                <p>Diversifique seu portfólio para minimizar riscos e aumentar a segurança dos seus investimentos.</p>
+            </div>
+            <div class="feature-item">
+                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Análise de Mercado">
+                <h3>Análise de Mercado</h3>
+                <p>Obtenha insights sobre as tendências do mercado e tome decisões informadas.</p>
+            </div>
+            <div class="feature-item">
+                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Objetivos Financeiros">
+                <h3>Objetivos Financeiros</h3>
+                <p>Defina e alcance seus objetivos financeiros com nosso suporte especializado.</p>
+            </div>
+        </section>
+
+        <!-- Calculadora de Investimentos -->
+        <section class="investment-calculator">
+            <h2>Calculadora de Retorno de Investimentos</h2>
+            <form id="calculatorForm">
+                <div class="form-group">
+                    <label for="investmentAmount">Montante de Investimento (€):</label>
+                    <input type="number" id="investmentAmount" required>
+                </div>
+                <div class="form-group">
+                    <label for="rateOfReturn">Taxa de Retorno Anual (%):</label>
+                    <input type="number" id="rateOfReturn" required>
+                </div>
+                <div class="form-group">
+                    <label for="investmentTime">Tempo de Investimento:</label>
+                    <input type="number" id="investmentTime" required>
+                    <select id="timeUnit">
+                        <option value="years">Anos</option>
+                        <option value="months">Meses</option>
+                        <option value="days">Dias</option>
+                    </select>
+                </div>
+                <button type="button" onclick="calculateReturn()">Calcular Retorno</button>
+            </form>
+            <div id="investmentResult" class="result"></div>
+        </section>
+        
+    </main>
+    <script src="Pasta JS/index.js"></script>
+</body>
+</html>

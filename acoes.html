@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ações</title>
+    <link rel="stylesheet" href="Pasta CSS/acoes.css">
+</head>
+<body>
+    <header class="header">
+        <img src="Pasta Imagens/logo.png" alt="Logo da Empresa" class="logo">
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="investidores.html">Investidores</a></li>
+                <li><a href="acoes.html">Ações</a></li>
+                <li><a href="guia-investimento.html">Guia para Investir</a></li>
+                <li id="saldo" class="user-info">Saldo: $0.00</li> <!-- Exibição do Saldo -->
+                <li class="user-menu" style="display: none;"> <!-- Inicialmente oculto -->
+                    <div class="menu-icon" id="user-menu-icon">⋮</div>
+                    <ul class="dropdown" id="user-dropdown">
+                        <li><a href="#">Detalhe da conta</a></li>
+                        <li><a href="#">Quantidade de ações</a></li>
+                        <li><a href="#">Comprar ações</a></li>
+                        <li><a href="#">Vender ações</a></li>
+                        <li><a href="#">Depositar</a></li>
+                        <li><a href="#">Retirada</a></li>
+                        <li><a href="#" id="logout">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="acoes-container">
+            <h1>Mercado de Ações</h1>
+            <table id="acoesTable">
+                <thead>
+                    <tr>
+                        <th>Ação</th>
+                        <th>Preço ($)</th>
+                        <th>Variação (%)</th>
+                        <th>QT Disponível</th>
+                        <th>Quantidade</th>
+                        <th>GR Mensal (%)</th>
+                        <th>Comprar</th>
+                        <th>Vender</th>
+                    </tr>
+                </thead>
+                <tbody id="acoesBody">
+                    <!-- As linhas das ações serão inseridas dinamicamente aqui -->
+                </tbody>
+            </table>
+        </section>
+        <section class="historico-container">
+            <h2>Histórico de Transações</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Ação</th>
+                        <th>Quantidade</th>
+                        <th>Valor Total ($)</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody id="historico">
+                    <!-- Histórico será inserido dinamicamente aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="Pasta JS/acoes.js"></script>
+</body>
+</html>

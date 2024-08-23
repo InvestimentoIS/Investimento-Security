@@ -1,0 +1,82 @@
+/* Pasta CSS/guia-investimento.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #003366;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo {
+    width: 140px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffcc00;
+}
+
+.investment-guide {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.investment-guide h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 30px;
+}
+
+.investment-guide ol {
+    margin-left: 20px;
+    color: #003366;
+    font-size: 1.1em;
+}
+
+.investment-guide ol li {
+    margin-bottom: 10px;
+}
+
+.investment-guide p {
+    color: #666666;
+    margin-top: 20px;
+}
+
+.investment-guide a {
+    color: #4DA6FF;
+    text-decoration: none;
+}
+
+.investment-guide a:hover {
+    text-decoration: underline;
+}

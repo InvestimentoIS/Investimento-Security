@@ -1,0 +1,167 @@
+/* Pasta CSS/acoes.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #003366;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo {
+    width: 140px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #ffcc00;
+}
+
+.acoes-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.acoes-container h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td .positive {
+    color: green;
+    font-weight: bold;
+}
+
+td .negative {
+    color: red;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.buy-btn, .sell-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.buy-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sell-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.buy-btn:hover {
+    background-color: #45a049;
+}
+
+.sell-btn:hover {
+    background-color: #e53935;
+}
+
+/* Estilo para o histórico de transações */
+.historico-container {
+    margin-top: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.historico-container h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.historico-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historico-container th, .historico-container td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.historico-container th {
+    background-color: #003366;
+    color: white;
+}
+
+.compra {
+    color: green;
+    font-weight: bold;
+}
+
+.venda {
+    color: red;
+    font-weight: bold;
+}

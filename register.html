@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="Pasta CSS/styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="Pasta Imagens/logo.png" alt="Logo da Empresa" class="logo">
+        <h2>Cadastro de Usuário</h2>
+        <div id="message"></div>
+        <form id="registerForm" action="/register" method="POST">
+            <div class="form-group">
+                <label for="username">Nome de Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-email">Confirmar Email:</label>
+                <input type="email" id="confirm-email" name="confirm_email" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Data de Nascimento:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required onkeyup="checkPasswordStrength()">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password')">🔐</span>
+                </div>
+                <div id="password-strength" class="strength-indicator"></div>
+                <div class="strength-bar" id="strength-bar"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirmar Senha:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm-password" name="confirm_password" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">🔐</span>
+                </div>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            const messageDiv = document.getElementById('message');
+            if (response.ok) {
+                messageDiv.innerHTML = `<p class="message-success">${result.success}</p>`;
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 1000); // Redireciona para a página de login após 1 segundo
+            } else {
+                messageDiv.innerHTML = `<p class="message-error">${result.error}</p>`;
+                setTimeout(() => {
+                    messageDiv.innerHTML = ''; // Limpa a mensagem após 5 segundos
+                }, 5000);
+            }
+        });
+
+        function togglePasswordVisibility(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleIcon = passwordField.nextElementSibling;
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🔓'; // Ícone de "senha visível"
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '🔐'; // Ícone de "senha oculta"
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthIndicator = document.getElementById('password-strength');
+            const strengthBar = document.getElementById('strength-bar');
+            let strength = 0;
+
+            if (password.length >= 8) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[\W]/.test(password)) strength += 1;
+
+            strengthBar.style.width = `${strength * 20}%`;
+
+            switch (strength) {
+                case 1:
+                case 2:
+                    strengthIndicator.textContent = 'Muito fraca';
+                    strengthIndicator.style.color = 'red';
+                    strengthBar.style.backgroundColor = 'red';
+                    break;
+                case 3:
+                    strengthIndicator.textContent = 'Fraca';
+                    strengthIndicator.style.color = 'orange';
+                    strengthBar.style.backgroundColor = 'orange';
+                    break;
+                case 4:
+                    strengthIndicator.textContent = 'Boa';
+                    strengthIndicator.style.color = 'yellowgreen';
+                    strengthBar.style.backgroundColor = 'yellowgreen';
+                    break;
+                case 5:
+                    strengthIndicator.textContent = 'Muito forte';
+                    strengthIndicator.style.color = 'green';
+                    strengthBar.style.backgroundColor = 'green';
+                    break;
+                default:
+                    strengthIndicator.textContent = '';
+                    strengthBar.style.backgroundColor = '';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

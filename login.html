@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="Pasta CSS/styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="Pasta Imagens/logo.png" alt="Logo da Empresa" class="logo">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password')">🔐</span>
+                </div>
+            </div>
+            <button type="button" onclick="simulateLogin()">Login</button>
+            <p><a href="register.html">Criar conta</a> | <a href="forgot-password.html">Esqueceu a senha?</a></p>
+        </form>
+    </div>
+    <script src="Pasta JS/index.js"></script>
+</body>
+</html>
