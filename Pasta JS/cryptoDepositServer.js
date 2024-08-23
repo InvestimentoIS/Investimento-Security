@@ -1,4 +1,3 @@
-// Pasta JS/cryptoDepositServer.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -14,20 +13,42 @@ app.use(bodyParser.json());
 
 const PORT = 3001; // Porta do servidor
 
-// Rota para gerar o endereço de depósito em USDC na rede Ethereum
+const supportedCryptos = {
+    ETH: 'Ethereum',
+    BTC: 'Bitcoin',
+    LTC: 'Litecoin',
+    DOGE: 'Dogecoin',
+    BCH: 'Bitcoin Cash',
+    USDC: 'USD Coin',
+    DAI: 'Dai',
+    APE: 'ApeCoin',
+    SHIB: 'SHIBA INU',
+    USDT: 'Tether',
+    PMATIC: 'Matic (Polygon)',
+    PUSDC: 'Bridged USD Coin (Polygon)',
+    POLUSDC: 'USD Coin (Polygon)',
+    PWETH: 'Wrapped Ether (Polygon)'
+};
+
 app.post('/api/generate-address', async (req, res) => {
-    const { depositAmount } = req.body;
+    const { depositAmount, selectedCrypto } = req.body;
+
+    console.log(`Solicitação de depósito recebida: ${depositAmount} em ${selectedCrypto}`);
 
     if (depositAmount < 1) {
         console.error('Erro: O valor mínimo de depósito é $1');
         return res.status(400).json({ message: 'O valor mínimo de depósito é $1' });
     }
 
+    if (!supportedCryptos[selectedCrypto]) {
+        console.error('Erro: Criptomoeda não suportada');
+        return res.status(400).json({ message: 'Criptomoeda não suportada' });
+    }
+
     try {
-        // Integração com a API da Coinbase Commerce
         const response = await axios.post('https://api.commerce.coinbase.com/charges', {
-            name: 'Depósito em USDC',
-            description: `Depósito de $${depositAmount} em USDC`,
+            name: `Depósito em ${supportedCryptos[selectedCrypto]}`,
+            description: `Depósito de $${depositAmount} em ${supportedCryptos[selectedCrypto]}`,
             local_price: {
                 amount: depositAmount,
                 currency: 'USD'
@@ -42,17 +63,26 @@ app.post('/api/generate-address', async (req, res) => {
                 'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
                 'X-CC-Version': '2018-03-22'
             },
-            timeout: 10000  // Aumentar o tempo de espera para 10 segundos
+            timeout: 10000
         });
 
         const charge = response.data.data;
 
-        if (!charge.addresses || !charge.addresses['ETH']) {
-            throw new Error(`Endereço para USDC na rede Ethereum não encontrado na resposta da API.`);
+        console.log("Resposta da API:", charge);
+
+        // Verificar se o objeto de endereços existe
+        if (!charge.addresses) {
+            throw new Error('Nenhum endereço foi retornado na resposta da API.');
+        }
+
+        // Verificar se o endereço foi retornado para a criptomoeda selecionada
+        const cryptoAddress = charge.addresses[selectedCrypto];
+        if (!cryptoAddress) {
+            throw new Error(`Endereço para ${supportedCryptos[selectedCrypto]} não encontrado na resposta da API.`);
         }
 
         res.json({
-            address: charge.addresses['ETH'],
+            address: cryptoAddress,
             qrCodeUrl: charge.hosted_url,
             chargeId: charge.id
         });
@@ -67,32 +97,6 @@ app.post('/api/generate-address', async (req, res) => {
             console.error('Erro ao configurar a requisição:', error.message);
             res.status(500).json({ message: 'Erro interno do servidor: ' + error.message });
         }
-    }
-});
-
-// Rota para verificar o status do pagamento
-app.get('/api/check-payment/:chargeId', async (req, res) => {
-    const { chargeId } = req.params;
-
-    try {
-        const response = await axios.get(`https://api.commerce.coinbase.com/charges/${chargeId}`, {
-            headers: {
-                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
-                'X-CC-Version': '2018-03-22'
-            },
-            timeout: 10000  // Aumentar o tempo de espera para 10 segundos
-        });
-
-        const charge = response.data.data;
-
-        if (charge.timeline[charge.timeline.length - 1].status === 'COMPLETED') {
-            res.json({ status: 'completed', amount: charge.pricing.local.amount });
-        } else {
-            res.json({ status: 'pending' });
-        }
-    } catch (error) {
-        console.error('Erro ao verificar o pagamento:', error.message);
-        res.status(500).json({ message: 'Erro ao verificar pagamento. ' + error.message });
     }
 });
 
