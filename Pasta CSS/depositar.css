@@ -1,107 +1,153 @@
-/* Pasta CSS/depositar.css */
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
+/* Header Styles */
 .header {
     background-color: #003366;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
-.logo {
-    width: 140px;
+.header .logo {
+    max-width: 150px;
+    height: auto;
 }
 
 .nav ul {
-    list-style-type: none;
-    margin: 0;
+    list-style: none;
     padding: 0;
-    display: flex;
-    align-items: center;
+    margin: 10px 0 0;
 }
 
 .nav ul li {
-    margin-left: 20px;
+    display: inline-block;
+    margin-right: 20px;
 }
 
 .nav ul li a {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
 }
 
 .nav ul li a:hover {
-    color: #ffcc00;
+    text-decoration: underline;
 }
 
+/* Main Content Styles */
 .deposito-container {
-    padding: 20px;
     max-width: 500px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .deposito-container h1 {
-    text-align: center;
     color: #003366;
     margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
 }
 
-form {
+.deposito-container form {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.deposito-container label {
     margin-bottom: 5px;
-    font-weight: bold;
     color: #003366;
+    font-weight: bold;
 }
 
-input[type="number"],
-select {
+.deposito-container input[type="number"],
+.deposito-container select {
     padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-button[type="submit"],
-#checkPayment {
-    padding: 10px 20px;
+.deposito-container button {
+    padding: 10px;
     background-color: #003366;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-weight: bold;
 }
 
-button[type="submit"]:hover,
-#checkPayment:hover {
-    background-color: #00224d;
+.deposito-container button:hover {
+    background-color: #0055a5;
 }
 
-#statusMessage {
+/* Deposit Result Styles */
+#depositResult {
     margin-top: 20px;
-    font-weight: bold;
     text-align: center;
 }
 
-#qrCodeImage {
-    width: 100%;
-    max-width: 200px;
+#depositResult h2 {
+    color: #003366;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+#cryptoAddress {
+    font-size: 1.2em;
+    color: #003366;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+#qrCodeCanvas {
     margin: 10px auto;
-    display: block;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.qr-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #003366;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.qr-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .deposito-container {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .header .logo {
+        max-width: 120px;
+    }
+
+    .nav ul li {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+    }
 }

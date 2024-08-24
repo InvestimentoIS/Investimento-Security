@@ -8,7 +8,6 @@ const app = express();
 
 // Habilitar CORS para todas as rotas
 app.use(cors());
-
 app.use(bodyParser.json());
 
 const PORT = 3001; // Porta do servidor
@@ -33,7 +32,7 @@ const supportedCryptos = {
 app.post('/api/generate-address', async (req, res) => {
     const { depositAmount, selectedCrypto } = req.body;
 
-    console.log(`Solicitação de depósito recebida: ${depositAmount} em ${selectedCrypto}`);
+    console.log(`\nSolicitação de depósito recebida: ${depositAmount} em ${selectedCrypto}`);
 
     if (depositAmount < 1) {
         console.error('Erro: O valor mínimo de depósito é $1');
@@ -57,10 +56,11 @@ app.post('/api/generate-address', async (req, res) => {
             metadata: {
                 customer_id: uuidv4(),
                 customer_name: 'Cliente'
-            }
+            },
+            expires_at: new Date(Date.now() + 20 * 60 * 1000).toISOString() // Expiração em 20 minutos
         }, {
             headers: {
-                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf', // Certifique-se de que esta chave API esteja correta
+                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
                 'X-CC-Version': '2018-03-22'
             },
             timeout: 10000 // Tempo de espera de 10 segundos
@@ -72,14 +72,15 @@ app.post('/api/generate-address', async (req, res) => {
 
         let cryptoAddress;
 
-        // Tentar encontrar o endereço de depósito em diferentes partes da resposta
-        if (charge.addresses && charge.addresses[selectedCrypto]) {
-            cryptoAddress = charge.addresses[selectedCrypto];
-        } else if (charge.web3_data && charge.web3_data.contract_addresses) {
-            const networkId = '1'; // ID da rede Ethereum (mainnet)
-            cryptoAddress = charge.web3_data.contract_addresses[networkId];
+        // Tentar obter o endereço diretamente de `web3_data.contract_addresses`
+        if (charge.web3_data && charge.web3_data.contract_addresses) {
+            cryptoAddress = charge.web3_data.contract_addresses['1']; // Verificando se a rede 1 (Ethereum) retorna o endereço
+            console.log(`Endereço gerado para ${selectedCrypto}: ${cryptoAddress}`);
+        } else {
+            console.error('Erro: A estrutura web3_data ou contract_addresses não foi encontrada na resposta da API.');
         }
 
+        // Lidar com o caso onde o endereço não é encontrado
         if (!cryptoAddress) {
             throw new Error(`Endereço para ${supportedCryptos[selectedCrypto]} não encontrado na resposta da API.`);
         }
