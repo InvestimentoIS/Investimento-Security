@@ -60,23 +60,26 @@ app.post('/api/generate-address', async (req, res) => {
             }
         }, {
             headers: {
-                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf',
+                'X-CC-Api-Key': 'c71eca71-2913-4c2d-8589-ebb976d6ffcf', // Certifique-se de que esta chave API esteja correta
                 'X-CC-Version': '2018-03-22'
             },
-            timeout: 10000
+            timeout: 10000 // Tempo de espera de 10 segundos
         });
 
         const charge = response.data.data;
 
         console.log("Resposta da API:", charge);
 
-        // Verificar se o objeto de endereços existe
-        if (!charge.addresses) {
-            throw new Error('Nenhum endereço foi retornado na resposta da API.');
+        let cryptoAddress;
+
+        // Tentar encontrar o endereço de depósito em diferentes partes da resposta
+        if (charge.addresses && charge.addresses[selectedCrypto]) {
+            cryptoAddress = charge.addresses[selectedCrypto];
+        } else if (charge.web3_data && charge.web3_data.contract_addresses) {
+            const networkId = '1'; // ID da rede Ethereum (mainnet)
+            cryptoAddress = charge.web3_data.contract_addresses[networkId];
         }
 
-        // Verificar se o endereço foi retornado para a criptomoeda selecionada
-        const cryptoAddress = charge.addresses[selectedCrypto];
         if (!cryptoAddress) {
             throw new Error(`Endereço para ${supportedCryptos[selectedCrypto]} não encontrado na resposta da API.`);
         }
