@@ -1,153 +1,120 @@
-/* Global Styles */
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     line-height: 1.6;
 }
 
-/* Header Styles */
-.header {
-    background-color: #003366;
-    padding: 20px;
-    text-align: center;
-}
-
-.header .logo {
-    max-width: 150px;
-    height: auto;
-}
-
-.nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0;
-}
-
-.nav ul li {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.nav ul li a {
+/* Cabeçalho e navegação */
+header {
+    background-color: #002366; /* Azul mais carregado */
     color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+    padding: 10px 0;
 }
 
-.nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Main Content Styles */
-.deposito-container {
-    max-width: 500px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.deposito-container h1 {
-    color: #003366;
-    margin-bottom: 20px;
-    font-size: 24px;
-    text-align: center;
-}
-
-.deposito-container form {
+header nav ul {
+    list-style-type: none;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding: 0;
 }
 
-.deposito-container label {
-    margin-bottom: 5px;
-    color: #003366;
-    font-weight: bold;
+header nav ul li {
+    margin: 0 15px;
 }
 
-.deposito-container input[type="number"],
-.deposito-container select {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.deposito-container button {
-    padding: 10px;
-    background-color: #003366;
+header nav ul li a {
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.deposito-container button:hover {
-    background-color: #0055a5;
-}
-
-/* Deposit Result Styles */
-#depositResult {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#depositResult h2 {
-    color: #003366;
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-#cryptoAddress {
-    font-size: 1.2em;
-    color: #003366;
-    background-color: #e6e6e6;
-    padding: 10px;
-    border-radius: 5px;
-    word-wrap: break-word;
-    margin-bottom: 20px;
-}
-
-#qrCodeCanvas {
-    margin: 10px auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-.qr-link {
-    display: inline-block;
-    margin-top: 10px;
-    color: #003366;
     text-decoration: none;
     font-weight: bold;
+    font-size: 16px;
 }
 
-.qr-link:hover {
+header nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .deposito-container {
-        width: 90%;
-        margin: 20px auto;
-    }
+/* Título da página */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+    font-size: 24px;
+}
 
-    .header .logo {
-        max-width: 120px;
-    }
+/* Formulário de depósito */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .nav ul li {
-        display: block;
-        text-align: center;
-        margin-bottom: 10px;
-    }
+form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+form input, form select, form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Estilo do botão de gerar endereço */
+form button {
+    background-color: #002366; /* Azul mais carregado */
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #001a52; /* Azul ainda mais escuro para hover */
+}
+
+/* Mensagem de erro */
+#error {
+    color: red;
+    text-align: center;
+    margin-top: -10px;
+}
+
+/* Estilo do endereço gerado e QR Code */
+#deposit-address, #expiration-time {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#qrcode {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #002366; /* Azul mais carregado */
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
 }

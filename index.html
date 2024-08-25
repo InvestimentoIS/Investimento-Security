@@ -1,96 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
+    <title>Investiment Security</title>
     <link rel="stylesheet" href="Pasta CSS/index.css">
 </head>
 <body>
-    <header class="header">
-        <img src="Fotos/Logo-Repete-1.png" alt="Logo da Empresa" class="logo">
-        <nav class="nav">
-            <ul id="nav-list">
+    <!-- Cabeçalho -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Investiment Security</h1>
+            </div>
+            <ul>
                 <li><a href="index.html">Início</a></li>
-                <li><a href="investidores.html">Investidores</a></li>
                 <li><a href="acoes.html">Ações</a></li>
-                <li><a href="guia-investimento.html">Guia para Investir</a></li>
-                <li class="auth-links"><a href="login.html" class="login-btn">Login</a></li>
-                <li class="auth-links"><a href="register.html" class="register-btn">Cadastro</a></li>
-                <li class="user-info" style="display: none;"><span>Saldo 1.000,00 €</span></li> <!-- Inicialmente oculto -->
-                <li class="user-menu" style="display: none;"> <!-- Inicialmente oculto -->
-                    <div class="menu-icon" id="user-menu-icon">⋮</div>
-                    <ul class="dropdown" id="user-dropdown">
-                        <li><a href="#">Detalhe da conta</a></li>
-                        <li><a href="#">QT de ações</a></li>
-                        <li><a href="#">Comprar ações</a></li>
-                        <li><a href="#">Vender ações</a></li>
-                        <li><a href="#">Depositar</a></li>
-                        <li><a href="#">Retirada</a></li>
-                        <li><a href="#">IT Banck</a></li>
-                        <li><a href="#" id="logout">Sair</a></li>
-                    </ul>
-                </li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#noticias">Notícias</a></li>
+                <li><a href="#parcerias">Parcerias</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section class="hero">
-            <h1>Bem-vindo ao Nosso Site de Investimentos</h1>
-            <p>Explore o mundo dos investimentos e aprenda a fazer seu dinheiro crescer!</p>
-        </section>
 
-        <!-- Seção com Quatro Colunas -->
-        <section class="features">
-            <div class="feature-item">
-                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Estratégia de Investimento">
-                <h3>Estratégia de Investimento</h3>
-                <p>Aprenda as melhores estratégias para maximizar seus retornos no mercado de ações.</p>
+    <!-- Banner -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Bem-vindo ao Investiment Security</h1>
+            <p>Inovação e segurança para o seu futuro financeiro</p>
+            <div class="cta-buttons">
+                <a href="guia-investimento.html" class="cta-button">Saiba Mais</a>
+                <a href="register.html" class="cta-button">Cadastre-se Agora</a>
             </div>
-            <div class="feature-item">
-                <img src="Fotos/vecteezy_trader-holding-graph-chart-with-arrow-for-analysis-stock_7039565.jpg" alt="Diversificação">
-                <h3>Diversificação</h3>
-                <p>Diversifique seu portfólio para minimizar riscos e aumentar a segurança dos seus investimentos.</p>
-            </div>
-            <div class="feature-item">
-                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Análise de Mercado">
-                <h3>Análise de Mercado</h3>
-                <p>Obtenha insights sobre as tendências do mercado e tome decisões informadas.</p>
-            </div>
-            <div class="feature-item">
-                <img src="Fotos/vecteezy_businessman-holding-golden-bitcoin-on-computer-trading-chart_3173775.jpg" alt="Objetivos Financeiros">
-                <h3>Objetivos Financeiros</h3>
-                <p>Defina e alcance seus objetivos financeiros com nosso suporte especializado.</p>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Calculadora de Investimentos -->
-        <section class="investment-calculator">
-            <h2>Calculadora de Retorno de Investimentos</h2>
-            <form id="calculatorForm">
-                <div class="form-group">
-                    <label for="investmentAmount">Montante de Investimento (€):</label>
-                    <input type="number" id="investmentAmount" required>
-                </div>
-                <div class="form-group">
-                    <label for="rateOfReturn">Taxa de Retorno Anual (%):</label>
-                    <input type="number" id="rateOfReturn" required>
-                </div>
-                <div class="form-group">
-                    <label for="investmentTime">Tempo de Investimento:</label>
-                    <input type="number" id="investmentTime" required>
-                    <select id="timeUnit">
-                        <option value="years">Anos</option>
-                        <option value="months">Meses</option>
-                        <option value="days">Dias</option>
-                    </select>
-                </div>
-                <button type="button" onclick="calculateReturn()">Calcular Retorno</button>
-            </form>
-            <div id="investmentResult" class="result"></div>
-        </section>
-        
-    </main>
-    <script src="Pasta JS/index.js"></script>
+    <!-- Seção de Destaques -->
+    <section class="destaques">
+        <h2>Nossos Diferenciais</h2>
+        <div class="diferenciais">
+            <div class="diferencial-item">
+                <img src="Fotos/pngwing.com.png" alt="Diferencial 1">
+                <h3>Segurança</h3>
+                <p>Sua segurança é nossa prioridade.</p>
+            </div>
+            <div class="diferencial-item">
+                <img src="Fotos/Innovation free icons designed by Freepik.jpeg" alt="Diferencial 2">
+                <h3>Inovação</h3>
+                <p>Estamos sempre à frente com as mais novas tecnologias.</p>
+            </div>
+            <div class="diferencial-item">
+                <img src="Fotos/pngwing.com (1).png" alt="Diferencial 3">
+                <h3>Suporte 24/7</h3>
+                <p>Estamos aqui para te ajudar a qualquer momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos -->
+    <section id="produtos" class="produtos">
+        <h2>Nossos Produtos</h2>
+        <div class="produtos-lista">
+            <div class="produto-item">
+                <h3>Ações Garantidas</h3>
+                <p>Invista com segurança em ações garantidas com risco de 0,0% controlada por nossas instituições de alta liquidez.</p>
+                <a href="acoes.html" class="cta-button">Ver Ações</a>
+            </div>
+            <div class="produto-item">
+                <h3>Ações Não Garantidas</h3>
+                <p>Arrisque e obtenha grandes retornos em até 80% ao dia sobre 1$.</p>
+                <a href="#" class="cta-button">Ver Ações em Alta Volatilidade</a>
+            </div>
+            <div class="produto-item">
+                <h3>Planos de Investimento</h3>
+                <p>Escolha o plano que melhor se adapta ao seu perfil.</p>
+                <a href="##" class="cta-button">Ver Planos De Investimentos para maiores de 25 anos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Notícias -->
+    <section id="noticias" class="noticias">
+        <h2>Blog e Atualizações do Mercado</h2>
+        <div class="noticias-conteudo">
+            <div class="blog-posts">
+                <h3>Últimos Posts do Blog</h3>
+                <ul>
+                    <li><a href="guia-investimento.html">Como Começar a Investir em Ações na I.S</a></li>
+                    <li><a href="acoes.html">As Melhores Ações para 2024</a></li>
+                    <li><a href="guia-investimento.html">Investindo em Criptomoedas: O Guia Completo</a></li>
+                </ul>
+                <a href="" class="cta-button">Leia Mais</a>
+            </div>
+            <div class="feed-noticias">
+                <h3>Feed de Notícias em Tempo Real</h3>
+                <ul>
+                    <li>🔵 Ações da Great Choise sobe 0.48% em meio a tensões globais por ser nova empresa</li>
+                    <li>🟠 Bitcoin atinge nova máxima de 2024</li>
+                    <li>🔵 Taxas de juros permanecem inalteradas pelo Fed e aumenta 15% das ações EURINVESTUSD</li>
+                </ul>
+            </div>
+            <div class="atualizacoes-mercado">
+                <h3>Atualizações do Mercado</h3>
+                <ul>
+                    <li><a href="acoes.html">O Mercado de Ações Hoje</a></li>
+                    <li><a href="#">Previsões para a Economia Global Da Empresa Investiment Security</a></li>
+                    <li><a href="#">Tendências e possivéis potências da empresa</a></li>
+                </ul>
+                <a href="https://whatsapp.com/channel/0029Vai1gJ4K0IBnjYcWmq1K" class="cta-button">Ver Todas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Testemunhos -->
+    <section class="testemunhos">
+        <h2>Testemunhos de Clientes</h2>
+        <div class="testemunhos-lista">
+            <div class="testemunho-item">
+                <img src="Fotos/testemunho 1.jpeg" alt="Cliente 1">
+                <p>"A Investiment Security transformou minha maneira de investir. Segurança e inovação em um só lugar! e agora consigo viver um estilo de vida com minha esposa"</p>
+                <span>- João Silva</span>
+            </div>
+            <div class="testemunho-item">
+                <img src="Fotos/testemunho2.jpeg" alt="Cliente 2">
+                <p>"O suporte 24/7 me deu a confiança que eu precisava para investir com tranquilidade, e ainda recebo o alarta dos meus ganhos pelo email, telegram e na dashboard em tempo real"</p>
+                <span>- Maria Souza</span>
+            </div>
+            <div class="testemunho-item">
+                <img src="Fotos/testemunho3.jpeg" alt="Cliente 3">
+                <p>"As inovações tecnológicas dessa plataforma são impressionantes! e tem otimas opções de investimentos para Quem é leigo"</p>
+                <span>- Carlos Oliveira</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Parcerias -->
+    <section id="parcerias" class="parcerias">
+        <h2>Nossos Parceiros</h2>
+        <div class="parceiros-logos">
+            <img src="Fotos/ALIEXPRESS.png" alt="Parceiro 1">
+            <img src="Fotos/BINANCE.png" alt="Parceiro 2">
+            <img src="Fotos/MASTERCADR.png" alt="Parceiro 3">
+        </div>
+        <h3>Certificações e Reconhecimentos</h3>
+        <ul>
+            <li>Certificação ISO 9001</li>
+            <li>Prêmio de Inovação Financeira 2024</li>
+            <li>Melhor Plataforma de Investimento pela I.S Finance</li>
+        </ul>
+    </section>
+
+    <!-- Seção de Chamada para Ação -->
+    <section class="cta-final">
+        <h2>Invista com Segurança e Inovação</h2>
+        <p>Não perca tempo, junte-se a nós e transforme o seu futuro financeiro.</p>
+        <a href="register.html" class="cta-button">Cadastre-se Agora</a>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 Investiment Security. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
