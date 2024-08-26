@@ -52,7 +52,7 @@ nav ul li a:hover {
 
 /* Estilo do banner */
 .banner {
-    background-image: url('/Fotos/55162817_l_normal_none.jpg'); /* Insira o caminho correto da sua imagem aqui */
+    background-image: url('../Fotos/55162817_l_normal_none.jpg'); /* Insira o caminho correto da sua imagem aqui */
     background-size: cover;
     background-position: center;
     color: #fff;
