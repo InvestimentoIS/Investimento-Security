@@ -52,7 +52,7 @@ nav ul li a:hover {
 
 /* Estilo do banner */
 .banner {
-    background-image: url('/Fotos/55162817_l_normal_none.jpg');
+    background-image: url('/Fotos/55162817_l_normal_none.jpg'); /* Insira o caminho correto da sua imagem aqui */
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -361,4 +361,115 @@ footer {
     text-align: center;
     padding: 20px;
     font-size: 14px;
+}
+
+/* Estilo Responsivo */
+@media (max-width: 1080px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .banner h1 {
+        font-size: 36px;
+    }
+
+    .banner p {
+        font-size: 18px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 30px;
+    }
+
+    .diferenciais, .produtos-lista, .noticias-conteudo, .testemunhos-lista, .parceiros-logos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-buttons a {
+        padding: 10px 15px;
+        margin: 5px;
+    }
+
+    .cta-final h2 {
+        font-size: 28px;
+    }
+
+    .cta-final p {
+        font-size: 18px;
+    }
+
+    .cta-final .cta-button {
+        padding: 10px 20px;
+    }
+
+    .testemunho-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .testemunho-item p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+
+    .banner h1 {
+        font-size: 28px;
+    }
+
+    .banner p {
+        font-size: 16px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 24px;
+    }
+
+    .cta-final h2 {
+        font-size: 24px;
+    }
+
+    .cta-final p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    nav ul {
+        display: none;
+    }
+
+    .banner h1 {
+        font-size: 24px;
+    }
+
+    .banner p {
+        font-size: 14px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
 }
