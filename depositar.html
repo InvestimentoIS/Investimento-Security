@@ -6,6 +6,16 @@
     <title>Depósito em Criptomoedas</title>
     <link rel="stylesheet" href="./Pasta CSS/depositar.css">
 </head>
+// JavaScript para alternar o menu em dispositivos móveis
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navUl = document.querySelector('nav ul');
+
+    navToggle.addEventListener('click', function() {
+        navUl.classList.toggle('expanded');
+    });
+});
+
 <body>
     <header>
         <nav>
