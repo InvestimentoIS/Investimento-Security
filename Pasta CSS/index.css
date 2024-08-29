@@ -10,19 +10,46 @@ body {
 header {
     background-color: #0057b7;
     color: #fff;
-    padding: 15px 0;
+    padding: 15px 20px;
+    position: relative;
 }
 
-nav {
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
 }
 
 .logo h1 {
     margin: 0;
     font-size: 24px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.nav-list li {
+    margin-left: 20px;
+}
+
+.nav-list li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    white-space: nowrap; /* Previne a quebra de palavras */
+}
+
+.nav-list li a.cadastro-button {
+    background-color: #f39c12;
+    border-radius: 5px;
+}
+
+.nav-list li a:hover {
+    background-color: #004a99;
+    border-radius: 5px;
 }
 
 /* Menu Icon for Mobile */
@@ -34,6 +61,42 @@ nav {
 .menu-icon img {
     width: 30px;
     height: 30px;
+}
+
+/* Estilo Responsivo */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-list {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #0057b7;
+        flex-direction: column;
+        align-items: flex-start;
+        display: none;
+        width: 100%; /* Garante que o menu use toda a largura disponível */
+        padding-left: 0; /* Remove padding à esquerda para melhorar o alinhamento */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destaque */
+        z-index: 999; /* Garante que o menu fique sobre outros elementos */
+    }
+
+    .nav-list li {
+        margin: 10px 0;
+        width: 100%; /* Cada item de menu ocupa toda a largura */
+    }
+
+    .nav-list li a {
+        display: block; /* Faz com que cada link ocupe toda a largura do item */
+        padding: 15px 20px; /* Aumenta o padding para melhorar a usabilidade em toque */
+        font-size: 18px; /* Aumenta o tamanho da fonte para melhor legibilidade */
+    }
+
+    .nav-list.show {
+        display: flex;
+    }
 }
 
 .nav-list {
