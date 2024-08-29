@@ -25,8 +25,15 @@ nav {
     font-size: 24px;
 }
 
+/* Menu Icon for Mobile */
 .menu-icon {
     display: none;
+    cursor: pointer;
+}
+
+.menu-icon img {
+    width: 30px;
+    height: 30px;
 }
 
 .nav-list {
@@ -467,7 +474,7 @@ footer ul li a:hover {
     }
 
     .nav-list li {
-        margin: 10px 0;
+        margin: 1px 0;
     }
 
     .banner h1 {
