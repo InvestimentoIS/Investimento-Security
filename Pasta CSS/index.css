@@ -39,6 +39,7 @@ header {
     color: #fff;
     text-decoration: none;
     padding: 10px 15px;
+    white-space: nowrap; /* Previne a quebra de palavras */
 }
 
 .nav-list li a.cadastro-button {
@@ -76,11 +77,21 @@ header {
         flex-direction: column;
         align-items: flex-start;
         display: none;
-        width: 100%;
+        width: 100%; /* Garante que o menu use toda a largura disponível */
+        padding-left: 0; /* Remove padding à esquerda para melhorar o alinhamento */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destaque */
+        z-index: 999; /* Garante que o menu fique sobre outros elementos */
     }
 
     .nav-list li {
         margin: 10px 0;
+        width: 100%; /* Cada item de menu ocupa toda a largura */
+    }
+
+    .nav-list li a {
+        display: block; /* Faz com que cada link ocupe toda a largura do item */
+        padding: 15px 20px; /* Aumenta o padding para melhorar a usabilidade em toque */
+        font-size: 18px; /* Aumenta o tamanho da fonte para melhor legibilidade */
     }
 
     .nav-list.show {
