@@ -12,3 +12,22 @@ window.addEventListener('resize', () => {
         navList.classList.remove('show'); // Oculta o menu se a tela for maior que 768px
     }
 });
+// Exemplo de verificação de autenticação (ajuste de acordo com sua lógica real)
+function isAuthenticated() {
+    // Verifique o estado de autenticação do usuário
+    // Este é apenas um exemplo simplificado
+    return localStorage.getItem('loggedIn') === 'true';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const headerLogado = document.getElementById('header-logado');
+    const headerNaoLogado = document.getElementById('header-nao-logado');
+
+    if (isAuthenticated()) {
+        headerLogado.style.display = 'block';
+        headerNaoLogado.style.display = 'none';
+    } else {
+        headerLogado.style.display = 'none';
+        headerNaoLogado.style.display = 'block';
+    }
+});

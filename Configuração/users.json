@@ -12,5 +12,12 @@
     "dob": "2000-03-25",
     "password": "$2b$10$pDMauiiOWytvO11IjnfxuO7X0owutB2QgcDTvr7pGwXFT.MrSNnhm",
     "verified": false
+  },
+  {
+    "username": "Sousa",
+    "email": "ericlenedesousa@gmail.com",
+    "dob": "2020-03-25",
+    "password": "$2b$10$El1d2btgmfKcTkHCECgX9esrG/vWL5HO7kiLRLI6JppYyfwwPj1nS",
+    "verified": false
   }
 ]

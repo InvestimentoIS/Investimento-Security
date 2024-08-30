@@ -5,27 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investiment Securit</title>
     <link rel="stylesheet" href="Pasta CSS/index.css">
+    
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
+   <!-- Cabeçalho para Usuários Logados -->
+   <header id="header-logado" style="display:none;">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="dashboard.html">
                 <h1>Investiment Security</h1>
+            </a>
+        </div>
+        <ul class="nav-list">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li class="dropdown">
+                <a href="#">Investimentos</a>
+                <ul class="dropdown-menu">
+                    <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
+                    <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
+                    <li><a href="vender-comprar.html">Vender/Comprar</a></li>
+                </ul>
+            </li>
+            <li><a href="deposito-saque.html">Depósito/Saque</a></li>
+        </ul>
+        <div class="user-menu">
+            <div class="notifications">
+                <img src="Fotos/notification-icon.png" alt="Notificações">
             </div>
-            <div class="menu-icon" id="menu-icon">
-                <img src="Fotos/Menu (1).png" alt="Menu">
+            <div class="user-profile">
+                <img src="Fotos/user-profile.png" alt="Perfil de Usuário">
+                <ul class="profile-dropdown">
+                    <li><a href="meu-perfil.html">Meu Perfil</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                    <li><a href="logout.html">Sair</a></li>
+                </ul>
             </div>
-            <ul class="nav-list" id="nav-list">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="acoes.html">Ações</a></li>
-                <li><a href="investidores.html">Investidores</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
-            </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
+
+ <!-- Cabeçalho para Usuários Não Logados -->
+   <header id="header-nao-logado">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <h1>Investiment Security</h1>
+            </a>
+        </div>
+        <div class="menu-icon" id="menu-icon">
+            <img src="Fotos/Menu (1).png" alt="Menu">
+        </div>
+        <ul class="nav-list" id="nav-list">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="como-funciona.html">Como Funciona</a></li>
+            <li><a href="guia-investimento.html">Guia de Investimento</a></li>
+            <li><a href="investidores.html">Investidores</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html" class="cadastro-button">Registrar-se</a></li>
+        </ul>
+    </nav>
+</header>
+
     <!-- Banner Inicial -->
     <section class="banner">
         <div class="banner-content">

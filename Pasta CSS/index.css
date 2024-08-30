@@ -748,3 +748,101 @@ footer {
     }
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    padding: 10px 20px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-list a {
+    color: #fff; /* Cor do texto dos links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-list a:hover {
+    color: #ddd; /* Cor do texto ao passar o mouse */
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    background-color: #444;
+    list-style: none;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Mostrar ao passar o mouse */
+}
+
+.dropdown-menu a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.dropdown-menu a:hover {
+    color: #ddd;
+}
+.notifications img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Torna a imagem redonda */
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #444;
+    list-style: none;
+    padding: 10px;
+}
+
+.user-profile:hover .profile-dropdown {
+    display: block; /* Mostrar ao passar o mouse */
+}
+
+.profile-dropdown a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.profile-dropdown a:hover {
+    color: #ddd;
+}
