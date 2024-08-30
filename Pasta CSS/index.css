@@ -39,7 +39,7 @@ header {
     color: #fff;
     text-decoration: none;
     padding: 10px 15px;
-    white-space: nowrap;
+    white-space: nowrap; /* Previne a quebra de palavras */
 }
 
 .nav-list li a.cadastro-button {
@@ -61,6 +61,134 @@ header {
 .menu-icon img {
     width: 30px;
     height: 30px;
+}
+
+/* Estilo Responsivo */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background-color: #333;
+        color: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 100%;
+        width: 60%; /* Menu ocupa 60% da tela */
+        padding: 20px;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        transition: right 0.4s ease;
+        z-index: 999;
+    }
+
+    .nav-list.show {
+        right: 0;
+    }
+
+    .nav-list li {
+        margin: 10px 0; /* Ajusta o espaço entre os itens do menu */
+        width: 100%;
+    }
+
+    .nav-list li a {
+        display: block;
+        padding: 15px 20px;
+        font-size: 18px;
+        text-align: left; /* Alinha o texto à esquerda */
+        letter-spacing: normal; /* Remove espaçamento excessivo */
+        color: #fff;
+    }
+
+    .nav-list li a:hover {
+        background-color: #444;
+    }
+
+    .banner h1 {
+        font-size: 28px;
+    }
+
+    .banner p {
+        font-size: 16px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 24px;
+    }
+
+    .cta-final h2 {
+        font-size: 24px;
+    }
+
+    .cta-final p {
+        font-size: 16px;
+    }
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 576px) {
+    .banner h1 {
+        font-size: 24px;
+    }
+
+    .banner p {
+        font-size: 14px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
+}
+
+/* Estilo do Rodapé */
+footer {
+    background-color: #003366; /* Cor distinta do resto do site */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+}
+
+footer a {
+    color: #fff; /* Cor branca para os links */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer .social-icons {
+    margin-top: 10px;
+}
+
+footer .social-icons a {
+    color: #fff;
+    margin: 0 5px;
+}
+
+footer .menu {
+    display: none; /* Remove o menu no rodapé */
 }
 
 /* Estilo do banner */
@@ -340,9 +468,9 @@ header {
 /* Seção de Chamada para Ação */
 .cta-final {
     padding: 60px 20px;
-    background-color: #0057b7;
+    background-color: #00324b;
     text-align: center;
-    color: #fff;
+    color: #000000;
 }
 
 .cta-final h2 {
@@ -353,7 +481,7 @@ header {
 .cta-final p {
     font-size: 20px;
     margin-bottom: 30px;
-    color: #f39c12; /* Mudei a cor para um laranja para destacar */
+    color: #ffffff; /* Mudei a cor para um laranja para destacar */
 }
 
 .cta-final .cta-button {
@@ -529,3 +657,4 @@ footer {
         font-size: 10px;
     }
 }
+
