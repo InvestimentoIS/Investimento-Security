@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-color: #f4f4f4; /* Cor de fundo clara */
 }
 
 /* Estilo do cabeçalho */
@@ -12,6 +13,7 @@ header {
     color: #fff;
     padding: 15px 20px;
     position: relative;
+    z-index: 1000;
 }
 
 .navbar {
@@ -63,118 +65,81 @@ header {
     height: 30px;
 }
 
-/* Estilo Responsivo */
+/* Estilo Responsivo e Luxuoso para o Menu Mobile */
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
     }
 
     .nav-list {
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background-color: #0057b7;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background-color: #000; /* Cor de fundo preta luxuosa */
         flex-direction: column;
-        align-items: flex-start;
-        display: none;
-        width: 100%; /* Garante que o menu use toda a largura disponível */
-        padding-left: 0; /* Remove padding à esquerda para melhorar o alinhamento */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destaque */
-        z-index: 999; /* Garante que o menu fique sobre outros elementos */
-    }
-
-    .nav-list li {
-        margin: 10px 0;
-        width: 100%; /* Cada item de menu ocupa toda a largura */
-    }
-
-    .nav-list li a {
-        display: block; /* Faz com que cada link ocupe toda a largura do item */
-        padding: 15px 20px; /* Aumenta o padding para melhorar a usabilidade em toque */
-        font-size: 18px; /* Aumenta o tamanho da fonte para melhor legibilidade */
+        align-items: center;
+        height: 100%;
+        width: 80%;
+        padding: 20px 0;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra elegante */
+        transition: right 0.4s ease; /* Animação suave ao abrir/fechar */
+        z-index: 999;
     }
 
     .nav-list.show {
-        display: flex;
+        right: 0; /* Animação para abrir o menu */
+    }
+
+    .nav-list li {
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    .nav-list li a {
+        display: block;
+        padding: 15px 20px;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        background-color: #222; /* Cor de fundo dos links */
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Efeitos suaves ao passar o mouse */
+    }
+
+    .nav-list li a:hover {
+        background-color: #444; /* Cor de fundo ao passar o mouse */
+        transform: scale(1.05); /* Efeito de escala ao passar o mouse */
+    }
+
+    /* Animação para o ícone do menu */
+    .menu-icon.active img {
+        transform: rotate(90deg);
+        transition: transform 0.3s ease;
     }
 }
 
-.nav-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-}
-
-.nav-list li {
-    margin-left: 20px;
-}
-
-.nav-list li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-}
-
-.nav-list li a.cadastro-button {
-    background-color: #f39c12;
-    border-radius: 5px;
-}
-
-.nav-list li a:hover {
-    background-color: #004a99;
-    border-radius: 5px;
-}
-
-/* Estilo do banner */
-.banner {
-    background-image: url('../Fotos/55162817_l_normal_none.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
+/* Estilo das Seções do Site */
+section {
+    padding: 60px 20px;
     text-align: center;
-    padding: 100px 20px;
-}
-
-.banner-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.banner h1 {
-    font-size: 48px;
+    background-color: #fff;
     margin-bottom: 20px;
 }
 
-.banner p {
-    font-size: 24px;
-    margin-bottom: 30px;
+section h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #333;
 }
 
-.cta-buttons a {
-    color: #fff;
-    background-color: #f39c12;
-    padding: 10px 20px;
-    margin: 10px;
-    display: inline-block;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.cta-buttons a:hover {
-    background-color: #d48806;
+section p {
+    font-size: 16px;
+    color: #555;
 }
 
 /* Seção de Destaques */
 .destaques {
-    padding: 60px 20px;
-    text-align: center;
     background-color: #f8f8f8;
-}
-
-.destaques h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
 }
 
 .diferenciais {
@@ -206,14 +171,7 @@ header {
 
 /* Seção de Produtos */
 .produtos {
-    padding: 60px 20px;
-    text-align: center;
     background-color: #fff;
-}
-
-.produtos h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
 }
 
 .produtos-lista {
@@ -255,14 +213,7 @@ header {
 
 /* Seção de Notícias */
 .noticias {
-    padding: 60px 20px;
     background-color: #f8f8f8;
-}
-
-.noticias h2 {
-    font-size: 36px;
-    text-align: center;
-    margin-bottom: 40px;
 }
 
 .noticias-conteudo {
@@ -321,14 +272,7 @@ header {
 
 /* Seção de Testemunhos */
 .testemunhos {
-    padding: 60px 20px;
     background-color: #fff;
-    text-align: center;
-}
-
-.testemunhos h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
 }
 
 .testemunhos-lista {
@@ -363,14 +307,8 @@ header {
 
 /* Seção de Parcerias */
 .parcerias {
-    padding: 60px 20px;
     background-color: #f8f8f8;
     text-align: center;
-}
-
-.parcerias h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
 }
 
 .parceiros-logos {
@@ -400,9 +338,7 @@ header {
 
 /* Seção de Chamada para Ação */
 .cta-final {
-    padding: 60px 20px;
     background-color: #0057b7;
-    text-align: center;
     color: #fff;
 }
 
@@ -436,27 +372,6 @@ footer {
     text-align: center;
     padding: 20px;
     font-size: 14px;
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-    display: flex;
-    justify-content: center;
-}
-
-footer ul li {
-    margin-left: 15px;
-}
-
-footer ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-footer ul li a:hover {
-    text-decoration: underline;
 }
 
 /* Estilo Responsivo */
@@ -515,29 +430,8 @@ footer ul li a:hover {
 }
 
 @media (max-width: 768px) {
-    .menu-icon {
-        display: block;
-        cursor: pointer;
-    }
-
-    .nav-list {
+    nav ul {
         display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 10;
-        width: 80%;
-        background-color: #0057b7;
-        text-align: center;
-        z-index: 1000;
-    }
-
-    .nav-list.show {
-        display: flex;
-    }
-
-    .nav-list li {
-        margin: 1px 0;
     }
 
     .banner h1 {
@@ -562,6 +456,10 @@ footer ul li a:hover {
 }
 
 @media (max-width: 576px) {
+    nav ul {
+        display: none;
+    }
+
     .banner h1 {
         font-size: 24px;
     }
