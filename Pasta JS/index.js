@@ -1,20 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Seleciona o ícone do menu e o menu móvel
-    const menuIcon = document.querySelector('.menu-icon');
-    const navList = document.querySelector('.nav-list');
+// Função para controlar a exibição do menu em dispositivos móveis
+const menuIcon = document.querySelector('.menu-icon');
+const navList = document.querySelector('.nav-list');
 
-    // Verifica se os elementos existem antes de adicionar o listener
-    if (menuIcon && navList) {
-        menuIcon.addEventListener('click', function() {
-            // Alterna a classe 'show' no menu
-            navList.classList.toggle('show');
-        });
+menuIcon.addEventListener('click', () => {
+    navList.classList.toggle('show'); // Alterna a exibição do menu
+});
+
+// Função para ocultar o menu em telas maiores
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navList.classList.remove('show'); // Oculta o menu se a tela for maior que 768px
     }
 });
 
-// Exemplo de verificação de autenticação (ajuste de acordo com sua lógica real)
+// Verificação de autenticação (ajuste de acordo com sua lógica real)
 function isAuthenticated() {
-    // Verifique o estado de autenticação do usuário
+    // Exemplo de verificação de autenticação
     return localStorage.getItem('loggedIn') === 'true';
 }
 
