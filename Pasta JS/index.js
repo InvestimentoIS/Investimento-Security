@@ -1,33 +1,27 @@
-// Função para verificar autenticação (ajuste conforme sua lógica)
+document.addEventListener("DOMContentLoaded", function() {
+    // Seleciona o ícone do menu e o menu móvel
+    const menuIcon = document.querySelector('.menu-icon');
+    const navList = document.querySelector('.nav-list');
+
+    // Verifica se os elementos existem antes de adicionar o listener
+    if (menuIcon && navList) {
+        menuIcon.addEventListener('click', function() {
+            // Alterna a classe 'show' no menu
+            navList.classList.toggle('show');
+        });
+    }
+});
+
+// Exemplo de verificação de autenticação (ajuste de acordo com sua lógica real)
 function isAuthenticated() {
     // Verifique o estado de autenticação do usuário
-    // Este é apenas um exemplo simplificado
     return localStorage.getItem('loggedIn') === 'true';
 }
 
-// Função que inicializa os comportamentos do menu e autenticação
-function initializeMenuAndAuth() {
-    const menuIcon = document.querySelector('.menu-icon');
-    const navList = document.querySelector('.nav-list');
-    const mobileMenu = document.querySelector('.mobile-menu');
+document.addEventListener("DOMContentLoaded", function() {
     const headerLogado = document.getElementById('header-logado');
     const headerNaoLogado = document.getElementById('header-nao-logado');
 
-    // Controle do menu em dispositivos móveis
-    menuIcon.addEventListener('click', () => {
-        navList.classList.toggle('show'); // Alterna a exibição do menu
-        mobileMenu.classList.toggle('open'); // Alterna a exibição do menu móvel
-    });
-
-    // Ajusta a visibilidade do menu em telas maiores
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            navList.classList.remove('show'); // Oculta o menu em telas maiores
-            mobileMenu.classList.remove('open'); // Oculta o menu móvel em telas maiores
-        }
-    });
-
-    // Verifica a autenticação do usuário e exibe o header apropriado
     if (isAuthenticated()) {
         headerLogado.style.display = 'block';
         headerNaoLogado.style.display = 'none';
@@ -35,18 +29,4 @@ function initializeMenuAndAuth() {
         headerLogado.style.display = 'none';
         headerNaoLogado.style.display = 'block';
     }
-}
-
-// Inicializa as funções assim que o DOM estiver carregado
-document.addEventListener("DOMContentLoaded", initializeMenuAndAuth);
-const menuIcon = document.querySelector('.menu-icon');
-const navList = document.querySelector('.nav-list');
-const mobileMenu = document.querySelector('.mobile-menu');
-
-// Verifica se os elementos existem antes de adicionar o listener
-if (menuIcon && navList && mobileMenu) {
-    menuIcon.addEventListener('click', () => {
-        navList.classList.toggle('show'); // Alterna a exibição do menu
-        mobileMenu.classList.toggle('open'); // Alterna a exibição do menu móvel
-    });
-}
+});
