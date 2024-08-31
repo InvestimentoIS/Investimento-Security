@@ -1106,13 +1106,7 @@ footer {
     }
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: ; /* Cor de fundo do cabeçalho */
-    padding: 10px 20px;
-}
+.navbar 
 
 .nav-list {
     list-style: none;
