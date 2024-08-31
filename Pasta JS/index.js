@@ -39,3 +39,14 @@ function initializeMenuAndAuth() {
 
 // Inicializa as funções assim que o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", initializeMenuAndAuth);
+const menuIcon = document.querySelector('.menu-icon');
+const navList = document.querySelector('.nav-list');
+const mobileMenu = document.querySelector('.mobile-menu');
+
+// Verifica se os elementos existem antes de adicionar o listener
+if (menuIcon && navList && mobileMenu) {
+    menuIcon.addEventListener('click', () => {
+        navList.classList.toggle('show'); // Alterna a exibição do menu
+        mobileMenu.classList.toggle('open'); // Alterna a exibição do menu móvel
+    });
+}
