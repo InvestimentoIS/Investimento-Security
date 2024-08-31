@@ -12,6 +12,7 @@ header {
     color: #fff;
     padding: 15px 20px;
     position: relative;
+    z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
 }
 
 .navbar {
@@ -23,6 +24,11 @@ header {
 .logo h1 {
     margin: 0;
     font-size: 24px;
+}
+
+.logo a {
+    color: #fff; /* Corrige a cor do logotipo para branco */
+    text-decoration: none;
 }
 
 .nav-list {
@@ -62,6 +68,7 @@ header {
     width: 30px;
     height: 30px;
 }
+
 /* Estilo do Menu */
 .mobile-menu {
     position: fixed;
@@ -153,9 +160,360 @@ header {
     footer {
         font-size: 10px;
     }
+
+    .menu-icon {
+        display: block; /* Exibe o ícone do menu em telas pequenas */
+    }
+
+    .nav-list {
+        display: none; /* Oculta o menu de navegação em telas pequenas */
+    }
+
+    .menu-icon {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
 }
 
 /* Estilo do Rodapé */
+footer {
+    background-color: #003366; /* Cor distinta do resto do site */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+}
+
+footer a {
+    color: #fff; /* Cor branca para os links */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer .social-icons {
+    margin-top: 10px;
+}
+
+footer .social-icons a {
+    color: #fff;
+    margin: 0 5px;
+}
+
+footer .menu {
+    display: none; /* Remove o menu no rodapé */
+}
+
+/* Estilo do banner */
+.banner {
+    background-image: url('../Fotos/55162817_l_normal_none.jpg'); 
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+.banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.banner h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.cta-buttons a {
+    color: #fff;
+    background-color: #f39c12;
+    padding: 10px 20px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-buttons a:hover {
+    background-color: #d48806;
+}
+
+/* Seção de Destaques */
+.destaques {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.destaques h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.diferenciais {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.diferencial-item {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.diferencial-item img {
+    width: 80px;
+    height: 80px;
+}
+
+.diferencial-item h3 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.diferencial-item p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Seção de Produtos */
+.produtos {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.produtos h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.produtos-lista {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.produto-item {
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.produto-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.produto-item p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.produto-item .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0057b7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.produto-item .cta-button:hover {
+    background-color: #004a99;
+}
+
+/* Seção de Notícias */
+.noticias {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+}
+
+.noticias h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.noticias-conteudo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.blog-posts, .feed-noticias, .atualizacoes-mercado {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.blog-posts h3, .feed-noticias h3, .atualizacoes-mercado h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.blog-posts ul, .feed-noticias ul, .atualizacoes-mercado ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blog-posts li, .feed-noticias li, .atualizacoes-mercado li {
+    margin-bottom: 10px;
+}
+
+.blog-posts li a, .feed-noticias li a, .atualizacoes-mercado li a {
+    text-decoration: none;
+    color: #0057b7;
+}
+
+.blog-posts li a:hover, .feed-noticias li a:hover, .atualizacoes-mercado li a:hover {
+    text-decoration: underline;
+}
+
+/* Seção de Testemunhos */
+.testemunhos {
+    padding: 60px 20px;
+    background-color: #fff;
+}
+
+.testemunhos h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.depoimentos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.depoimento-item {
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.depoimento-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.depoimento-item p {
+    font-size: 16px;
+    color: #555;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.depoimento-item h3 {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Seção de Parcerias */
+.parcerias {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.parcerias h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.parcerias ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.parcerias li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.parcerias img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Seção de CTA Final */
+.cta-final {
+    padding: 60px 20px;
+    background-color: #0057b7;
+    color: #fff;
+    text-align: center;
+}
+
+.cta-final h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.cta-final p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.cta-final .cta-buttons a {
+    color: #fff;
+    background-color: #f39c12;
+    padding: 10px 20px;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-final .cta-buttons a:hover {
+    background-color: #d48806;
+}
+
+/* Estilo responsivo para outras seções */
+@media (max-width: 576px) {
+    .diferenciais, .produtos-lista, .depoimentos, .parcerias ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .diferencial-item, .produto-item, .depoimento-item, .parcerias li {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .noticias-conteudo {
+        flex-direction: column;
+    }
+
+    .blog-posts, .feed-noticias, .atualizacoes-mercado {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+}
+* Estilo do Rodapé */
 footer {
     background-color: #003366; /* Cor distinta do resto do site */
     color: #fff;
@@ -752,7 +1110,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333; /* Cor de fundo do cabeçalho */
+    background-color: ; /* Cor de fundo do cabeçalho */
     padding: 10px 20px;
 }
 
@@ -846,3 +1204,4 @@ footer {
 .profile-dropdown a:hover {
     color: #ddd;
 }
+
