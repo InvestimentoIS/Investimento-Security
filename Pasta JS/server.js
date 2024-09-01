@@ -184,7 +184,17 @@ app.post('/forgot-password', async (req, res) => {
         if (!user.verified) {
             return res.status(400).json({ error: 'Por favor, verifique seu e-mail antes de fazer login.' });
         }
-
+        const express = require('express');
+        const connectDB = require('./Pasta JS/db');
+        
+        const app = express();
+        
+        // Conecta ao MongoDB
+        connectDB();
+        
+        // Inicia o servidor
+        app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+        
         // Comparar a senha
         const isMatch = bcrypt.compareSync(password, user.password);
         if (isMatch) {

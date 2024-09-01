@@ -1,91 +1,70 @@
-/* Pasta CSS/styles.css */
+/* Estilos básicos */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
     margin: 0;
     padding: 0;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-.container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+/* Container do login */
+.login-container {
+    background-color: #fff;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 300px;
     text-align: center;
 }
 
+/* Logotipo */
+.logo-container {
+    margin-bottom: 20px;
+}
+
 .logo {
-    width: 140px; /* Aumentando o tamanho do logotipo */
-    margin-bottom: 20px;
+    width: 100px;
+    height: auto;
 }
 
-h2 {
-    color: #003366;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #003366;
-}
-
-.form-group input {
+/* Estilos do formulário */
+input[type="text"],
+input[type="password"] {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #003366;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.password-wrapper {
-    position: relative;
-}
-
-.password-wrapper .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #003366;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #003366;
-    color: white;
+    background-color: #0057b7;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #00224d;
+    background-color: #004a99;
 }
 
 p {
     margin-top: 10px;
+    font-size: 14px;
 }
 
-a {
-    color: #003366;
+p a {
+    color: #0057b7;
     text-decoration: none;
 }
 
-a:hover {
+p a:hover {
     text-decoration: underline;
 }
-
