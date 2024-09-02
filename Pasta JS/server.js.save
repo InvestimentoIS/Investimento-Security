@@ -1,4 +1,5 @@
-require('dotenv').config(); // Certifique-se de que esta linha está no topo do arquivo
+node server.js
+require('dotenv').config(); // Certifique-se de que esta linha esteja no topo
 
 const express = require('express');
 const mongoose = require('mongoose');
