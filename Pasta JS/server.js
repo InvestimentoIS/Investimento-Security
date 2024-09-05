@@ -1,4 +1,4 @@
-require('dotenv').config(); // Certifique-se de que esta linha está no topo do arquivo
+require('dotenv').config(); // Certifique-se de que esta linha esteja no topo
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 // Conectando ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 }).then(() => {
     console.log('Conectado ao MongoDB');
 }).catch((err) => {

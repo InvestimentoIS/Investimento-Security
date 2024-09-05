@@ -1,25 +1,25 @@
 // Função para controlar a exibição do menu em dispositivos móveis
-const menuIcon = document.querySelector('.menu-icon');
-const navList = document.querySelector('.nav-list');
+const menuIcon = document.querySelector('#menu-icon');
+const navListNaoLogado = document.querySelector('#nav-list-nao-logado');
+const menuIconLogado = document.querySelector('#menu-icon-logado');
+const navListLogado = document.querySelector('#nav-list-logado');
 
+// Função para alternar o menu de usuários não logados
 menuIcon.addEventListener('click', () => {
-    navList.classList.toggle('show'); // Alterna a exibição do menu
+    navListNaoLogado.classList.toggle('show');
 });
 
-// Função para ocultar o menu em telas maiores
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        navList.classList.remove('show'); // Oculta o menu se a tela for maior que 768px
-    }
+// Função para alternar o menu de usuários logados
+menuIconLogado.addEventListener('click', () => {
+    navListLogado.classList.toggle('show');
 });
 
-// Verificação de autenticação (ajuste de acordo com sua lógica real)
+// Verificar se o usuário está logado
 function isAuthenticated() {
-    // Exemplo de verificação de autenticação
     return localStorage.getItem('loggedIn') === 'true';
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', () => {
     const headerLogado = document.getElementById('header-logado');
     const headerNaoLogado = document.getElementById('header-nao-logado');
 
@@ -31,20 +31,3 @@ document.addEventListener("DOMContentLoaded", function() {
         headerNaoLogado.style.display = 'block';
     }
 });
-const mongoose = require('mongoose');
-require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
-
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log('Conectado ao MongoDB com sucesso');
-    } catch (err) {
-        console.error('Erro ao conectar ao MongoDB:', err.message);
-        process.exit(1); // Encerra o processo se a conexão falhar
-    }
-};
-
-module.exports = connectDB;
