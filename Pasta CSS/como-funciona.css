@@ -1,0 +1,226 @@
+/* Estilo básico para Como Funciona */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #004a99;
+    color: white;
+    padding: 10px 0;
+  }
+  
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  header nav .logo h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  header nav ul li {
+    margin-left: 20px;
+  }
+  
+  header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  h1, h2 {
+    color: #004a99;
+    margin-bottom: 15px;
+  }
+  
+  #introducao p, #calculadoras p {
+    margin-bottom: 20px;
+  }
+  
+  #grafico-acao {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  footer {
+    background-color: #004a99;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .cta-btn {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .cta-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Responsividade */
+  @media screen and (max-width: 768px) {
+    header nav ul {
+      flex-direction: column;
+    }
+  
+    input, button, select {
+      width: 100%;
+    }
+  }
+  
+  /* Estilo básico para Como Funciona */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #004a99;
+    color: white;
+    padding: 10px 0;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+  
+  header nav ul li {
+    margin-left: 20px;
+  }
+  
+  header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  h1, h2 {
+    color: #004a99;
+  }
+  
+  #etapas-processo, #opcoes-investimento, #calculadoras {
+    margin-top: 20px;
+  }
+  
+  .etapa, .opcao, .calculadora {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label, input, button, select {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  input, button, select {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  button {
+    background-color: #004a99;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #003366;
+  }
+  
+  .cta-btn {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .cta-btn:hover {
+    background-color: #218838;
+  }
+  
+  footer {
+    background-color: #004a99;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Gráfico de Ações */
+  #grafico-acao {
+    margin-top: 40px;
+    background-color: #393939;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
