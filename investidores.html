@@ -1,33 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maiores Investidores</title>
+    <title>Top Investidores - Investiment Security</title>
     <link rel="stylesheet" href="Pasta CSS/investidores.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header class="header">
-        <img src="Pasta Imagens/logo.png" alt="Logo da Empresa" class="logo">
-        <nav class="nav">
-            <ul>
+
+    <!-- Cabeçalho com menu responsivo -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1><a href="index.html">Investiment Security</a></h1>
+            </div>
+            <ul id="nav-list" class="nav-list">
                 <li><a href="index.html">Início</a></li>
-                <li><a href="#">Investidores</a></li>
-                <li><a href="#">Ações</a></li>
-                <li><a href="guia-investimento.html">Guia para Investir</a></li>
+                <li><a href="acoes.html">Ações</a></li>
+                <li><a href="investidores.html">Investidores</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
             </ul>
-        </nav>
+            <div id="menu-icon" class="menu-icon">
+                <img src="menu.png" alt="Menu Icon">
+            </div>
+        </div>
     </header>
-    <main>
-        <section class="investor-list">
-            <h2>Top 25 Maiores Investidores</h2>
-            <ul>
-                <li>John Doe - €10,000,000</li>
-                <li>Jane Smith - €9,500,000</li>
-                <li>Richard Roe - €9,000,000</li>
-                <!-- Continue com outros investidores fictícios -->
-            </ul>
-        </section>
-    </main>
+
+    <!-- Seção de lista de investidores com Ver Mais -->
+    <section class="investor-list">
+        <h2>Top 50 Investidores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Investidor</th>
+                    <th>Montante Investido</th>
+                    <th>Lucro Diário</th>
+                    <th>Crescimento</th>
+                </tr>
+            </thead>
+            <tbody id="investor-table">
+                <tr>
+                    <td>Fortunato Teixeira</td>
+                    <td id="investment-investor1">$1,234,567.89</td>
+                    <td id="profit-investor1">$5,976.89</td>
+                    <td><canvas id="investor1-chart"></canvas></td>
+                </tr>
+                <tr>
+                    <td>Patrícia Almeida</td>
+                    <td id="investment-investor2">$789,654.32</td>
+                    <td id="profit-investor2">$3,876.45</td>
+                    <td><canvas id="investor2-chart"></canvas></td>
+                </tr>
+                <!-- Mais investidores serão carregados dinamicamente -->
+            </tbody>
+        </table>
+        <button id="load-more" class="load-more">Ver Mais</button>
+    </section>
+
+    <!-- Seção de Cotações de Criptomoedas em Tempo Real -->
+    <section class="crypto-widget">
+        <h2>Cotações de Criptomoedas em Tempo Real</h2>
+        <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=light" width="100%" height="400px"></iframe>
+    </section>
+
+    <!-- Chamada para Ação -->
+    <section class="cta">
+        <h2>Pronto para Transformar Seu Futuro?</h2>
+        <a href="register.html" class="btn-primary">Cadastre-se Agora</a>
+    </section>
+
+    <!-- Scripts de gráficos Chart.js e carregamento de investidores -->
+    <script src="Pasta JS/investidores.js"></script>
+
 </body>
 </html>

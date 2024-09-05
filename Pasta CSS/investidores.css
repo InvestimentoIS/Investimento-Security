@@ -1,70 +1,215 @@
-/* Pasta CSS/investidores.css */
+/* Estilo básico e Reset */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    background-color: #f4f4f9;
 }
 
-.header {
-    background-color: #003366;
-    padding: 10px 20px;
+/* Estilo do cabeçalho */
+header {
+    background-color: #004a99;
+    color: #fff;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
 }
 
-.logo {
-    width: 140px;
-}
-
-.nav ul {
-    list-style-type: none;
+.logo h1 {
     margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
+    font-size: 24px;
 }
 
-.nav ul li {
+.logo a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    transition: transform 0.3s ease;
+}
+
+.nav-list li {
     margin-left: 20px;
 }
 
-.nav ul li a {
-    color: white;
+.nav-list li a {
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+    padding: 10px 15px;
 }
 
-.nav ul li a:hover {
-    color: #ffcc00;
+.nav-list li a.cadastro-button {
+    background-color: #f39c12;
+    border-radius: 5px;
 }
 
+.nav-list li a:hover {
+    background-color: #004a99;
+    border-radius: 5px;
+}
+
+/* Estilo do ícone de menu para mobile */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Menu móvel */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 50%;
+        background-color: #333;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        z-index: 999;
+        transition: right 0.3s ease;
+    }
+
+    .nav-list.show {
+        right: 0;
+    }
+
+    .nav-list li {
+        margin: 20px 0;
+        width: 100%;
+    }
+
+    .nav-list li a {
+        font-size: 18px;
+        color: #fff;
+        text-align: left;
+        padding: 10px 0;
+    }
+
+    .nav-list li a:hover {
+        background-color: #444;
+    }
+}
+
+/* Estilo da lista de investidores */
 .investor-list {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 50px 20px;
+    text-align: center;
 }
 
 .investor-list h2 {
-    text-align: center;
-    color: #003366;
+    font-size: 2.5em;
+    color: #004a99;
     margin-bottom: 30px;
 }
 
-.investor-list ul {
-    list-style-type: none;
-    padding: 0;
+.investor-list table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
 }
 
-.investor-list ul li {
-    background-color: #ffffff;
+.investor-list th, .investor-list td {
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+    text-align: center;
     font-size: 1.2em;
-    color: #003366;
+}
+
+.investor-list th {
+    background-color: #004a99;
+    color: white;
+}
+
+.investor-list td canvas {
+    width: 200px;
+    height: 100px;
+}
+
+.load-more {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #004a99;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-more:hover {
+    background-color: #003366;
+}
+
+/* Gráficos */
+canvas {
+    width: 200px !important;
+    height: 100px !important;
+}
+
+/* Cores de crescimento */
+.green-line {
+    border-color: green;
+}
+
+.red-line {
+    border-color: red;
+}
+
+/* Estilo da cotações de criptomoedas */
+.crypto-widget {
+    padding: 50px;
+    background-color: #f0f8ff;
+    text-align: center;
+}
+
+.crypto-widget h2 {
+    font-size: 2.5em;
+    color: #004a99;
+}
+
+/* Estilo da chamada para ação (CTA) */
+.cta {
+    background-color: #004a99;
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5em;
+}
+
+.cta .btn-primary {
+    background-color: #ff9900;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta .btn-primary:hover {
+    background-color: #e68a00;
 }
