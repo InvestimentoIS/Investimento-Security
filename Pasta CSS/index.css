@@ -1,29 +1,17 @@
-/* Reset Básico */
-body, h1, h2, h3, p, ul, li, a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    box-sizing: border-box;
-}
-
+/* Estilo básico e Reset */
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
-/* Cabeçalho */
+/* Estilo do cabeçalho */
 header {
-    background-color: #004a99;
+    background-color: #0057b7;
     color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 15px 20px;
     position: relative;
-    z-index: 1000;
 }
 
 .navbar {
@@ -33,29 +21,47 @@ header {
 }
 
 .logo h1 {
-    font-size: 24px;
     margin: 0;
+    font-size: 24px;
+    color: white;
 }
 
 .nav-list {
+    list-style: none;
     display: flex;
-    gap: 20px;
+    margin: 0;
+}
+
+.nav-list li {
+    margin-left: 20px;
 }
 
 .nav-list li a {
     color: #fff;
     text-decoration: none;
     padding: 10px 15px;
+    white-space: nowrap;
 }
 
-.nav-list li a:hover {
-    background-color: #003366;
+.nav-list li a.cadastro-button {
+    background-color: #f39c12;
     border-radius: 5px;
 }
 
-/* Menu Mobile */
+.nav-list li a:hover {
+    background-color: #004a99;
+    border-radius: 5px;
+}
+
+/* Estilo do Menu para Mobile */
 .menu-icon {
     display: none;
+    cursor: pointer;
+}
+
+.menu-icon img {
+    width: 30px;
+    height: 30px;
 }
 
 .mobile-menu {
@@ -70,7 +76,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 20px;
+    padding: 10px 20px;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
 }
@@ -82,41 +88,61 @@ header {
 .mobile-menu ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .mobile-menu ul li {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
 }
 
 .mobile-menu ul li a {
-    color: #fff;
     text-decoration: none;
+    color: #fff;
+    font-weight: bold;
     display: block;
     padding: 10px 0;
-    font-size: 18px;
+}
+
+.mobile-menu ul li a:hover {
+    color: #f39c12;
 }
 
 .mobile-menu .cta-button {
     background-color: #f39c12;
     color: #fff;
-    padding: 15px;
+    padding: 10px 20px;
     text-align: center;
     border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
     margin-top: auto;
+    width: 100%;
 }
 
 .mobile-menu .cta-button:hover {
     background-color: #e67e22;
 }
 
-/* Banner */
+/* Estilo do Banner */
 .banner {
-    background-image: url('../Fotos/55162817_l_normal_none.jpg');
+    background-image: url('../Fotos/banner.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
     text-align: center;
     padding: 100px 20px;
+    position: relative;
+}
+
+.banner-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .banner h1 {
@@ -130,12 +156,13 @@ header {
 }
 
 .cta-buttons a {
-    background-color: #f39c12;
     color: #fff;
+    background-color: #f39c12;
     padding: 10px 20px;
+    margin: 10px;
+    display: inline-block;
     border-radius: 5px;
     text-decoration: none;
-    margin: 10px;
     font-weight: bold;
 }
 
@@ -143,7 +170,7 @@ header {
     background-color: #d48806;
 }
 
-/* Destaques */
+/* Seção de Destaques */
 .destaques {
     padding: 60px 20px;
     text-align: center;
@@ -157,14 +184,13 @@ header {
 
 .diferenciais {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .diferencial-item {
     max-width: 300px;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
 .diferencial-item img {
@@ -173,15 +199,17 @@ header {
 }
 
 .diferencial-item h3 {
-    margin: 20px 0 10px;
     font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .diferencial-item p {
+    font-size: 16px;
     color: #555;
 }
 
-/* Produtos */
+/* Seção de Produtos */
 .produtos {
     padding: 60px 20px;
     text-align: center;
@@ -195,9 +223,8 @@ header {
 
 .produtos-lista {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .produto-item {
@@ -212,14 +239,17 @@ header {
 }
 
 .produto-item p {
+    font-size: 16px;
     color: #555;
     margin-bottom: 20px;
 }
 
 .produto-item .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
     background-color: #0057b7;
     color: #fff;
-    padding: 10px 20px;
+    text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
 }
@@ -228,7 +258,115 @@ header {
     background-color: #004a99;
 }
 
-/* Parceiros */
+/* Seção de Notícias */
+.noticias {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+}
+
+.noticias h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.noticias-conteudo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.blog-posts, .feed-noticias, .atualizacoes-mercado {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.blog-posts h3, .feed-noticias h3, .atualizacoes-mercado h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.blog-posts ul, .feed-noticias ul, .atualizacoes-mercado ul {
+    list-style: none;
+    padding: 0;
+}
+
+.blog-posts ul li, .feed-noticias ul li, .atualizacoes-mercado ul li {
+    margin-bottom: 10px;
+}
+
+.blog-posts ul li a, .atualizacoes-mercado ul li a {
+    color: #0057b7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.blog-posts ul li a:hover, .atualizacoes-mercado ul li a:hover {
+    text-decoration: underline;
+}
+
+.feed-noticias ul li {
+    font-size: 16px;
+    color: #333;
+}
+
+.noticias .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.noticias .cta-button:hover {
+    background-color: #d48806;
+}
+
+/* Seção de Testemunhos */
+.testemunhos {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.testemunhos h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.testemunhos-lista {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.testemunho-item {
+    max-width: 300px;
+    text-align: center;
+}
+
+.testemunho-item img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.testemunho-item p {
+    font-size: 16px;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testemunho-item span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Seção de Parcerias */
 .parcerias {
     padding: 60px 20px;
     background-color: #f8f8f8;
@@ -243,15 +381,11 @@ header {
 .parceiros-logos {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
+    margin-bottom: 40px;
 }
 
 .parceiros-logos img {
-    max-width: 150px; /* Ajuste do tamanho das imagens */
-    height: auto;
-    object-fit: contain; /* Mantém a proporção */
-    margin: 10px;
+    max-width: 150px;
 }
 
 .parcerias h3 {
@@ -269,63 +403,54 @@ header {
     margin-bottom: 10px;
 }
 
-/* Testemunhos */
-.testemunhos {
+/* Seção de Chamada para Ação */
+.cta-final {
     padding: 60px 20px;
-    background-color: #fff;
+    background-color: #989898;
     text-align: center;
+    color: #000000;
 }
 
-.testemunhos h2 {
+.cta-final h2 {
     font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.testemunhos-lista {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.testemunho-item {
-    max-width: 300px;
-    text-align: center;
-}
-
-.testemunho-item img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
     margin-bottom: 20px;
 }
 
-.testemunho-item p {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 10px;
+.cta-final p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #ffffff;
 }
 
-.testemunho-item span {
+.cta-final .cta-button {
+    padding: 15px 30px;
+    background-color: #f39c12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
     font-weight: bold;
-    color: #333;
 }
 
-/* Rodapé */
+.cta-final .cta-button:hover {
+    background-color: #d48806;
+}
+
+/* Estilo do Rodapé */
 footer {
     background-color: #003366;
     color: #fff;
     padding: 40px 20px;
     text-align: left;
+    font-family: 'Arial', sans-serif;
 }
 
 .footer-container {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    gap: 20px;
 }
 
 .footer-section {
@@ -336,14 +461,18 @@ footer {
 
 .footer-section h3,
 .footer-section h4 {
-    color: #f39c12;
     margin-bottom: 15px;
+    font-size: 20px;
+    color: #f39c12;
+    font-weight: bold;
 }
 
 .footer-section p,
 .footer-section ul li {
-    color: #d3d3d3;
     margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d3d3d3;
 }
 
 .footer-section ul {
@@ -351,67 +480,112 @@ footer {
     padding: 0;
 }
 
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
 .footer-section ul li a {
     color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
 }
 
 .social-icons {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .social-icons img {
     width: 30px;
     height: 30px;
     transition: transform 0.3s;
+    object-fit: cover;
 }
 
 .social-icons img:hover {
     transform: scale(1.2);
 }
 
+.footer-section.social {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-section.social h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
 .footer-bottom {
     text-align: center;
-    padding-top: 10px;
+    margin-top: 20px;
+    font-size: 14px;
     border-top: 1px solid #444;
+    padding-top: 10px;
     color: #d3d3d3;
 }
 
-/* Ajustes Responsivos */
+/* Estilo Responsivo */
 @media (max-width: 768px) {
-    .nav-list {
-        display: none;
-    }
-
     .menu-icon {
         display: block;
     }
 
+    .nav-list {
+        display: none;
+    }
+
     .banner h1 {
-        font-size: 36px;
+        font-size: 28px;
     }
 
     .banner p {
-        font-size: 18px;
+        font-size: 16px;
     }
 
-    .destaques h2,
-    .produtos h2,
-    .parcerias h2,
-    .testemunhos h2 {
-        font-size: 30px;
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 24px;
     }
 
-    .parceiros-logos {
-        justify-content: center;
+    .cta-final h2 {
+        font-size: 24px;
     }
 
-    .footer-container {
-        flex-direction: column;
+    .cta-final p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .banner h1 {
+        font-size: 24px;
     }
 
-    .footer-section {
-        min-width: 100%;
+    .banner p {
+        font-size: 14px;
+    }
+
+    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final h2 {
+        font-size: 20px;
+    }
+
+    .cta-final p {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 10px;
     }
 }
