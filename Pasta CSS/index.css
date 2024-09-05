@@ -68,7 +68,7 @@ header {
     position: fixed;
     top: 0;
     right: 0;
-    width: 50%;
+    width: 50%; /* Ocupa 50% da tela */
     height: 100%;
     background-color: #333;
     color: #fff;
@@ -96,7 +96,7 @@ header {
 
 .mobile-menu ul li {
     margin-bottom: 15px;
-    font-size: 16px;
+    font-size: 18px; /* Aumenta o tamanho da fonte para melhor legibilidade */
     width: 100%;
     text-align: left;
 }
@@ -106,7 +106,7 @@ header {
     color: #fff;
     font-weight: bold;
     display: block;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .mobile-menu ul li a:hover {
@@ -129,9 +129,14 @@ header {
     background-color: #e67e22;
 }
 
+/* Ajuste do Menu Fechado ao Clicar Fora */
+body.mobile-open .mobile-menu {
+    transform: translateX(100%);
+}
+
 /* Estilo do Banner */
 .banner {
-    background-image: url('../Fotos/55162817_l_normal_none.jpg');
+    background-image: url('../Fotos/55162817_l_normal_none.jpg'); /* Certifique-se de ter a imagem correta */
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -308,20 +313,6 @@ header {
 .feed-noticias ul li {
     font-size: 16px;
     color: #333;
-}
-
-.noticias .cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #f39c12;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.noticias .cta-button:hover {
-    background-color: #d48806;
 }
 
 /* Seção de Testemunhos */
@@ -533,8 +524,36 @@ footer {
     color: #d3d3d3;
 }
 
-/* Estilo Responsivo */
-@media (max-width: 768px) {
+
+/* Ajustes Responsivos */
+@media (max-width: 2408px) {
+    /* Ajuste específico para o Samsung A13 */
+    .banner h1 {
+        font-size: 42px;
+    }
+
+    .banner p {
+        font-size: 20px;
+    }
+
+    .produtos h2 {
+        font-size: 32px;
+    }
+
+    .destaques h2 {
+        font-size: 32px;
+    }
+
+    .cta-final h2 {
+        font-size: 32px;
+    }
+
+    .cta-final p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1080px) {
     .menu-icon {
         display: block;
     }
@@ -543,50 +562,21 @@ footer {
         display: none;
     }
 
-    .banner h1 {
-        font-size: 28px;
+    .cta-buttons a {
+        padding: 8px 15px;
     }
 
-    .banner p {
-        font-size: 16px;
-    }
-
-    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
-        font-size: 24px;
-    }
-
-    .cta-final h2 {
-        font-size: 24px;
+    .produtos-lista, .diferenciais {
+        flex-direction: column;
+        align-items: center;
     }
 
     .cta-final p {
-        font-size: 16px;
+        font-size: 18px;
+    }
+
+    .testemunho-item img {
+        width: 80px;
+        height: 80px;
     }
 }
-
-@media (max-width: 576px) {
-    .banner h1 {
-        font-size: 24px;
-    }
-
-    .banner p {
-        font-size: 14px;
-    }
-
-    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
-        font-size: 20px;
-    }
-
-    .cta-final h2 {
-        font-size: 20px;
-    }
-
-    .cta-final p {
-        font-size: 14px;
-    }
-
-    footer {
-        font-size: 10px;
-    }
-}
-
