@@ -131,7 +131,7 @@ header {
 
 /* Estilo do Banner */
 .banner {
-    background-image: url('../Fotos/n');
+    background-image: url('../Fotos/banner.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -589,4 +589,3 @@ footer {
         font-size: 10px;
     }
 }
-
