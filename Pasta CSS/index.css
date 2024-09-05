@@ -8,7 +8,7 @@ body {
 
 /* Estilo do cabeçalho */
 header {
-    background-color: #0057b7;
+    background-color: #004a99;
     color: #fff;
     padding: 15px 20px;
     position: relative;
@@ -23,13 +23,18 @@ header {
 .logo h1 {
     margin: 0;
     font-size: 24px;
-    color: white;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
     margin: 0;
+    transition: transform 0.3s ease;
 }
 
 .nav-list li {
@@ -40,7 +45,6 @@ header {
     color: #fff;
     text-decoration: none;
     padding: 10px 15px;
-    white-space: nowrap;
 }
 
 .nav-list li a.cadastro-button {
@@ -53,7 +57,7 @@ header {
     border-radius: 5px;
 }
 
-/* Estilo do Menu para Mobile */
+/* Estilo do ícone de menu para mobile */
 .menu-icon {
     display: none;
     cursor: pointer;
@@ -64,528 +68,44 @@ header {
     height: 30px;
 }
 
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 10px 20px;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-}
-
-.mobile-menu.open {
-    transform: translateX(0);
-}
-
-.mobile-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.mobile-menu ul li {
-    margin-bottom: 15px;
-    font-size: 16px;
-    width: 100%;
-    text-align: left;
-}
-
-.mobile-menu ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    display: block;
-    padding: 10px 0;
-}
-
-.mobile-menu ul li a:hover {
-    color: #f39c12;
-}
-
-.mobile-menu .cta-button {
-    background-color: #f39c12;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 18px;
-    margin-top: auto;
-    width: 100%;
-}
-
-.mobile-menu .cta-button:hover {
-    background-color: #e67e22;
-}
-
-/* Estilo do Banner */
-.banner {
-    background-image: url('../Fotos/banner.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    text-align: center;
-    padding: 100px 20px;
-    position: relative;
-}
-
-.banner-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.banner h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.banner p {
-    font-size: 24px;
-    margin-bottom: 30px;
-}
-
-.cta-buttons a {
-    color: #fff;
-    background-color: #f39c12;
-    padding: 10px 20px;
-    margin: 10px;
-    display: inline-block;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.cta-buttons a:hover {
-    background-color: #d48806;
-}
-
-/* Seção de Destaques */
-.destaques {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #f8f8f8;
-}
-
-.destaques h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.diferenciais {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.diferencial-item {
-    max-width: 300px;
-    margin-bottom: 20px;
-}
-
-.diferencial-item img {
-    width: 80px;
-    height: 80px;
-}
-
-.diferencial-item h3 {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.diferencial-item p {
-    font-size: 16px;
-    color: #555;
-}
-
-/* Seção de Produtos */
-.produtos {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #fff;
-}
-
-.produtos h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.produtos-lista {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.produto-item {
-    max-width: 300px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.produto-item h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.produto-item p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.produto-item .cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0057b7;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.produto-item .cta-button:hover {
-    background-color: #004a99;
-}
-
-/* Seção de Notícias */
-.noticias {
-    padding: 60px 20px;
-    background-color: #f8f8f8;
-}
-
-.noticias h2 {
-    font-size: 36px;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.noticias-conteudo {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.blog-posts, .feed-noticias, .atualizacoes-mercado {
-    flex: 1;
-    margin: 0 20px;
-}
-
-.blog-posts h3, .feed-noticias h3, .atualizacoes-mercado h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.blog-posts ul, .feed-noticias ul, .atualizacoes-mercado ul {
-    list-style: none;
-    padding: 0;
-}
-
-.blog-posts ul li, .feed-noticias ul li, .atualizacoes-mercado ul li {
-    margin-bottom: 10px;
-}
-
-.blog-posts ul li a, .atualizacoes-mercado ul li a {
-    color: #0057b7;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.blog-posts ul li a:hover, .atualizacoes-mercado ul li a:hover {
-    text-decoration: underline;
-}
-
-.feed-noticias ul li {
-    font-size: 16px;
-    color: #333;
-}
-
-.noticias .cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #f39c12;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.noticias .cta-button:hover {
-    background-color: #d48806;
-}
-
-/* Seção de Testemunhos */
-.testemunhos {
-    padding: 60px 20px;
-    background-color: #fff;
-    text-align: center;
-}
-
-.testemunhos h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.testemunhos-lista {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
-
-.testemunho-item {
-    max-width: 300px;
-    text-align: center;
-}
-
-.testemunho-item img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
-
-.testemunho-item p {
-    font-size: 16px;
-    color: #555;
-    font-style: italic;
-    margin-bottom: 10px;
-}
-
-.testemunho-item span {
-    font-weight: bold;
-    color: #333;
-}
-
-/* Seção de Parcerias */
-.parcerias {
-    padding: 60px 20px;
-    background-color: #f8f8f8;
-    text-align: center;
-}
-
-.parcerias h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.parceiros-logos {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
-}
-
-.parceiros-logos img {
-    max-width: 150px;
-}
-
-.parcerias h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.parcerias ul {
-    list-style: none;
-    padding: 0;
-}
-
-.parcerias ul li {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-/* Seção de Chamada para Ação */
-.cta-final {
-    padding: 60px 20px;
-    background-color: #989898;
-    text-align: center;
-    color: #000000;
-}
-
-.cta-final h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.cta-final p {
-    font-size: 20px;
-    margin-bottom: 30px;
-    color: #ffffff;
-}
-
-.cta-final .cta-button {
-    padding: 15px 30px;
-    background-color: #f39c12;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.cta-final .cta-button:hover {
-    background-color: #d48806;
-}
-
-/* Estilo do Rodapé */
-footer {
-    background-color: #003366;
-    color: #fff;
-    padding: 40px 20px;
-    text-align: left;
-    font-family: 'Arial', sans-serif;
-}
-
-.footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px;
-}
-
-.footer-section {
-    flex: 1;
-    min-width: 250px;
-    margin-bottom: 20px;
-}
-
-.footer-section h3,
-.footer-section h4 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #f39c12;
-    font-weight: bold;
-}
-
-.footer-section p,
-.footer-section ul li {
-    margin-bottom: 10px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #d3d3d3;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.footer-section ul li a:hover {
-    text-decoration: underline;
-}
-
-.social-icons {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-}
-
-.social-icons img {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s;
-    object-fit: cover;
-}
-
-.social-icons img:hover {
-    transform: scale(1.2);
-}
-
-.footer-section.social {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.footer-section.social h4 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    border-top: 1px solid #444;
-    padding-top: 10px;
-    color: #d3d3d3;
-}
-
-/* Estilo Responsivo */
+/* Menu móvel */
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
     }
 
     .nav-list {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 50%; /* Ocupa 50% da tela */
+        background-color: #333;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start; /* Alinha os itens à esquerda */
+        padding: 20px;
+        z-index: 999;
+        transition: right 0.3s ease;
     }
 
-    .banner h1 {
-        font-size: 28px;
+    .nav-list.show {
+        right: 0;
     }
 
-    .banner p {
-        font-size: 16px;
+    .nav-list li {
+        margin: 20px 0; /* Espaçamento mais estético */
+        width: 100%; /* Cada item ocupa 100% da largura do menu */
     }
 
-    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
-        font-size: 24px;
+    .nav-list li a {
+        font-size: 18px;
+        color: #fff;
+        text-align: left; /* Alinha o texto à esquerda */
+        padding: 10px 0; /* Mais espaço em torno dos links */
     }
 
-    .cta-final h2 {
-        font-size: 24px;
-    }
-
-    .cta-final p {
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 576px) {
-    .banner h1 {
-        font-size: 24px;
-    }
-
-    .banner p {
-        font-size: 14px;
-    }
-
-    .destaques h2, .produtos h2, .noticias h2, .testemunhos h2, .parcerias h2, .cta-final h2 {
-        font-size: 20px;
-    }
-
-    .cta-final h2 {
-        font-size: 20px;
-    }
-
-    .cta-final p {
-        font-size: 14px;
-    }
-
-    footer {
-        font-size: 10px;
+    .nav-list li a:hover {
+        background-color: #444;
     }
 }
