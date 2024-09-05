@@ -4,6 +4,8 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-color: #f4f4f9;
+    overflow-x: hidden; /* Remove o scroll horizontal global */
 }
 
 /* Estilo do cabeçalho */
@@ -79,7 +81,7 @@ header {
         top: 0;
         right: -100%;
         height: 100%;
-        width: 50%;
+        width: 50%; /* Ajuste para ocupar 50% da tela */
         background-color: #333;
         flex-direction: column;
         justify-content: flex-start;
@@ -110,16 +112,10 @@ header {
     }
 }
 
-/* Estilo da lista de investidores */
-.investor-list {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.investor-list h2 {
-    font-size: 2.5em;
-    color: #004a99;
-    margin-bottom: 30px;
+/* Estilo da tabela responsiva */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Cria rolagem horizontal quando necessário */
 }
 
 .investor-list table {
@@ -127,6 +123,7 @@ header {
     max-width: 1200px;
     margin: 0 auto;
     border-collapse: collapse;
+    overflow-x: auto; /* Garante que a tabela não saia da tela */
 }
 
 .investor-list th, .investor-list td {
@@ -134,6 +131,7 @@ header {
     border-bottom: 1px solid #ddd;
     text-align: center;
     font-size: 1.2em;
+    white-space: nowrap; /* Impede a quebra de linhas no celular */
 }
 
 .investor-list th {
@@ -141,9 +139,15 @@ header {
     color: white;
 }
 
-.investor-list td canvas {
-    width: 200px;
-    height: 100px;
+/* Estilo para dispositivos móveis */
+@media (max-width: 768px) {
+    .investor-list table {
+        font-size: 0.9em; /* Diminui o tamanho da fonte no celular */
+    }
+
+    .table-responsive {
+        padding: 0 10px; /* Adiciona padding lateral */
+    }
 }
 
 .load-more {

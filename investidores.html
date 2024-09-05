@@ -24,7 +24,7 @@
                 <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
             </ul>
             <div id="menu-icon" class="menu-icon">
-                <img src="Fotos/menu preto.png" alt="Menu Icon">
+                <img src="menu.png" alt="Menu Icon">
             </div>
         </div>
     </header>
@@ -32,30 +32,32 @@
     <!-- Seção de lista de investidores com Ver Mais -->
     <section class="investor-list">
         <h2>Top 50 Investidores</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Investidor</th>
-                    <th>Montante Investido</th>
-                    <th>Lucro Diário</th>
-                    <th>Crescimento</th>
-                </tr>
-            </thead>
-            <tbody id="investor-table">
-                <tr>
-                    <td>Fortunato Teixeira</td>
-                    <td id="investment-investor1">$1,234,567.89</td>
-                    <td id="profit-investor1">$5,976.89</td>
-                    <td><canvas id="investor1-chart"></canvas></td>
-                </tr>
-                <tr>
-                    <td>Patrícia Almeida</td>
-                    <td id="investment-investor2">$789,654.32</td>
-                    <td id="profit-investor2">$3,876.45</td>
-                    <td><canvas id="investor2-chart"></canvas></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Investidor</th>
+                        <th>Montante Investido</th>
+                        <th>Lucro Diário</th>
+                        <th>Crescimento</th>
+                    </tr>
+                </thead>
+                <tbody id="investor-table">
+                    <tr>
+                        <td>Fortunato Teixeira</td>
+                        <td id="investment-investor1">$1,234,567.89</td>
+                        <td id="profit-investor1">$5,976.89</td>
+                        <td><canvas id="investor1-chart"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td>Patrícia Almeida</td>
+                        <td id="investment-investor2">$789,654.32</td>
+                        <td id="profit-investor2">$3,876.45</td>
+                        <td><canvas id="investor2-chart"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <button id="load-more" class="load-more">Ver Mais</button>
     </section>
 

@@ -61,7 +61,6 @@ loadMoreBtn.addEventListener('click', () => {
             <td>$2,154.67</td>
             <td><canvas id="investor4-chart"></canvas></td>
         </tr>
-        <!-- Adicione mais investidores aqui -->
     `;
     investorTable.innerHTML += additionalInvestors;
 
