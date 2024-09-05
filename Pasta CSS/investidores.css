@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-color: #f4f4f9;
 }
 
 /* Estilo do cabeçalho */
@@ -165,15 +164,6 @@ header {
 canvas {
     width: 200px !important;
     height: 100px !important;
-}
-
-/* Cores de crescimento */
-.green-line {
-    border-color: green;
-}
-
-.red-line {
-    border-color: red;
 }
 
 /* Estilo da cotações de criptomoedas */
