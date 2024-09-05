@@ -1,12 +1,18 @@
-/* Estilo básico e Reset */
-body {
-    font-family: 'Arial', sans-serif;
+/* Reset Básico */
+body, h1, h2, h3, p, ul, li, a {
     margin: 0;
     padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
     line-height: 1.6;
 }
 
-/* Estilo do cabeçalho */
+/* Cabeçalho */
 header {
     background-color: #004a99;
     color: #fff;
@@ -21,7 +27,6 @@ header {
 }
 
 .logo h1 {
-    margin: 0;
     font-size: 24px;
 }
 
@@ -31,33 +36,22 @@ header {
 }
 
 .nav-list {
-    list-style: none;
     display: flex;
-    margin: 0;
-    transition: transform 0.3s ease;
-}
-
-.nav-list li {
-    margin-left: 20px;
+    gap: 20px;
 }
 
 .nav-list li a {
     color: #fff;
-    text-decoration: none;
     padding: 10px 15px;
-}
-
-.nav-list li a.cadastro-button {
-    background-color: #f39c12;
-    border-radius: 5px;
+    text-decoration: none;
 }
 
 .nav-list li a:hover {
-    background-color: #004a99;
+    background-color: #003366;
     border-radius: 5px;
 }
 
-/* Estilo do ícone de menu para mobile */
+/* Menu Mobile */
 .menu-icon {
     display: none;
     cursor: pointer;
@@ -68,7 +62,6 @@ header {
     height: 30px;
 }
 
-/* Menu móvel */
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
@@ -78,12 +71,11 @@ header {
         position: fixed;
         top: 0;
         right: -100%;
+        width: 50%;
         height: 100%;
-        width: 50%; /* Ocupa 50% da tela */
         background-color: #333;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start; /* Alinha os itens à esquerda */
+        align-items: flex-start;
         padding: 20px;
         z-index: 999;
         transition: right 0.3s ease;
@@ -94,18 +86,149 @@ header {
     }
 
     .nav-list li {
-        margin: 20px 0; /* Espaçamento mais estético */
-        width: 100%; /* Cada item ocupa 100% da largura do menu */
+        margin-bottom: 20px;
+        width: 100%;
     }
 
     .nav-list li a {
         font-size: 18px;
         color: #fff;
-        text-align: left; /* Alinha o texto à esquerda */
-        padding: 10px 0; /* Mais espaço em torno dos links */
+        padding: 10px 0;
+        text-align: left;
     }
 
     .nav-list li a:hover {
         background-color: #444;
+    }
+}
+
+/* Banner */
+.banner {
+    background-image: url('../Fotos/55162817_l_normal_none.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.banner h1 {
+    font-size: 48px;
+}
+
+.cta-buttons a {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-buttons a:hover {
+    background-color: #d48806;
+}
+
+/* Destaques */
+.destaques {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.diferenciais {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.diferencial-item {
+    max-width: 300px;
+    text-align: center;
+}
+
+.diferencial-item img {
+    width: 80px;
+    height: 80px;
+}
+
+.diferencial-item h3 {
+    font-size: 24px;
+    margin: 20px 0 10px;
+}
+
+.diferencial-item p {
+    color: #555;
+}
+
+/* Produtos */
+.produtos {
+    padding: 60px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.produtos h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.produtos-lista {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.produto-item {
+    max-width: 300px;
+    text-align: center;
+}
+
+.produto-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.produto-item p {
+    color: #555;
+}
+
+.produto-item .cta-button {
+    background-color: #0057b7;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.produto-item .cta-button:hover {
+    background-color: #004a99;
+}
+
+/* Parcerias */
+.parcerias {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.parceiros-logos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.parceiros-logos img {
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .produtos-lista, .diferenciais, .parceiros-logos {
+        flex-direction: column;
     }
 }
