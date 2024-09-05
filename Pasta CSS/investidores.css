@@ -118,12 +118,21 @@ header {
     overflow-x: auto; /* Cria rolagem horizontal quando necessário */
 }
 
+.investor-list {
+    text-align: center;
+}
+
+.investor-list h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #004a99;
+}
+
 .investor-list table {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     border-collapse: collapse;
-    overflow-x: auto; /* Garante que a tabela não saia da tela */
 }
 
 .investor-list th, .investor-list td {
@@ -139,7 +148,7 @@ header {
     color: white;
 }
 
-/* Estilo para dispositivos móveis */
+/* Ajustes para manter a tabela completa no celular */
 @media (max-width: 768px) {
     .investor-list table {
         font-size: 0.9em; /* Diminui o tamanho da fonte no celular */
@@ -150,8 +159,14 @@ header {
     }
 }
 
-.load-more {
+/* Centraliza o botão "Ver Mais" */
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
+}
+
+.load-more {
     padding: 10px 20px;
     background-color: #004a99;
     color: white;
