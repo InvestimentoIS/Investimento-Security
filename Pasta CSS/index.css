@@ -131,7 +131,7 @@ header {
 
 /* Estilo do Banner */
 .banner {
-    background-image: url('../Fotos/55162817_l_normal_none.jpg');
+    background-image: url('../Fotos/n');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -534,7 +534,7 @@ footer {
 }
 
 /* Estilo Responsivo */
-@media (max-width: 2408px) {
+@media (max-width: 768px) {
     .menu-icon {
         display: block;
     }
@@ -564,7 +564,7 @@ footer {
     }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 576px) {
     .banner h1 {
         font-size: 24px;
     }
