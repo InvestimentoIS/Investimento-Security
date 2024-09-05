@@ -10,7 +10,8 @@
 
     <!-- Cabeçalho -->
     <header>
-        <nav class="navbar">
+        <!-- Para Usuários Não Logados -->
+        <nav class="navbar" id="header-nao-logado">
             <div class="logo">
                 <h1><a href="index.html">Investimento Security</a></h1>
             </div>
@@ -26,9 +27,27 @@
                 <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
             </ul>
         </nav>
+
+        <!-- Para Usuários Logados -->
+        <nav class="navbar" id="header-logado" style="display: none;">
+            <div class="logo">
+                <h1><a href="dashboard.html">Painel de Controle</a></h1>
+            </div>
+            <div class="menu-icon" id="menu-icon">
+                <img src="Fotos/menu preto.png" alt="Menu">
+            </div>
+            <ul class="nav-list" id="nav-list">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
+                <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
+                <li><a href="depositar.html">Depósito/Saque</a></li>
+                <li><a href="suporte.html">Suporte</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Banner -->
+    <!-- Banner Inicial -->
     <section class="banner">
         <div class="banner-content">
             <h1>Invista no Futuro com Segurança e Inovação</h1>
@@ -40,66 +59,121 @@
         </div>
     </section>
 
-    <!-- Conteúdo -->
-    <section class="conteudo">
-        <!-- Seções da página como 'Nossos Diferenciais', 'Produtos', etc. -->
-        <div class="destaques">
-            <h2>Nossos Diferenciais</h2>
-            <div class="diferenciais">
-                <div class="diferencial-item">
-                    <img src="Fotos/seguranca.png" alt="Segurança Garantida">
-                    <h3>Segurança Garantida</h3>
-                    <p>Plataformas com altos padrões de segurança.</p>
-                </div>
-                <div class="diferencial-item">
-                    <img src="Fotos/inovacao.png" alt="Inovação">
-                    <h3>Inovações em Trading</h3>
-                    <p>Inovando sempre para melhorar suas operações.</p>
-                </div>
-                <div class="diferencial-item">
-                    <img src="Fotos/suporte.png" alt="Suporte 24/7">
-                    <h3>Suporte 24/7</h3>
-                    <p>Suporte especializado disponível o tempo todo.</p>
-                </div>
+    <!-- Seção Nossos Diferenciais -->
+    <section class="destaques">
+        <h2>Nossos Diferenciais</h2>
+        <div class="diferenciais">
+            <div class="diferencial-item">
+                <img src="Fotos/segurança.png" alt="Segurança Garantida">
+                <h3>Segurança Garantida</h3>
+                <p>Nossos sistemas são seguros e confiáveis.</p>
             </div>
-        </div>
-
-        <div class="produtos">
-            <h2>Nossos Produtos</h2>
-            <div class="produtos-lista">
-                <div class="produto-item">
-                    <h3>Ações Garantidas</h3>
-                    <p>Invista com segurança em ações garantidas.</p>
-                    <a href="acoes.html" class="cta-button">Ver Ações</a>
-                </div>
-                <div class="produto-item">
-                    <h3>Ações Não Garantidas</h3>
-                    <p>Assuma riscos maiores para melhores retornos.</p>
-                    <a href="acoes.html" class="cta-button">Ver Ações</a>
-                </div>
-                <div class="produto-item">
-                    <h3>Planos de Investimento</h3>
-                    <p>Escolha o melhor plano de investimento para você.</p>
-                    <a href="planos.html" class="cta-button">Ver Planos</a>
-                </div>
+            <div class="diferencial-item">
+                <img src="Fotos/Innovation free icons designed by Freepik.jpeg" alt="Inovação">
+                <h3>Inovações em Trading</h3>
+                <p>Trabalhamos com as melhores tecnologias.</p>
             </div>
-        </div>
-
-        <div class="parcerias">
-            <h2>Nossos Parceiros</h2>
-            <div class="parceiros-logos">
-                <img src="Fotos/aliExpress.png" alt="AliExpress">
-                <img src="Fotos/binance.png" alt="Binance">
-                <img src="Fotos/mastercard.png" alt="MasterCard">
+            <div class="diferencial-item">
+                <img src="Fotos/24.png" alt="Suporte 24/7">
+                <h3>Suporte 24/7</h3>
+                <p>Suporte ao cliente disponível sempre que precisar.</p>
             </div>
-            <h3>Certificações e Reconhecimentos</h3>
-            <ul>
-                <li>Certificação ISO 9001</li>
-                <li>Prêmio de Inovação 2024</li>
-                <li>Melhor Plataforma de Investimento</li>
-            </ul>
         </div>
     </section>
+
+    <!-- Seção Nossos Produtos -->
+    <section class="produtos">
+        <h2>Nossos Produtos</h2>
+        <div class="produtos-lista">
+            <div class="produto-item">
+                <h3>Ações Garantidas</h3>
+                <p>Invista com segurança em ações garantidas com risco baixo.</p>
+                <a href="acoes-garantidas.html" class="cta-button">Ver Ações Garantidas</a>
+            </div>
+            <div class="produto-item">
+                <h3>Ações Não Garantidas</h3>
+                <p>Obtenha altos retornos com ações de maior risco.</p>
+                <a href="acoes-nao-garantidas.html" class="cta-button">Ver Ações Não Garantidas</a>
+            </div>
+            <div class="produto-item">
+                <h3>Planos de Investimento</h3>
+                <p>Escolha o plano ideal para o seu perfil de investidor.</p>
+                <a href="planos.html" class="cta-button">Ver Planos de Investimento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Nossos Parceiros -->
+    <section class="parcerias">
+        <h2>Nossos Parceiros</h2>
+        <div class="parceiros-logos">
+            <img src="Fotos/ALIEXPRESS.png" alt="Parceiro Aliexpress">
+            <img src="Fotos/BINANCE.png" alt="Parceiro Binance">
+            <img src="Fotos/MASTERCADR.png" alt="Parceiro Mastercard">
+        </div>
+        <h3>Certificações e Reconhecimentos</h3>
+        <ul>
+            <li>Certificação ISO 9001</li>
+            <li>Prêmio de Inovação Financeira 2024</li>
+            <li>Melhor Plataforma de Investimento pela I.S Finance</li>
+        </ul>
+    </section>
+
+    <!-- Seção de Chamada para Ação -->
+    <section class="cta-final">
+        <h2>Invista com Segurança e Inovação</h2>
+        <p>Não perca tempo, junte-se a nós e transforme o seu futuro financeiro.</p>
+        <a href="register.html" class="cta-button">Cadastre-se Agora</a>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>Sobre Nós</h3>
+                <p>Invista com confiança. Oferecemos as melhores soluções financeiras para garantir o futuro do seu patrimônio.</p>
+            </div>
+            <div class="footer-section links">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="guia-investimento.html">Guia de Investimento</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-section legal">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="termos.html">Termos de Uso</a></li>
+                    <li><a href="privacidade.html">Política de Privacidade</a></li>
+                    <li><a href="cookies.html">Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section suporte">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="suporte.html">Suporte Técnico</a></li>
+                    <li><a href="ticket.html">Abrir um Ticket</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h4>Siga-nos</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="Fotos/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="Fotos/twitter.png" alt="Twitter"></a>
+                    <a href="#"><img src="Fotos/linkedin.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="Fotos/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="Fotos/youtube.png" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Investimento Security. Todos os direitos reservados.
+        </div>
+    </footer>
 
     <script src="Pasta JS/index.js"></script>
 </body>
