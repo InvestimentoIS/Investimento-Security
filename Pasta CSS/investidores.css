@@ -115,7 +115,7 @@ header {
 /* Estilo da tabela responsiva */
 .table-responsive {
     width: 100%;
-    overflow-x: auto; /* Cria rolagem horizontal quando necessário */
+    overflow-x: hidden; /* Remove a rolagem lateral */
 }
 
 .investor-list {
@@ -140,24 +140,18 @@ header {
     border-bottom: 1px solid #ddd;
     text-align: center;
     font-size: 1.2em;
-    white-space: nowrap; /* Impede a quebra de linhas no celular */
 }
 
-.investor-list th {
-    background-color: #004a99;
-    color: white;
-}
-
-/* Ajustes para manter a tabela completa no celular */
+/* Ajustes para telas menores */
 @media (max-width: 768px) {
-    /* Exibição em bloco para dispositivos móveis */
+    /* Exibição em formato de blocos para telas pequenas */
     .investor-list table, .investor-list thead, .investor-list tbody, .investor-list th, .investor-list td, .investor-list tr {
         display: block;
         width: 100%;
     }
 
     .investor-list tr {
-        margin-bottom: 20px; /* Espaço entre blocos no celular */
+        margin-bottom: 20px; /* Espaço entre blocos */
     }
 
     .investor-list td {
@@ -175,12 +169,12 @@ header {
         font-weight: bold;
     }
 
-    .investor-list th, .investor-list td {
-        font-size: 1em; /* Ajusta o tamanho da fonte para melhor legibilidade */
+    .investor-list th {
+        display: none; /* Remove o cabeçalho das colunas em telas pequenas */
     }
 
-    .investor-list th {
-        display: none; /* Remove o cabeçalho das colunas no celular */
+    .investor-list td {
+        font-size: 1em; /* Ajusta o tamanho da fonte */
     }
 }
 
