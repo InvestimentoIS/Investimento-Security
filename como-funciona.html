@@ -9,11 +9,14 @@
 </head>
 <body>
   <header>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <img src="Fotos/menu.png" alt="Menu Icon">
+    </div>
     <nav>
-      <div class="Investiment Security">
+      <div class="logo">
         <h1>Investment Security</h1>
       </div>
-      <ul>
+      <ul class="nav-list">
         <li><a href="index.html">Início</a></li>
         <li><a href="como-funciona.html">Como Funciona</a></li>
         <li><a href="guia-investimento.html">Guia de Investimento</a></li>
@@ -26,80 +29,14 @@
   </header>
 
   <main>
+    <!-- Conteúdo principal da página -->
     <section id="introducao">
       <h1>Como Funciona a Investment Security</h1>
       <p>A Investment Security oferece uma plataforma fácil e acessível para investir em ações utilizando criptomoedas. Nosso processo é simples e transparente, adequado tanto para iniciantes quanto para investidores experientes.</p>
     </section>
 
-    <section id="etapas-processo">
-      <h2>Etapas do Processo</h2>
-      <div class="etapa">
-        <h3>1. Cadastro</h3>
-        <p>Registre-se rapidamente e crie sua conta na nossa plataforma.</p>
-      </div>
-      <div class="etapa">
-        <h3>2. Depósito em Criptomoedas</h3>
-        <p>Faça o depósito utilizando criptomoedas. <a href="Fotos/1x1_Cria_uma_imagem_com_uma_m_o_more.png" target="_blank">Veja o manual de depósito</a>.</p>
-      </div>
-      <div class="etapa">
-        <h3>3. Investimento e Retirada</h3>
-        <p>Após o depósito, escolha entre três opções de investimento. O processo de retirada é simples e direto.</p>
-      </div>
-    </section>
-
-    <section id="opcoes-investimento">
-      <h2>Opções de Investimento</h2>
-      <div class="opcao">
-        <h3>Ações com Garantia</h3>
-        <p>15% de juros mensais garantidos. Para valores abaixo de $1250, uma taxa de seguro de 10% será aplicada.</p>
-      </div>
-      <div class="opcao">
-        <h3>Ações sem Garantia</h3>
-        <p>Alto retorno, podendo chegar até 80%, porém sem garantia de valor exato.</p>
-      </div>
-    </section>
-
-    <section id="calculadoras">
-      <h2>Calculadoras de Investimento</h2>
-      <div class="calculadora">
-        <h3>Calculadora para Ações com Garantia</h3>
-        <label for="montante-garantia">Montante Investido:</label>
-        <input type="number" id="montante-garantia" placeholder="Ex: 2000">
-
-        <label for="tempo-garantia">Tempo:</label>
-        <select id="tempo-garantia-tipo">
-          <option value="dias">Dias</option>
-          <option value="semanas">Semanas</option>
-          <option value="meses">Meses</option>
-          <option value="anos">Anos</option>
-        </select>
-        <input type="number" id="tempo-garantia" placeholder="Quantos...">
-
-        <button id="calcular-garantia">Calcular</button>
-        <p>Retorno: <span id="retorno-garantia"></span></p>
-      </div>
-
-      <div class="calculadora">
-        <h3>Calculadora para Ações sem Garantia</h3>
-        <label for="montante-sem-garantia">Montante Investido:</label>
-        <input type="number" id="montante-sem-garantia" placeholder="Ex: 2000">
-
-        <label for="tempo-sem-garantia">Tempo:</label>
-        <select id="tempo-sem-garantia-tipo">
-          <option value="dias">Dias</option>
-          <option value="semanas">Semanas</option>
-          <option value="meses">Meses</option>
-          <option value="anos">Anos</option>
-        </select>
-        <input type="number" id="tempo-sem-garantia" placeholder="Quantos...">
-
-        <button id="calcular-sem-garantia">Calcular</button>
-        <p>Retorno estimado: <span id="retorno-sem-garantia"></span></p>
-      </div>
-    </section>
-
     <section id="grafico-acao">
-      <h2>Gráfico de Ações em Tempo Real</h2>
+      <h2>Gráfico (Great Choice)</h2>
       <canvas id="grafico"></canvas>
     </section>
 
@@ -110,9 +47,60 @@
   </main>
 
   <footer>
-    <p>&copy; 2024 Investment Security. Todos os direitos reservados.</p>
+    <div class="footer-container">
+      <div class="footer-section about">
+        <h3>Sobre Nós</h3>
+        <p>Invista com confiança. Oferecemos as melhores soluções financeiras para garantir o futuro do seu patrimônio.</p>
+      </div>
+      <div class="footer-section links">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="como-funciona.html">Como Funciona</a></li>
+          <li><a href="guia-investimento.html">Guia de Investimento</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-section legal">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="termos.html">Termos de Uso</a></li>
+          <li><a href="privacidade.html">Política de Privacidade</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+      <div class="footer-section suporte">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="suporte.html">Suporte Técnico</a></li>
+          <li><a href="ticket.html">Abrir um Ticket</a></li>
+        </ul>
+      </div>
+      <div class="footer-section social">
+        <h4>Siga-nos</h4>
+        <div class="social-icons">
+          <a href="#"><img src="Fotos/facebook.png" alt="Facebook"></a>
+          <a href="#"><img src="Fotos/twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="Fotos/linkedin.png" alt="LinkedIn"></a>
+          <a href="#"><img src="Fotos/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="Fotos/youtube.png" alt="YouTube"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Investment Security. Todos os direitos reservados.
+    </div>
   </footer>
 
   <script src="Pasta JS/como-funciona.js"></script>
+  <script>
+    // Função para abrir/fechar o menu móvel
+    function toggleMenu() {
+      const navList = document.querySelector('.nav-list');
+      navList.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>

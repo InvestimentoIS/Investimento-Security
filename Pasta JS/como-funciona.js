@@ -136,4 +136,49 @@ document.getElementById('calcular-garantia').addEventListener('click', function 
           }
       }
   });
-  
+  // Gráfico (já implementado)
+async function obterDadosBTC() {
+  const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=minute');
+  const data = await response.json();
+  return data.prices;
+}
+
+async function atualizarGrafico() {
+  const dadosBTC = await obterDadosBTC();
+  const labels = dadosBTC.map((entry) => {
+      const date = new Date(entry[0]);
+      return `${date.getHours()}:${date.getMinutes()}`;
+  });
+  const prices = dadosBTC.map((entry) => entry[1]);
+
+  const ctx = document.getElementById('grafico').getContext('2d');
+  new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [{
+              label: 'Great Choice',
+              data: prices,
+              borderColor: '#28a745',
+              backgroundColor: 'rgba(40, 167, 69, 0.2)',
+              borderWidth: 2
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: false
+              }
+          }
+      }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', atualizarGrafico);
+
+// Menu móvel controlado por JavaScript
+function toggleMenu() {
+const navList = document.querySelector('.nav-list');
+navList.classList.toggle('show');
+}
