@@ -1,23 +1,37 @@
+require('dotenv').config(); // Carrega as variáveis do .env
 const nodemailer = require('nodemailer');
 
+// Certifique-se de que as variáveis de ambiente estão carregando
+console.log('EMAIL_USER:', process.env.EMAIL_USER);
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS);
+
+// Configurando o Nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'richtradereps@gmail.com', // Seu e-mail
-        pass: 'xtqs maat qtth byet' // Senha do aplicativo
+        user: process.env.EMAIL_USER, // Carregado do arquivo .env
+        pass: process.env.EMAIL_PASS  // Carregado do arquivo .env
     }
 });
 
+// Configurações do e-mail a ser enviado
 const mailOptions = {
-    from: 'richtradereps@gmail.com',
-    to: 'seu-email-de-ericlenedesousa@gmail.com', // Substitua pelo seu e-mail de teste
+    from: process.env.EMAIL_USER,
+    to: 'emaildeteste@exemplo.com', // Coloque aqui um e-mail de teste para receber a mensagem
     subject: 'Teste de Envio de E-mail',
-    text: 'Se você está recebendo este e-mail, o Nodemailer está funcionando!'
+    text: 'Este é um e-mail de teste enviado usando Nodemailer!'
 };
 
+// Enviando o e-mail
 transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-        return console.log('Erro ao enviar e-mail:', error);
+        console.log('Erro ao enviar e-mail:', error);
+    } else {
+        console.log('E-mail enviado:', info.response);
     }
-    console.log('E-mail enviado:', info.response);
 });
+require('dotenv').config(); // Carrega as variáveis do .env
+
+// Teste de carregamento das variáveis
+console.log('EMAIL_USER:', process.env.EMAIL_USER);
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS);

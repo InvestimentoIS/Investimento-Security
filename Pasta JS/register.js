@@ -1,3 +1,4 @@
+// Lida com o envio do formulário de registro
 document.getElementById('registerForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Impede o envio padrão do formulário
 
@@ -9,7 +10,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     messageDiv.classList.remove('error', 'success'); // Remove classes anteriores
 
     try {
-        const response = await fetch('/register', { // Verifique se esse caminho "/register" é válido no backend
+        const response = await fetch('/register', { // Certifique-se de que o caminho "/register" é válido no backend
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,12 +22,12 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
         if (response.ok) {
             messageDiv.classList.add('success');
-            messageDiv.textContent = result.success;
+            messageDiv.textContent = "Cadastro bem-sucedido! Verifique seu e-mail para ativar sua conta."; // Mensagem de sucesso
 
-            // Redireciona para a página inicial após 2 segundos
+            // Redireciona para a página de login após 5 segundos
             setTimeout(() => {
-                window.location.href = '/index.html';
-            }, 2000);
+                window.location.href = '/login.html';
+            }, 5000);
         } else {
             throw new Error(result.error);
         }
@@ -42,7 +43,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     }
 });
 
-
+// Função para verificar a força da senha
 function checkPasswordStrength() {
     const password = document.getElementById('password').value;
     const strengthIndicator = document.getElementById('password-strength');
@@ -85,50 +86,6 @@ function checkPasswordStrength() {
             break;
     }
 }
-// Lida com o envio do formulário de registro
-document.getElementById('registerForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Impede o envio padrão do formulário
-
-    const form = event.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    const messageDiv = document.getElementById('message');
-    messageDiv.classList.remove('error', 'success'); // Remove classes anteriores
-
-    try {
-        const response = await fetch('/register', { // Certifique-se de que o caminho "/register" é válido no backend
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            messageDiv.classList.add('success');
-            messageDiv.textContent = result.success;
-
-            // Redireciona para a página inicial após 2 segundos
-            setTimeout(() => {
-                window.location.href = '/index.html';
-            }, 2000);
-        } else {
-            throw new Error(result.error);
-        }
-    } catch (error) {
-        messageDiv.classList.add('error');
-        messageDiv.textContent = error.message || 'Erro no servidor. Por favor, tente novamente.';
-
-        // Limpa a mensagem após 5 segundos
-        setTimeout(() => {
-            messageDiv.textContent = ''; 
-            messageDiv.classList.remove('error', 'success'); // Remove as classes de mensagem
-        }, 5000);
-    }
-});
 
 // Função para exibir/ocultar senha
 function togglePasswordVisibility(fieldId) {
