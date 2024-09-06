@@ -60,7 +60,6 @@ header nav ul li a {
 .menu-icon {
   display: none;
   cursor: pointer;
-  margin-right: 20px;
 }
 
 .menu-icon img {
@@ -70,52 +69,44 @@ header nav ul li a {
 
 @media (max-width: 768px) {
   .menu-icon {
-    display: block;
+      display: block;
   }
 
-  header nav ul {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100%;
-    width: 50%;  /* Ajustado para ocupar 50% da tela */
-    background-color: #333;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
-    z-index: 999;
-    transition: right 0.3s ease;
+  .nav-list {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100%;
+      width: 50%;
+      background-color: #333;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 20px;
+      z-index: 999;
+      transition: right 0.3s ease;
   }
 
   .nav-list.show {
-    right: 0;
+      right: 0;
   }
 
   .nav-list li {
-    margin: 20px 0;
-    width: 100%;
+      margin: 20px 0;
+      width: 100%;
   }
 
   .nav-list li a {
-    font-size: 18px;
-    color: #fff;
-    text-align: left;
-    padding: 10px 0;
+      font-size: 18px;
+      color: #fff;
+      text-align: left;
+      padding: 10px 0;
   }
 
   .nav-list li a:hover {
-    background-color: #444;
+      background-color: #444;
   }
 }
-
-/* Conteúdo principal */
-main {
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
 /* Calculadoras */
 .calculadora {
   background-color: #fff;
