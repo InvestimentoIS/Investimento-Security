@@ -44,6 +44,18 @@ header nav ul li a {
   padding: 10px;
 }
 
+/* Estilo especial para o botão de cadastro */
+.btn-cadastro {
+  background-color: #f39c12;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.btn-cadastro:hover {
+  background-color: #e67e22;
+}
+
 /* Menu móvel */
 .menu-icon {
   display: none;
@@ -66,7 +78,7 @@ header nav ul li a {
     top: 0;
     right: -100%;
     height: 100%;
-    width: 50%;
+    width: 50%;  /* Ajustado para ocupar 50% da tela */
     background-color: #333;
     flex-direction: column;
     justify-content: flex-start;
@@ -161,7 +173,7 @@ button:hover {
 /* Gráfico */
 #grafico-acao {
   margin-top: 40px;
-  background-color: #686868;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -174,7 +186,7 @@ button:hover {
 }
 
 .cta-btn {
-  background-color: #f39c12;
+  background-color: #ffc107;
   color: white;
   text-align: center;
   padding: 15px 30px;
@@ -188,35 +200,44 @@ button:hover {
   background-color: #003366;
 }
 
-/* Rodapé */
+/* Estilo do Rodapé */
 footer {
-  background-color: #004a99;
-  color: white;
-  padding: 20px 0;
+  background-color: #003366;
+  color: #fff;
+  padding: 40px 20px;
   text-align: left;
+  font-family: 'Arial', sans-serif;
 }
 
 .footer-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 20px;
+  justify-content: space-between;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+  gap: 20px;
 }
 
 .footer-section {
-  flex-basis: 100%;
+  flex: 1;
+  min-width: 250px;
   margin-bottom: 20px;
 }
 
-.footer-section h3, .footer-section h4 {
-  margin-bottom: 10px;
-  font-size: 18px;
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #f39c12;
+  font-weight: bold;
 }
 
-.footer-section p, .footer-section ul {
+.footer-section p,
+.footer-section ul li {
+  margin-bottom: 10px;
   font-size: 14px;
-  line-height: 1.8;
+  line-height: 1.6;
+  color: #d3d3d3;
 }
 
 .footer-section ul {
@@ -225,39 +246,69 @@ footer {
 }
 
 .footer-section ul li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .footer-section ul li a {
-  color: white;
+  color: #fff;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .footer-section ul li a:hover {
   text-decoration: underline;
 }
 
-.social-icons a img {
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.social-icons img {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
+  transition: transform 0.3s;
+  object-fit: cover;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
 }
 
 .footer-bottom {
-  background-color: #003366;
-  color: #ccc;
-  padding: 10px 20px;
   text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+  color: #d3d3d3;
 }
 
-/* Responsividade do rodapé */
-@media (min-width: 769px) {
-  .footer-section {
-    flex-basis: 25%;
+/* Responsividade */
+@media (max-width: 1080px) {
+  .diferenciais,
+  .produtos-lista,
+  .parceiros-logos {
+      flex-direction: column;
+      align-items: center;
   }
 
-  .footer-section.social {
-    flex-basis: 50%;
-    text-align: center;
+  .parceiros-logos img {
+      max-width: 100px;
+  }
+
+  .banner h1 {
+      font-size: 36px;
+  }
+
+  .cta-final h2 {
+      font-size: 28px;
+  }
+
+  footer {
+      font-size: 12px;
   }
 }
