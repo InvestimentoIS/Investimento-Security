@@ -18,23 +18,19 @@ header {
   color: white;
   padding: 10px 0;
   position: relative;
-}
-
-header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
 }
 
-header nav .logo h1 {
-  margin: 0;
-  font-size: 24px;
+header .logo h1 {
+  margin-left: 20px;
 }
 
 header nav ul {
   list-style: none;
   display: flex;
+  margin-right: 20px;
 }
 
 header nav ul li {
@@ -52,6 +48,7 @@ header nav ul li a {
 .menu-icon {
   display: none;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .menu-icon img {
@@ -64,7 +61,7 @@ header nav ul li a {
     display: block;
   }
 
-  .nav-list {
+  header nav ul {
     position: fixed;
     top: 0;
     right: -100%;
@@ -107,26 +104,100 @@ main {
   margin: auto;
 }
 
+/* Calculadoras */
+.calculadora {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label, input, select, button {
+  display: block;
+  margin: 10px 0;
+}
+
+input, select, button {
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.retorno-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.retorno-box span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.retorno-box button {
+  background-color: #ffc107;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
 /* Gráfico */
 #grafico-acao {
   margin-top: 40px;
-  background-color: #fff;
+  background-color: #686868;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* CTA Final */
+#cta-final {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-btn {
+  background-color: #f39c12;
+  color: white;
+  text-align: center;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.cta-btn:hover {
+  background-color: #003366;
+}
+
 /* Rodapé */
 footer {
-  background-color: #333;
+  background-color: #004a99;
   color: white;
   padding: 20px 0;
-  text-align: center;
+  text-align: left;
 }
 
 .footer-container {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   padding: 0 20px;
   max-width: 1200px;
@@ -134,18 +205,16 @@ footer {
 }
 
 .footer-section {
-  flex-basis: 22%;
+  flex-basis: 100%;
   margin-bottom: 20px;
 }
 
-.footer-section h3,
-.footer-section h4 {
+.footer-section h3, .footer-section h4 {
   margin-bottom: 10px;
   font-size: 18px;
 }
 
-.footer-section p,
-.footer-section ul {
+.footer-section p, .footer-section ul {
   font-size: 14px;
   line-height: 1.8;
 }
@@ -175,20 +244,20 @@ footer {
 }
 
 .footer-bottom {
-  background-color: #222;
+  background-color: #003366;
   color: #ccc;
-  padding: 10px 0;
-  font-size: 14px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 /* Responsividade do rodapé */
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
+@media (min-width: 769px) {
+  .footer-section {
+    flex-basis: 25%;
   }
 
-  .footer-section {
-    flex-basis: 100%;
+  .footer-section.social {
+    flex-basis: 50%;
+    text-align: center;
   }
 }
