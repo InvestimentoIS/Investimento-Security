@@ -4,16 +4,35 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ajusta a altura mínima para garantir centralização */
 }
 
 .container {
-    max-width: 400px;
+    width: 100%; /* Ocupa 100% da largura em dispositivos móveis */
+    max-width: 400px; /* Limita a largura máxima para PCs */
     margin: 50px auto;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+/* Ajuste para telas menores (celulares mais comuns) */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px; /* Diminui o padding em telas menores */
+    }
+}
+
+/* Estilo para telas maiores (tablets e PCs) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 400px; /* Mantém 400px para tablets e desktops */
+    }
 }
 
 h2 {
@@ -29,9 +48,11 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .form-group {
+    width: 100%; /* Faz os campos ocuparem toda a largura disponível */
     margin-bottom: 15px;
     text-align: left;
 }
@@ -43,11 +64,12 @@ form {
     display: block;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="tel"], select {
+input[type="text"], input[type="email"], input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
     margin-bottom: 10px;
 }
 
@@ -59,11 +81,27 @@ button {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    width: 100%; /* Botão ocupa toda a largura */
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #004a99;
+    background-color: #003d82;
+}
+
+/* Ajuste para garantir que o campo de senha e o ícone fiquem no mesmo alinhamento */
+.password-wrapper {
+    position: relative;
+    width: 100%; /* Faz a caixa de senha ocupar toda a largura */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
 }
 
 /* Exibição de mensagens */
@@ -83,54 +121,4 @@ button:hover {
 .message.success {
     color: white;
     background-color: green;
-}
-
-/* Indicador de força da senha */
-.strength-bar {
-    height: 5px;
-    background-color: red;
-    width: 0%;
-    transition: width 0.3s ease;
-}
-
-.strength-indicator {
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-.password-wrapper {
-    position: relative;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 12px;
-    cursor: pointer;
-}
-
-p {
-    margin-top: 20px;
-}
-
-a {
-    color:  #004a99;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-/* Estilo para a barra de força da senha */
-#strength-bar {
-    height: 10px;
-    width: 0;
-    background-color: transparent;
-    border-radius: 5px;
-    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
-#password-strength {
-    margin-top: 5px;
-    font-size: 14px;
 }

@@ -11,7 +11,6 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
-
 // Configurando o aplicativo Express
 const app = express();
 
@@ -51,9 +50,21 @@ function sendVerificationEmail(user) {
     const mailOptions = {
         from: process.env.EMAIL_USER,  // Endereço de e-mail do remetente
         to: user.email,                // Endereço de e-mail do destinatário
-        subject: 'Verifique seu e-mail',
-        text: `Clique no link para verificar seu e-mail: ${verificationUrl}`,
-        html: `<p>Clique no link abaixo para verificar seu e-mail:</p><a href="${verificationUrl}">Verificar e-mail</a>`
+        subject: 'Verifique seu e-mail para ativar sua conta',
+        html: `
+            <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; color: #333;">
+                <h1 style="color: #4CAF50;">Seja bem-vindo!</h1>
+                <p style="font-size: 18px;">Estamos muito felizes por você estar aqui.</p>
+                <p style="font-size: 16px;">Para completar seu cadastro e ativar sua conta, clique no botão abaixo:</p>
+                <a href="${verificationUrl}" 
+                   style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                   Verificar E-mail
+                </a>
+                <p style="margin-top: 20px; font-size: 14px;">Se você não se cadastrou em nossa plataforma, ignore este e-mail.</p>
+                <img src="https://via.placeholder.com/300x150" alt="Imagem ilustrativa" style="margin-top: 20px; border-radius: 8px; width: 300px;">
+                <p style="color: #888; font-size: 12px; margin-top: 20px;">&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+            </div>
+        `
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -137,6 +148,63 @@ app.get('/verify', async (req, res) => {
         res.redirect('/login.html');
     } catch (error) {
         res.status(500).json({ error: "Erro ao verificar e-mail." });
+    }
+});
+
+// Rota de login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Verifica se o usuário existe
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Verifica se a senha está correta
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Senha incorreta' });
+        }
+
+        // Verifica se o e-mail está confirmado
+        if (!user.isVerified) {
+            return res.status(400).json({ error: 'E-mail não verificado. Verifique seu e-mail.' });
+        }
+// Rota de login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Verifica se o usuário existe
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Verifica se a senha está correta
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Senha incorreta' });
+        }
+
+        // Verifica se o e-mail foi verificado
+        if (!user.isVerified) {
+            return res.status(400).json({ error: 'E-mail não verificado. Verifique seu e-mail antes de fazer login.' });
+        }
+
+        // Retorna uma resposta de sucesso se o usuário for verificado e a senha estiver correta
+        return res.status(200).json({ message: 'Login bem-sucedido!' });
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
+    }
+});
+
+        // Retorna a mensagem de sucesso ao frontend
+        return res.status(200).json({ message: 'Login bem-sucedido!' });
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
     }
 });
 
