@@ -4,7 +4,8 @@
   "description": "Backend do projeto de cadastro",
   "main": "pasta_js/serverindex.js",
   "scripts": {
-    "start": "node pasta_js/serverindex.js"
+    "start": "node pasta_js/serverindex.js",
+    "build": "npm rebuild bcrypt"
   },
   "dependencies": {
     "axios": "^1.7.4",
@@ -28,4 +29,3 @@
   },
   "license": "ISC"
 }
-
