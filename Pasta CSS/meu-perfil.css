@@ -1,0 +1,78 @@
+/* Estilo para excitar o cliente a investir - Cores: Verde e Dourado */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+.profile-photo img {
+    border-radius: 50%;
+    border: 3px solid #4caf50;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #333333;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.profile-info {
+    font-size: 18px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    margin: 8px 0;
+    font-size: 18px;
+    color: #4CAF50; /* Cor verde associada a investimento e sucesso */
+}
+
+.btn-submit {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #388E3C; /* Tom de verde mais escuro ao passar o mouse */
+}
+
+/* Estilo mais luxuoso com detalhes dourados */
+.profile-container {
+    border: 1px solid #ffd700; /* Borda dourada para uma sensação de sofisticação */
+}
+
+h2 {
+    color: #4CAF50;
+}
+
+.profile-info p span.label {
+    color: #333;
+    font-weight: bold;
+}
+
+.upload-photo {
+    margin-top: 20px;
+}
+
+.upload-photo form {
+    display: inline-block;
+}

@@ -18,7 +18,7 @@
             <div class="menu-icon" id="menu-icon">
                 <img src="Fotos/menu preto.png" alt="Menu">
             </div>
-            <ul class="nav-list" id="nav-list">
+            <ul class="nav-list" id="nav-list-nao-logado">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="acoes.html">Ações</a></li>
                 <li><a href="investidores.html">Investidores</a></li>
@@ -31,18 +31,46 @@
         <!-- Para Usuários Logados -->
         <nav class="navbar" id="header-logado" style="display: none;">
             <div class="logo">
-                <h1><a href="dashboard.html">Painel de Controle</a></h1>
+                <h1><a href="dashboard.html">Investimento Security</a></h1>
             </div>
             <div class="menu-icon" id="menu-icon">
                 <img src="Fotos/menu preto.png" alt="Menu">
             </div>
-            <ul class="nav-list" id="nav-list">
+            <ul class="nav-list" id="nav-list-logado">
                 <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
-                <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
+
+                <!-- Submenu de Investimentos -->
+                <li class="dropdown">
+                    <a href="#">Investimentos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
+                        <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
+                        <li><a href="comprar-vender.html">Vender/Comprar</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="depositar.html">Depósito/Saque</a></li>
+                
+                <!-- Notificações -->
+                <li>
+                    <a href="notificacoes.html">
+                        <img src="Fotos/Icone de notificação 2.png" alt="Notificações" class="icone-notificacoes">
+                    </a>
+                </li>
+                
                 <li><a href="suporte.html">Suporte</a></li>
-                <li><a href="logout.html">Logout</a></li>
+                
+                <!-- Ícone do Perfil com Dropdown -->
+                <li class="dropdown perfil-usuario">
+                    <a href="#">
+                        <img src="Fotos/Icone de perfil.png" alt="Perfil" class="icone-usuario">
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="meu-perfil.html">Perfil</a></li>
+                        <li><a href="configuracoes.html">CG</a></li>
+                        <li><button id="logout-btn" class="logout-button">Sair</button></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -176,5 +204,43 @@
     </footer>
 
     <script src="Pasta JS/index.js"></script>
+
+    <!-- Script para gerenciar o logout e exibição do menu -->
+    <script>
+        // Simulação do estado de autenticação
+        const usuarioLogado = true; // Altere para false para testar o estado não logado
+
+        // Alterna entre os menus logado e não logado
+        document.addEventListener('DOMContentLoaded', function() {
+            const headerLogado = document.getElementById('header-logado');
+            const headerNaoLogado = document.getElementById('header-nao-logado');
+
+            if (usuarioLogado) {
+                headerLogado.style.display = 'flex';
+                headerNaoLogado.style.display = 'none';
+            } else {
+                headerLogado.style.display = 'none';
+                headerNaoLogado.style.display = 'flex';
+            }
+        });
+
+        // Script de logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            fetch('/logout', {
+                method: 'POST',
+                credentials: 'same-origin', // Inclui cookies para a requisição
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/index.html';
+                } else {
+                    alert('Erro ao fazer logout. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao fazer logout:', error);
+            });
+        });
+    </script>
 </body>
 </html>

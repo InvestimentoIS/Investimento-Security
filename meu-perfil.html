@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Plataforma de Investimento</title>
+    <link rel="stylesheet" href="Pasta CSS/meu-perfil.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Seção da foto de perfil -->
+        <div class="profile-photo">
+            <img src="/uploads/default-profile.png" alt="Foto de Perfil" id="profile-photo" width="150" height="150">
+        </div>
+
+        <!-- Informações do perfil do usuário -->
+        <div class="profile-info">
+            <h2 id="username">Nome do Usuário</h2>
+            <p id="email">E-mail: exemplo@email.com</p>
+            <p id="country">País: Brasil</p> <!-- Será atualizado dinamicamente -->
+            <p id="birthdate">Data de Nascimento: 01/01/2000</p> <!-- Será atualizado dinamicamente -->
+            <p id="phone">Telefone: (11) 0000-9999</p> <!-- Será atualizado dinamicamente -->
+        </div>
+        
+        <!-- Formulário para upload da foto de perfil -->
+        <div class="upload-photo">
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" name="profilePhoto" id="profilePhoto" accept="image/*" required>
+                <button type="submit" class="btn-submit">Enviar Foto de Perfil</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Arquivo JS separado -->
+    <script src="Pasta JS/meu-perfil.js"></script>
+</body>
+</html>
