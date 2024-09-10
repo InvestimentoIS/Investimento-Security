@@ -4,7 +4,7 @@
   "description": "Backend do projeto de cadastro",
   "main": "Pasta JS/serverindex.js",
   "scripts": {
-    "start": "node Pasta\\ JS/serverindex.js"
+    "start": "node \"Pasta JS/serverindex.js\""
   },
   "dependencies": {
     "axios": "^1.7.4",
