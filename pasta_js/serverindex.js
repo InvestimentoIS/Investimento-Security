@@ -300,7 +300,7 @@ app.post('/logout', (req, res) => {
     });
 });
 
-// Verificação se o arquivo index.html existe para servir como página inicial
+// Verificação se o arquivo index.html existe para servir como página inicia
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'cadastro', 'index.html'));
 });
