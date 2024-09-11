@@ -16,7 +16,7 @@ const app = express();
 
 // Habilitar CORS
 const corsOptions = {
-    origin: 'https://investimentois.github.io/Investimento-Security/', // Corrigido o caminho correto
+    origin: 'https://investimentois.github.io', // Permitir o domínio correto
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
