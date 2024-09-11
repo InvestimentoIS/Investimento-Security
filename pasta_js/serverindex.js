@@ -29,7 +29,17 @@ app.use(session({
 
 // Definindo o caminho absoluto para o diretório 'cadastro' e a pasta 'uploads'
 const cadastroDir = path.join('/Users/ericlene/documents/cadastro');
-const uploadDir = path.join(cadastroDir, 'uploads');
+const fs = require('fs');
+const path = require('path');
+
+// Defina o caminho relativo para a pasta 'uploads'
+const uploadDir = path.join(__dirname, 'uploads');
+
+// Verifica se a pasta 'uploads/' existe, e a cria se não existir
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+    console.log(`Diretório 'uploads' criado em ${uploadDir}`);
+}
 
 // Verifica se a pasta 'uploads/' dentro de 'cadastro' existe, e a cria se não existir
 if (!fs.existsSync(uploadDir)) {
