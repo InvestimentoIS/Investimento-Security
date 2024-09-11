@@ -204,68 +204,70 @@
 
     <script src="pasta_js/index.js"></script>
 
-   <!-- Script para gerenciar o logout e exibição do menu -->
-   <script>
-    // Verifica se o usuário está logado através do token ou estado no localStorage
-    const token = localStorage.getItem('authToken');
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const headerLogado = document.getElementById('header-logado');
-        const headerNaoLogado = document.getElementById('header-nao-logado');
-
-        if (token) {
-            // Usuário logado: exibe o menu logado e oculta o não logado
-            headerLogado.style.display = 'flex';
-            headerNaoLogado.style.display = 'none';
-
-            // Chama função para buscar dados do usuário
-            fetchUserProfile();
-
-        } else {
-            // Usuário não logado: exibe o menu não logado e oculta o logado
-            headerLogado.style.display = 'none';
-            headerNaoLogado.style.display = 'flex';
-        }
-    });
-
-    // Função para buscar e exibir os dados do usuário logado (a partir do seu backend)
-    async function fetchUserProfile() {
-        try {
-            const response = await fetch(`${backendURL}/meu-perfil`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`, // Envia o token de autenticação
-                },
-                credentials: 'include' // Inclui cookies/sessões
-            });
-
-            if (!response.ok) {
-                throw new Error("Não foi possível carregar os dados do perfil.");
+    <script>
+        // URL do seu backend
+        const backendURL = 'https://investimento-security.onrender.com'; // Ajuste para o seu backend
+        
+        // Função para verificar o estado de login e atualizar o conteúdo da página
+        function atualizarConteudoParaUsuario() {
+            const token = localStorage.getItem('authToken'); // Obtém o token do localStorage
+        
+            const headerLogado = document.getElementById('header-logado');
+            const headerNaoLogado = document.getElementById('header-nao-logado');
+        
+            if (token) {
+                // Usuário está logado, mostra o cabeçalho para usuários logados
+                headerLogado.style.display = 'flex';
+                headerNaoLogado.style.display = 'none';
+        
+                // Carregar informações do perfil do usuário logado (opcional)
+                fetchUserProfile();
+            } else {
+                // Usuário não está logado, mostra o cabeçalho para usuários não logados
+                headerLogado.style.display = 'none';
+                headerNaoLogado.style.display = 'flex';
             }
-
-            const userData = await response.json();
-
-            // Atualiza a interface com as informações do usuário logado
-            document.getElementById('username').textContent = userData.username;
-            document.getElementById('email').textContent = userData.email;
-            document.getElementById('country').textContent = userData.country;
-            document.getElementById('birthdate').textContent = userData.birthdate;
-            document.getElementById('phone').textContent = userData.phone;
-            document.getElementById('profilePhoto').src = userData.profilePhoto;
-
-        } catch (error) {
-            console.error('Erro ao carregar o perfil do usuário:', error);
-            // Redireciona para a página de login se o usuário não estiver autenticado
-            window.location.href = "login.html";
         }
-    }
-
-    // Função de logout: remove o token de autenticação e redireciona para a página inicial
-    document.getElementById('logout-btn').addEventListener('click', function() {
-        localStorage.removeItem('authToken'); // Remove o token armazenado
-        window.location.href = 'index.html'; // Redireciona após logout
-    });
-</script>
-
+        
+        // Função para buscar e exibir os dados do usuário logado
+        async function fetchUserProfile() {
+            const token = localStorage.getItem('authToken');
+        
+            try {
+                const response = await fetch(`${backendURL}/meu-perfil`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include' // Envia cookies/sessão se houver
+                });
+        
+                if (!response.ok) {
+                    throw new Error("Erro ao carregar os dados do perfil.");
+                }
+        
+                const userData = await response.json();
+        
+                // Atualizar o cabeçalho/logado com os dados do usuário (opcional)
+                document.getElementById('username').textContent = userData.username;
+                document.getElementById('email').textContent = userData.email;
+                document.getElementById('profilePhoto').src = userData.profilePhoto;
+        
+            } catch (error) {
+                console.error('Erro ao carregar o perfil do usuário:', error);
+            }
+        }
+        
+        // Função de logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('authToken'); // Remove o token
+            window.location.reload(); // Recarrega a página para atualizar o conteúdo
+        });
+        
+        // Chama a função para atualizar o conteúdo assim que a página carregar
+        document.addEventListener('DOMContentLoaded', atualizarConteudoParaUsuario);
+        </script>
+        
 </body>
 </html>
