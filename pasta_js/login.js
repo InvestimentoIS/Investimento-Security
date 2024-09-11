@@ -1,5 +1,5 @@
 // URL do backend hospedado no Render
-const backendURL = 'https://investimento-security.onrender.com'; // Substitua pela URL correta do seu backend
+const backendURL = 'https://investimento-security.onrender.com'; // Verifique se essa URL está correta
 
 // Função para alternar a visibilidade da senha
 function togglePasswordVisibility() {
@@ -15,23 +15,25 @@ function togglePasswordVisibility() {
         toggleIcon.textContent = '🔐'; // Atualiza o ícone para "senha oculta"
     }
 }
-// Usuario logado e não logado
-const token = localStorage.getItem('authToken'); // Ou sessionStorage, cookies
+
+// Verifica se o usuário está logado
+const token = localStorage.getItem('authToken'); // Pega o token de autenticação (pode ser sessionStorage também)
 
 if (token) {
-    // O usuário está logado
-    fetch("/api/user-info", {
+    // O usuário está logado, faz uma requisição para obter informações do usuário
+    fetch(`${backendURL}/api/user-info`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
     }).then(response => response.json())
-    .then(data => console.log("Usuário logado:", data.username));
+    .then(data => {
+        console.log("Usuário logado:", data.username);
+        // Aqui você pode atualizar o UI com as informações do usuário, se necessário
+    })
+    .catch(err => console.error("Erro ao buscar dados do usuário:", err));
 } else {
     console.log("Usuário não logado");
 }
-
-
-
 
 // Aplica o evento ao ícone de exibir/ocultar senha
 document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
@@ -49,43 +51,27 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     messageDiv.style.display = 'none'; // Esconde a mensagem no início
 
     try {
-        const response = await fetch(`${backendURL}/login`, { // Usa a URL do backend no Render
+        // Faz a requisição de login para o backend
+        const response = await fetch(`${backendURL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data) // Envia os dados do formulário
         });
 
         const result = await response.json();
 
         if (response.ok) {
+            // Login bem-sucedido
             messageDiv.classList.add('success');
             messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
             messageDiv.style.display = 'block'; // Exibe a mensagem de sucesso
-            fetch('https://investimento-security.onrender.com/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include', // Incluir cookies na requisição
-                body: JSON.stringify({
-                    email: 'email_do_usuario',
-                    password: 'senha_do_usuario'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Login realizado com sucesso:', data.user);
-                    // Redirecionar ou exibir as informações do usuário
-                } else {
-                    console.error('Erro ao fazer login:', data.error);
-                }
-            })
-            .catch(err => console.error('Erro no login:', err));
-            
-            // Redireciona para a página index.html após o login
+
+            // Armazena o token de autenticação
+            localStorage.setItem('authToken', result.token);
+
+            // Redireciona para a página principal
             setTimeout(() => {
                 window.location.href = "https://investimentois.github.io/Investimento-Security/index.html";
             }, 2000);
@@ -93,6 +79,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             throw new Error(result.error || "Credenciais inválidas.");
         }
     } catch (error) {
+        // Exibe mensagem de erro
         messageDiv.classList.add('error');
         messageDiv.textContent = error.message || 'Erro no servidor. Por favor, tente novamente.';
         messageDiv.style.display = 'block'; // Exibe a mensagem de erro

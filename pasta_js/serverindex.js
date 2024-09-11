@@ -27,6 +27,9 @@ app.use(cors(corsOptions));
 // Middleware para analisar o corpo da requisição
 app.use(bodyParser.json());
 
+// Servindo arquivos estáticos da pasta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Conectando ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -75,12 +78,17 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-// Rota para buscar os dados do usuário logado
-app.get('/meu-perfil', async (req, res) => {
-    if (!req.session.userId) {
-        return res.status(401).json({ error: 'Não autorizado' });
+// Middleware para verificar se o usuário está logado
+function isAuthenticated(req, res, next) {
+    if (req.session.userId) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Não autorizado. Por favor, faça login.' });
     }
+}
 
+// Rota para buscar os dados do usuário logado
+app.get('/meu-perfil', isAuthenticated, async (req, res) => {
     try {
         const user = await User.findById(req.session.userId);
         if (!user) {
@@ -112,7 +120,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Rota para upload da foto de perfil
-app.post('/upload-profile-photo', upload.single('profilePhoto'), async (req, res) => {
+app.post('/upload-profile-photo', isAuthenticated, upload.single('profilePhoto'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     }
@@ -168,32 +176,28 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ error: "Erro no servidor. Por favor, tente novamente." });
     }
 });
+
 // Rota de login
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Verifica se o usuário existe com o e-mail fornecido
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
 
-        // Verifica se o e-mail foi verificado
         if (!user.isVerified) {
             return res.status(401).json({ error: 'E-mail não verificado. Por favor, verifique seu e-mail.' });
         }
 
-        // Compara a senha fornecida com a senha armazenada (hash)
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(401).json({ error: 'Credenciais incorretas.' });
         }
 
-        // Armazena o ID do usuário na sessão
         req.session.userId = user._id;
 
-        // Retorna sucesso e dados do usuário
         res.status(200).json({ 
             success: true, 
             message: 'Login realizado com sucesso.',
