@@ -170,24 +170,44 @@ app.post('/register', async (req, res) => {
 });
 // Rota de login
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
     try {
+        const { email, password } = req.body;
+
+        // Verifica se o usuário existe com o e-mail fornecido
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ error: 'Usuário não encontrado' });
+            return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
+
+        // Verifica se o e-mail foi verificado
+        if (!user.isVerified) {
+            return res.status(401).json({ error: 'E-mail não verificado. Por favor, verifique seu e-mail.' });
+        }
+
+        // Compara a senha fornecida com a senha armazenada (hash)
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ error: 'Senha incorreta' });
+            return res.status(401).json({ error: 'Credenciais incorretas.' });
         }
-        if (!user.isVerified) {
-            return res.status(400).json({ error: 'E-mail não verificado. Verifique seu e-mail antes de fazer login.' });
-        }
+
+        // Armazena o ID do usuário na sessão
         req.session.userId = user._id;
-        req.session.username = user.username;
-        res.status(200).json({ message: 'Login bem-sucedido!' });
+
+        // Retorna sucesso e dados do usuário
+        res.status(200).json({ 
+            success: true, 
+            message: 'Login realizado com sucesso.',
+            user: {
+                username: user.username,
+                email: user.email,
+                profilePhoto: user.profilePhoto,
+                country: user.country,
+                birthdate: user.birthdate,
+                phone: user.phone
+            }
+        });
     } catch (error) {
-        return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
+        res.status(500).json({ error: 'Erro no servidor. Por favor, tente novamente.' });
     }
 });
 
