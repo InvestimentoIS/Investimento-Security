@@ -15,6 +15,23 @@ function togglePasswordVisibility() {
         toggleIcon.textContent = '🔐'; // Atualiza o ícone para "senha oculta"
     }
 }
+// Usuario logado e não logado
+const token = localStorage.getItem('authToken'); // Ou sessionStorage, cookies
+
+if (token) {
+    // O usuário está logado
+    fetch("/api/user-info", {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(response => response.json())
+    .then(data => console.log("Usuário logado:", data.username));
+} else {
+    console.log("Usuário não logado");
+}
+
+
+
 
 // Aplica o evento ao ícone de exibir/ocultar senha
 document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
