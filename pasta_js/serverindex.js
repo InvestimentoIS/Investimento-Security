@@ -168,6 +168,28 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ error: "Erro no servidor. Por favor, tente novamente." });
     }
 });
+// Rota de login
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ error: 'Usuário não encontrado' });
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Senha incorreta' });
+        }
+        if (!user.isVerified) {
+            return res.status(400).json({ error: 'E-mail não verificado. Verifique seu e-mail antes de fazer login.' });
+        }
+        req.session.userId = user._id;
+        req.session.username = user.username;
+        res.status(200).json({ message: 'Login bem-sucedido!' });
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro no servidor. Tente novamente mais tarde.' });
+    }
+});
 
 // Função para enviar o e-mail de verificação usando Nodemailer
 function sendVerificationEmail(user) {
