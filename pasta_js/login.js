@@ -63,7 +63,28 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             messageDiv.classList.add('success');
             messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
             messageDiv.style.display = 'block'; // Exibe a mensagem de sucesso
-
+            fetch('https://investimento-security.onrender.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include', // Incluir cookies na requisição
+                body: JSON.stringify({
+                    email: 'email_do_usuario',
+                    password: 'senha_do_usuario'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Login realizado com sucesso:', data.user);
+                    // Redirecionar ou exibir as informações do usuário
+                } else {
+                    console.error('Erro ao fazer login:', data.error);
+                }
+            })
+            .catch(err => console.error('Erro no login:', err));
+            
             // Redireciona para a página index.html após o login
             setTimeout(() => {
                 window.location.href = "https://investimentois.github.io/Investimento-Security/index.html";
