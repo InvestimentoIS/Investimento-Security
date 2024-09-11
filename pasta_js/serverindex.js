@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    tlsInsecure: true // Desabilita a verificação SSL (somente para testes)
+    tlsInsecure: process.env.NODE_ENV !== 'production' // Ajuste: desabilitar TLS apenas em dev
 }).then(() => {
     console.log('Conectado ao MongoDB');
 }).catch((err) => {
@@ -108,7 +108,7 @@ app.get('/meu-perfil', isAuthenticated, async (req, res) => {
     }
 });
 
-// Configuração do Multer para upload de imagem de perfil
+// Configuração do Multer para upload de imagem de perfil (ajustes em tamanho/tipo de arquivo)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, uploadDir); // Pasta para uploads
@@ -117,7 +117,21 @@ const storage = multer.diskStorage({
         cb(null, `${req.session.userId}-${Date.now()}${path.extname(file.originalname)}`);
     }
 });
-const upload = multer({ storage });
+
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.mimetype)) {
+        cb(new Error('Tipo de arquivo não permitido'), false);
+    } else {
+        cb(null, true);
+    }
+};
+
+const upload = multer({ 
+    storage,
+    fileFilter,
+    limits: { fileSize: 1024 * 1024 * 2 } // Limite de 2MB por arquivo
+});
 
 // Rota para upload da foto de perfil
 app.post('/upload-profile-photo', isAuthenticated, upload.single('profilePhoto'), async (req, res) => {
@@ -143,6 +157,12 @@ app.post('/register', async (req, res) => {
 
         if (password !== confirm_password) {
             return res.status(400).json({ error: "As senhas não coincidem." });
+        }
+
+        // Validação adicional de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ error: 'E-mail inválido.' });
         }
 
         const userExists = await User.findOne({ username });
