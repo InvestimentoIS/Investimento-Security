@@ -49,7 +49,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
             // Redireciona para a página index.html após o login
             setTimeout(() => {
-                window.location.href = '/index.html'; // Redirecionamento correto para index.html
+                window.location.href = "https://investimentois.github.io/Investimento-Security/index.html";
+                // Redirecionamento correto para index.html
             }, 2000);
         } else {
             throw new Error(result.error);
