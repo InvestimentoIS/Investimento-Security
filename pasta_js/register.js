@@ -55,12 +55,13 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     submitButton.textContent = "Enviando...";
 
     try {
-        const response = await fetch('/register', { // Verifique o caminho da API
+        // Requisição para o back-end no Render
+        const response = await fetch('https://investimento-security.onrender.com/register', { // URL do Render
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data) // Envia os dados do formulário como JSON
         });
 
         const result = await response.json();
@@ -71,7 +72,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
             // Redireciona para a página de login após 5 segundos
             setTimeout(() => {
-                window.location.href = '/login.html';
+                window.location.href = '/login.html'; // Verifique se a URL está correta para sua página de login
             }, 5000);
         } else {
             throw new Error(result.error);
