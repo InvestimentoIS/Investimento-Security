@@ -36,8 +36,26 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         return; // Impede o envio do formulário
     }
 
+    // Verificação de correspondência entre senha e confirmação de senha
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirm_password');
+
+    if (password !== confirmPassword) {
+        messageDiv.classList.add('error');
+        messageDiv.textContent = "As senhas não coincidem.";
+        setTimeout(() => {
+            messageDiv.textContent = ''; 
+            messageDiv.classList.remove('error');
+        }, 5000);
+        return; // Impede o envio do formulário
+    }
+
+    const submitButton = document.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+
     try {
-        const response = await fetch('/register', { // Certifique-se de que o caminho "/register" é válido no backend
+        const response = await fetch('/register', { // Verifique o caminho da API
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +67,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
         if (response.ok) {
             messageDiv.classList.add('success');
-            messageDiv.textContent = "Cadastro bem-sucedido! Verifique seu e-mail para ativar sua conta."; // Mensagem de sucesso
+            messageDiv.textContent = "Cadastro bem-sucedido! Verifique seu e-mail para ativar sua conta.";
 
             // Redireciona para a página de login após 5 segundos
             setTimeout(() => {
@@ -62,11 +80,13 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         messageDiv.classList.add('error');
         messageDiv.textContent = error.message || 'Erro no servidor. Por favor, tente novamente.';
 
-        // Limpa a mensagem após 5 segundos
         setTimeout(() => {
             messageDiv.textContent = ''; 
-            messageDiv.classList.remove('error', 'success'); // Remove as classes de mensagem
+            messageDiv.classList.remove('error', 'success');
         }, 5000);
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Cadastrar";
     }
 });
 
