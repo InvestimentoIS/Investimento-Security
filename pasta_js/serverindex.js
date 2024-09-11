@@ -9,6 +9,7 @@ const path = require('path');
 const session = require('express-session'); // Suporte para sessões
 const multer = require('multer'); // Importando multer para upload de arquivos
 const fs = require('fs'); // Importando fs para manipulação de arquivos e diretórios
+const MongoStore = require('connect-mongo'); // Usando MongoDB como store de sessões
 
 // Configurando o aplicativo Express
 const app = express();
@@ -19,36 +20,6 @@ app.use(cors());
 // Middleware para analisar o corpo da requisição
 app.use(bodyParser.json());
 
-// Configurando sessões
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'supersecretkey',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // Defina como true se estiver usando HTTPS em produção
-}));
-
-// Definindo o caminho absoluto para o diretório 'cadastro' e a pasta 'uploads'
-const cadastroDir = path.join('/Users/ericlene/documents/cadastro');
-const fs = require('fs');
-const path = require('path');
-
-// Defina o caminho relativo para a pasta 'uploads'
-const uploadDir = path.join(__dirname, 'uploads');
-
-// Verifica se a pasta 'uploads/' existe, e a cria se não existir
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-    console.log(`Diretório 'uploads' criado em ${uploadDir}`);
-}
-
-// Verifica se a pasta 'uploads/' dentro de 'cadastro' existe, e a cria se não existir
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// **Servir arquivos estáticos do diretório 'cadastro'**
-app.use(express.static(cadastroDir));  // Agora, o Express vai servir qualquer arquivo estático dentro de 'cadastro'
-
 // Conectando ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -58,6 +29,27 @@ mongoose.connect(process.env.MONGO_URI, {
 }).catch((err) => {
     console.error('Erro ao conectar ao MongoDB:', err);
 });
+
+// Configurando sessões usando MongoDB
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'supersecretkey',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI, // Usa o MongoDB como store de sessões
+        collectionName: 'sessions', // Nome da coleção onde as sessões serão armazenadas
+    }),
+    cookie: { secure: false } // Defina como true se estiver usando HTTPS em produção
+}));
+
+// Definindo o caminho relativo para a pasta 'uploads'
+const uploadDir = path.join(__dirname, 'uploads');
+
+// Verifica se a pasta 'uploads/' existe, e a cria se não existir
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true }); // Inclui 'recursive: true' para criar diretórios pai, se necessário
+    console.log(`Diretório 'uploads' criado em ${uploadDir}`);
+}
 
 // Definindo o modelo de usuário com Mongoose
 const UserSchema = new mongoose.Schema({
@@ -196,7 +188,6 @@ function sendVerificationEmail(user) {
             <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; color: #333;">
                 <h1 style="color: #4CAF50;">Seja bem-vindo!</h1>
                 
-                <!-- Referenciando a imagem inline via CID -->
                 <img src="cid:logo-image" alt="Logo" style="width: 100px; margin-bottom: 20px;" />
         
                 <p style="font-size: 18px;">Estamos muito felizes por você estar aqui.</p>
@@ -212,16 +203,13 @@ function sendVerificationEmail(user) {
         attachments: [
             {
                 filename: 'logo_email.jpg',
-                path: '/Users/ericlene/documents/cadastro/fotos/vecteezy_trader-holding-graph-chart-with-arrow-for-analysis-stock_7039565.jpg', // Tente com .jpg
-                cid: 'logo-image', 
+                path: path.join(__dirname, 'fotos', 'vecteezy_trader-holding-graph-chart-with-arrow-for-analysis-stock_7039565.jpg'),
+                cid: 'logo-image',
                 contentType: 'image/jpeg'
             }
         ]
-        
     };
-    
-    
-    
+
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
             console.error('Erro ao enviar e-mail:', err);
@@ -312,9 +300,9 @@ app.post('/logout', (req, res) => {
     });
 });
 
-// **Verificação se o arquivo index.html existe para servir como página inicial**
+// Verificação se o arquivo index.html existe para servir como página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(cadastroDir, 'index.html'));
+    res.sendFile(path.join(__dirname, 'cadastro', 'index.html'));
 });
 
 // Inicialização do servidor
