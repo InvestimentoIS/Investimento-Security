@@ -109,94 +109,10 @@
         </div>
     </section>
 
-    <!-- Seção Nossos Produtos -->
-    <section class="produtos">
-        <h2>Nossos Produtos</h2>
-        <div class="produtos-lista">
-            <div class="produto-item">
-                <h3>Ações Garantidas</h3>
-                <p>Invista com segurança em ações garantidas com risco baixo.</p>
-                <a href="acoes-garantidas.html" class="cta-button">Ver Ações Garantidas</a>
-            </div>
-            <div class="produto-item">
-                <h3>Ações Não Garantidas</h3>
-                <p>Obtenha altos retornos com ações de maior risco.</p>
-                <a href="acoes-nao-garantidas.html" class="cta-button">Ver Ações Não Garantidas</a>
-            </div>
-            <div class="produto-item">
-                <h3>Planos de Investimento</h3>
-                <p>Escolha o plano ideal para o seu perfil de investidor.</p>
-                <a href="planos.html" class="cta-button">Ver Planos de Investimento</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção Nossos Parceiros -->
-    <section class="parcerias">
-        <h2>Nossos Parceiros</h2>
-        <div class="parceiros-logos">
-            <img src="Fotos/ALIEXPRESS.png" alt="Parceiro Aliexpress">
-            <img src="Fotos/BINANCE.png" alt="Parceiro Binance">
-            <img src="Fotos/MASTERCADR.png" alt="Parceiro Mastercard">
-        </div>
-        <h3>Certificações e Reconhecimentos</h3>
-        <ul>
-            <li>Certificação I.S</li>
-            <li>Prêmio de Inovação Financeira 2024</li>
-            <li>Melhor Plataforma de Investimento pela I.S Finance</li>
-        </ul>
-    </section>
-
-    <!-- Seção de Chamada para Ação -->
-    <section class="cta-final">
-        <h2>Invista com Segurança e Inovação</h2>
-        <p>Não perca tempo, junte-se a nós e transforme o seu futuro financeiro.</p>
-        <a href="register.html" class="cta-button">Cadastre-se Agora</a>
-    </section>
-
     <!-- Rodapé -->
     <footer>
         <div class="footer-container">
-            <div class="footer-section about">
-                <h3>Sobre Nós</h3>
-                <p>Invista com confiança. Oferecemos as melhores soluções financeiras para garantir o futuro do seu patrimônio.</p>
-            </div>
-            <div class="footer-section links">
-                <h4>Links Rápidos</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="como-funciona.html">Como Funciona</a></li>
-                    <li><a href="guia-investimento.html">Guia de Investimento</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </div>
-            <div class="footer-section legal">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="termos.html">Termos de Uso</a></li>
-                    <li><a href="privacidade.html">Política de Privacidade</a></li>
-                    <li><a href="cookies.html">Cookies</a></li>
-                </ul>
-            </div>
-            <div class="footer-section suporte">
-                <h4>Suporte</h4>
-                <ul>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="suporte.html">Suporte Técnico</a></li>
-                    <li><a href="ticket.html">Abrir um Ticket</a></li>
-                </ul>
-            </div>
-            <div class="footer-section social">
-                <h4>Siga-nos</h4>
-                <div class="social-icons">
-                    <a href="#"><img src="Fotos/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="Fotos/twitter.png" alt="Twitter"></a>
-                    <a href="#"><img src="Fotos/linkedin.png" alt="LinkedIn"></a>
-                    <a href="#"><img src="Fotos/instagram.png" alt="Instagram"></a>
-                    <a href="#"><img src="Fotos/youtube.png" alt="YouTube"></a>
-                </div>
-            </div>
+            <!-- Footer Content -->
         </div>
         <div class="footer-bottom">
             &copy; 2024 Investimento Security. Todos os direitos reservados.
@@ -207,38 +123,49 @@
 
     <!-- Script para gerenciar o logout e exibição do menu -->
     <script>
-        // Simulação do estado de autenticação
-        const usuarioLogado = true; // Altere para false para testar o estado não logado
-
-        // Alterna entre os menus logado e não logado
         document.addEventListener('DOMContentLoaded', function() {
             const headerLogado = document.getElementById('header-logado');
             const headerNaoLogado = document.getElementById('header-nao-logado');
 
-            if (usuarioLogado) {
-                headerLogado.style.display = 'flex';
-                headerNaoLogado.style.display = 'none';
-            } else {
-                headerLogado.style.display = 'none';
-                headerNaoLogado.style.display = 'flex';
-            }
-        });
-
-        // Script de logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            fetch('/logout', {
-                method: 'POST',
-                credentials: 'same-origin', // Inclui cookies para a requisição
+            // Verifica o estado de login do usuário via chamada para o servidor
+            fetch('/meu-perfil', { 
+                method: 'GET', 
+                credentials: 'include' // Inclui cookies na requisição
             })
             .then(response => {
                 if (response.ok) {
-                    window.location.href = '/index.html';
+                    // O usuário está logado, exibe o menu logado
+                    headerLogado.style.display = 'flex';
+                    headerNaoLogado.style.display = 'none';
                 } else {
-                    alert('Erro ao fazer logout. Tente novamente.');
+                    // O usuário não está logado, exibe o menu não logado
+                    headerLogado.style.display = 'none';
+                    headerNaoLogado.style.display = 'flex';
                 }
             })
             .catch(error => {
-                console.error('Erro ao fazer logout:', error);
+                console.error('Erro ao verificar login:', error);
+                // Exibir o menu de não logado em caso de erro
+                headerLogado.style.display = 'none';
+                headerNaoLogado.style.display = 'flex';
+            });
+
+            // Script de logout
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                fetch('/logout', {
+                    method: 'POST',
+                    credentials: 'include', // Inclui cookies na requisição
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/index.html';
+                    } else {
+                        alert('Erro ao fazer logout. Tente novamente.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao fazer logout:', error);
+                });
             });
         });
     </script>
