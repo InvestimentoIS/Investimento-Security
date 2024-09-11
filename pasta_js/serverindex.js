@@ -21,7 +21,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Conectando ao MongoDB
-mongoose.connect(process.env.MONGO_URI).then(() => {
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tlsInsecure: true // Desabilita a verificação SSL (apenas para teste, não recomendado em produção)
+}).then(() => {
     console.log('Conectado ao MongoDB');
 }).catch((err) => {
     console.error('Erro ao conectar ao MongoDB:', err);
@@ -297,9 +301,9 @@ app.post('/logout', (req, res) => {
     });
 });
 
-// Verificação se o arquivo index.html existe para servir como página inicia
+// Verificação se o arquivo index.html existe para servir como página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'cadastro', 'index.html'));
+    res.sendFile(path.join(__dirname, '../index.html')); // Corrigido para apontar um diretório acima
 });
 
 // Inicialização do servidor
