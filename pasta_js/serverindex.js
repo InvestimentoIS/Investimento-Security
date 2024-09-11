@@ -215,10 +215,12 @@ app.get('/verify', async (req, res) => {
             return res.status(400).json({ error: "Usuário não encontrado." });
         }
 
+        // Verificar o e-mail do usuário
         user.isVerified = true;
         await user.save();
 
-        res.redirect('/login.html');
+        // Redirecionar para a página correta do GitHub Pages após verificar o e-mail
+        res.redirect('https://investimentois.github.io/Investimento-Security/login.html'); // Redireciona para a página de login
     } catch (error) {
         res.status(500).json({ error: "Erro ao verificar e-mail." });
     }
