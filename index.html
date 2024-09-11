@@ -207,43 +207,66 @@
 
     <!-- Script para gerenciar o logout e exibição do menu -->
     <script>
-        // Simulação do estado de autenticação
-        const usuarioLogado = true; // Altere para false para testar o estado não logado
-
-        // Alterna entre os menus logado e não logado
+        // Verifica se o usuário está logado através do token ou estado no localStorage
+        const token = localStorage.getItem('authToken'); // Token armazenado após o login
+    
         document.addEventListener('DOMContentLoaded', function() {
             const headerLogado = document.getElementById('header-logado');
             const headerNaoLogado = document.getElementById('header-nao-logado');
-
-            if (usuarioLogado) {
+    
+            if (token) {
+                // Usuário logado: exibe o menu logado e oculta o não logado
                 headerLogado.style.display = 'flex';
                 headerNaoLogado.style.display = 'none';
+    
+                // Aqui você pode adicionar uma requisição para buscar informações do usuário logado
+                fetchUserProfile(); // Função para buscar e exibir informações do perfil do usuário
+    
             } else {
+                // Usuário não logado: exibe o menu não logado e oculta o logado
                 headerLogado.style.display = 'none';
                 headerNaoLogado.style.display = 'flex';
             }
         });
-
-        // Script de logout (verificação se o botão existe)
-        const logoutBtn = document.getElementById('logout-btn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function() {
-                fetch('/logout', {
-                    method: 'POST',
-                    credentials: 'same-origin', // Inclui cookies para a requisição
-                })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = '/index.html';
-                    } else {
-                        alert('Erro ao fazer logout. Tente novamente.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao fazer logout:', error);
+    
+        // Função para buscar e exibir os dados do usuário logado (a partir do seu backend)
+        async function fetchUserProfile() {
+            try {
+                const response = await fetch(`${backendURL}/meu-perfil`, { // URL do backend
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Passa o token de autenticação
+                    },
+                    credentials: 'include' // Inclui cookies/sessões
                 });
-            });
+    
+                if (!response.ok) {
+                    throw new Error("Não foi possível carregar os dados do perfil.");
+                }
+    
+                const userData = await response.json();
+    
+                // Atualiza a interface com as informações do usuário logado
+                document.getElementById('username').textContent = userData.username;
+                document.getElementById('email').textContent = userData.email;
+                document.getElementById('country').textContent = userData.country;
+                document.getElementById('birthdate').textContent = userData.birthdate;
+                document.getElementById('phone').textContent = userData.phone;
+                document.getElementById('profilePhoto').src = userData.profilePhoto;
+    
+            } catch (error) {
+                console.error('Erro ao carregar o perfil do usuário:', error);
+                // Redireciona para a página de login se o usuário não estiver autenticado
+                window.location.href = "https://investimentois.github.io/Investimento-Security/login.html";
+            }
         }
+    
+        // Função de logout: remove o token de autenticação e redireciona para a página inicial
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('authToken'); // Remove o token armazenado
+            window.location.href = '/index.html'; // Redireciona após logout
+        });
     </script>
+    
 </body>
 </html>
