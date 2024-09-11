@@ -14,10 +14,13 @@ const MongoStore = require('connect-mongo'); // Store de sessões no MongoDB
 // Configurando o aplicativo Express
 const app = express();
 
-// Habilitar CORS com domínio correto
+// Habilitar CORS com configuração para permitir credenciais
 const corsOptions = {
     origin: 'https://investimentois.github.io',  // Ajustar o domínio permitido
-    optionsSuccessStatus: 200
+    credentials: true,  // Permitir cookies e credenciais nas requisições
+    optionsSuccessStatus: 200,
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
 };
 app.use(cors(corsOptions));
 
@@ -44,13 +47,15 @@ app.use(session({
         mongoUrl: process.env.MONGO_URI, // MongoDB para sessões
         collectionName: 'sessions', // Coleção onde as sessões são armazenadas
     }),
-    cookie: { secure: false } // Defina como true se usar HTTPS em produção
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production', // Definir como true em produção (HTTPS)
+        httpOnly: true, // Impedir acesso via JavaScript
+        maxAge: 1000 * 60 * 60 * 24, // Expiração do cookie (1 dia)
+    }
 }));
 
-// Definindo o caminho relativo para a pasta 'uploads'
+// Verificando se a pasta 'uploads/' existe, e a cria se não existir
 const uploadDir = path.join(__dirname, 'uploads');
-
-// Verifica se a pasta 'uploads/' existe, e a cria se não existir
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
     console.log(`Diretório 'uploads' criado em ${uploadDir}`);
