@@ -14,9 +14,9 @@ const MongoStore = require('connect-mongo'); // Store de sessões no MongoDB
 // Configurando o aplicativo Express
 const app = express();
 
-// Habilitar CORS
+// Habilitar CORS com domínio correto
 const corsOptions = {
-    origin: 'https://investimentois.github.io',  // Permitir o domínio correto
+    origin: 'https://investimentois.github.io',  // Ajustar o domínio permitido
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
@@ -158,7 +158,6 @@ app.post('/register', async (req, res) => {
 
         sendVerificationEmail(newUser);
 
-        // Redirecionamento para página de login após cadastro
         res.status(201).json({ success: "Cadastro bem-sucedido! Verifique seu e-mail." });
     } catch (error) {
         res.status(500).json({ error: "Erro no servidor. Por favor, tente novamente." });
