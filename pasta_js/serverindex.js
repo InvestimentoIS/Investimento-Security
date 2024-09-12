@@ -6,12 +6,11 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const path = require('path');
-const session = require('express-session'); // Suporte para sessões
+const session = require('express-session');
 const multer = require('multer'); // Upload de arquivos
-const fs = require('fs'); // Manipulação de arquivos
-const MongoStore = require('connect-mongo'); // Store de sessões no MongoDB
+const fs = require('fs');
+const MongoStore = require('connect-mongo'); // Armazenamento de sessões no MongoDB
 
-// Configurando o aplicativo Express
 const app = express();
 
 // Habilitar CORS com configuração para permitir credenciais
@@ -30,22 +29,26 @@ app.use(bodyParser.json());
 // Servindo arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configurando sessões
+// Configurando sessões usando MongoDB para armazenar sessões
 app.use(session({
     secret: process.env.SESSION_SECRET || 'supersecretkey',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } // Defina como true se estiver usando HTTPS em produção
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI, // MongoDB para sessões
+        collectionName: 'sessions', // Coleção onde as sessões são armazenadas
+    }),
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production', // Definir como true em produção (HTTPS)
+        httpOnly: true, // Impedir acesso via JavaScript
+        maxAge: 1000 * 60 * 60 * 24, // Expiração do cookie (1 dia)
+    }
 }));
-// Servir arquivos estáticos da pasta "Cadastro"
-app.use(express.static(path.join(__dirname, '..', 'Cadastro')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve a pasta de uploads
 
 // Conectando ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    tlsInsecure: process.env.NODE_ENV !== 'production' // Ajuste: desabilitar TLS apenas em dev
+    useUnifiedTopology: true
 }).then(() => {
     console.log('Conectado ao MongoDB');
 }).catch((err) => {
@@ -92,22 +95,6 @@ function sendVerificationEmail(user) {
         }
     });
 }
-
-// Configurando sessões usando MongoDB
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'supersecretkey',
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI, // MongoDB para sessões
-        collectionName: 'sessions', // Coleção onde as sessões são armazenadas
-    }),
-    cookie: { 
-        secure: process.env.NODE_ENV === 'production', // Definir como true em produção (HTTPS)
-        httpOnly: true, // Impedir acesso via JavaScript
-        maxAge: 1000 * 60 * 60 * 24, // Expiração do cookie (1 dia)
-    }
-}));
 
 // Verificando se a pasta 'uploads/' existe, e a cria se não existir
 const uploadDir = path.join(__dirname, 'uploads');
@@ -241,9 +228,11 @@ app.post('/register', async (req, res) => {
 
         await newUser.save();
 
+        // Enviar o e-mail de verificação
         sendVerificationEmail(newUser);
 
-        res.status(201).json({ success: "Cadastro bem-sucedido! Verifique seu e-mail." });
+        // Redirecionar para a página de login após cadastro
+        res.status(201).json({ success: "Cadastro bem-sucedido! Verifique seu e-mail para ativar sua conta. Redirecionando para login..." });
     } catch (error) {
         res.status(500).json({ error: "Erro no servidor. Por favor, tente novamente." });
     }
@@ -259,6 +248,7 @@ app.post('/login', async (req, res) => {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
 
+        // Verificação se o e-mail foi confirmado
         if (!user.isVerified) {
             return res.status(401).json({ error: 'E-mail não verificado. Por favor, verifique seu e-mail.' });
         }
@@ -268,6 +258,7 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Credenciais incorretas.' });
         }
 
+        // Iniciar sessão
         req.session.userId = user._id;
 
         res.status(200).json({ 
@@ -325,6 +316,7 @@ app.post('/logout', (req, res) => {
         res.status(200).json({ message: 'Logout bem-sucedido!' }); // Retorna status 200 ao frontend
     });
 });
+
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

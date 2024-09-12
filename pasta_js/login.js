@@ -17,7 +17,7 @@ function togglePasswordVisibility() {
 }
 
 // Verifica se o usuário está logado
-const token = localStorage.getItem('authToken'); // Pega o token de autenticação (pode ser sessionStorage também)
+const token = sessionStorage.getItem('authToken'); // Usando sessionStorage para maior segurança
 
 if (token) {
     // O usuário está logado, faz uma requisição para obter informações do usuário
@@ -28,7 +28,7 @@ if (token) {
     }).then(response => response.json())
     .then(data => {
         console.log("Usuário logado:", data.username);
-        // Aqui você pode atualizar o UI com as informações do usuário, se necessário
+        // Aqui você pode atualizar a UI com as informações do usuário, se necessário
     })
     .catch(err => console.error("Erro ao buscar dados do usuário:", err));
 } else {
@@ -47,10 +47,15 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const data = Object.fromEntries(formData.entries()); // Converte para um objeto
 
     const messageDiv = document.getElementById('message');
-    messageDiv.classList.remove('error', 'success'); // Remove classes anteriores
+    messageDiv.classList.remove('error', 'success', 'loading'); // Remove classes anteriores
     messageDiv.style.display = 'none'; // Esconde a mensagem no início
 
     try {
+        // Exibe um loader enquanto a requisição de login está sendo processada
+        messageDiv.classList.add('loading');
+        messageDiv.textContent = "Fazendo login...";
+        messageDiv.style.display = 'block';
+
         // Faz a requisição de login para o backend
         const response = await fetch(`${backendURL}/login`, {
             method: 'POST',
@@ -64,41 +69,51 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         if (response.ok) {
             // Login bem-sucedido
+            messageDiv.classList.remove('loading');
             messageDiv.classList.add('success');
             messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
             messageDiv.style.display = 'block'; // Exibe a mensagem de sucesso
 
-            // Armazena o token de autenticação
-            localStorage.setItem('authToken', result.token);
+            // Armazena o token de autenticação no sessionStorage para mais segurança
+            sessionStorage.setItem('authToken', result.token);
 
-            // Redireciona para a página principal
-            setTimeout(() => {
-                window.location.href = "https://investimentois.github.io/Investimento-Security/index.html";
-            }, 2000);
+            // Redireciona para a página principal de forma imediata e otimizada
+            window.location.href = "https://investimentois.github.io/Investimento-Security/index.html";
         } else {
             throw new Error(result.error || "Credenciais inválidas.");
         }
     } catch (error) {
         // Exibe mensagem de erro
+        messageDiv.classList.remove('loading');
         messageDiv.classList.add('error');
         messageDiv.textContent = error.message || 'Erro no servidor. Por favor, tente novamente.';
         messageDiv.style.display = 'block'; // Exibe a mensagem de erro
 
-        // Limpa a mensagem após 5 segundos
+        // Limpa a mensagem após 3 segundos
         setTimeout(() => {
             messageDiv.style.display = 'none'; 
             messageDiv.textContent = ''; 
-            messageDiv.classList.remove('error', 'success'); // Remove as classes de mensagem
-        }, 5000);
+            messageDiv.classList.remove('error', 'success', 'loading'); // Remove as classes de mensagem
+        }, 3000);
     }
 });
 
 // Função para buscar e exibir os dados do usuário logado
 async function fetchUserProfile() {
+    const token = sessionStorage.getItem('authToken'); // Usando sessionStorage para maior segurança
+
+    if (!token) {
+        // Se não tiver token, redireciona para a página de login
+        window.location.href = "https://investimentois.github.io/Investimento-Security/login.html";
+        return;
+    }
+
     try {
         const response = await fetch(`${backendURL}/meu-perfil`, { // Usa a rota /meu-perfil do backend
             method: 'GET',
-            credentials: 'include' // Inclui cookies/sessões na requisição
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         });
 
         if (!response.ok) {
