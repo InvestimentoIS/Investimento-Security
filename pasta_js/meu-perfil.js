@@ -20,6 +20,23 @@ async function loadUserProfile() {
         Swal.fire('Erro', 'Erro no servidor ao carregar os dados do perfil.', 'error');
     }
 }
+app.post('/upload-profile-photo', upload.single('profilePhoto'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    }
+
+    // URL relativa ao servidor
+    const newProfilePhoto = `/uploads/${req.file.filename}`;
+
+    try {
+        // Atualizar a foto de perfil do usuário no banco de dados
+        await User.updateOne({ _id: req.session.userId }, { profilePhoto: newProfilePhoto });
+
+        res.status(200).json({ success: true, newProfilePhoto });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
+    }
+});
 
 // Função para fazer o upload da foto de perfil
 async function uploadProfilePhoto(event) {
