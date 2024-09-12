@@ -288,10 +288,12 @@ app.get('/verify', async (req, res) => {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
 
-        user.isVerified = true;
+        user.isVerified = true; // Atualiza o status para verificado
         await user.save();
 
-        res.status(200).json({ success: 'E-mail verificado com sucesso!' });
+        // Redireciona automaticamente para a página de login após verificação
+        res.redirect('https://investimentois.github.io/Investimento-Security/login.html'); 
+
     } catch (error) {
         res.status(500).json({ error: 'Erro ao verificar o e-mail.' });
     }
