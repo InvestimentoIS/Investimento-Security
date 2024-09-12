@@ -207,66 +207,27 @@
     <script>
         // URL do seu backend
         const backendURL = 'https://investimento-security.onrender.com'; // Ajuste para o seu backend
-        
-        // Função para verificar o estado de login e atualizar o conteúdo da página
-        function atualizarConteudoParaUsuario() {
-            const token = localStorage.getItem('authToken'); // Obtém o token do localStorage
-        
-            const headerLogado = document.getElementById('header-logado');
-            const headerNaoLogado = document.getElementById('header-nao-logado');
-        
-            if (token) {
-                // Usuário está logado, mostra o cabeçalho para usuários logados
-                headerLogado.style.display = 'flex';
-                headerNaoLogado.style.display = 'none';
-        
-                // Carregar informações do perfil do usuário logado (opcional)
-                fetchUserProfile();
-            } else {
-                // Usuário não está logado, mostra o cabeçalho para usuários não logados
-                headerLogado.style.display = 'none';
-                headerNaoLogado.style.display = 'flex';
-            }
+        // Verifica se o usuário está logado
+const token = sessionStorage.getItem('authToken'); // Verifica o token de sessão (ou localStorage)
+
+if (token) {
+    // Se o usuário está logado, faz uma requisição para buscar as informações
+    fetch(`${backendURL}/meu-perfil`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
         }
-        
-        // Função para buscar e exibir os dados do usuário logado
-        async function fetchUserProfile() {
-            const token = localStorage.getItem('authToken');
-        
-            try {
-                const response = await fetch(`${backendURL}/meu-perfil`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include' // Envia cookies/sessão se houver
-                });
-        
-                if (!response.ok) {
-                    throw new Error("Erro ao carregar os dados do perfil.");
-                }
-        
-                const userData = await response.json();
-        
-                // Atualizar o cabeçalho/logado com os dados do usuário (opcional)
-                document.getElementById('username').textContent = userData.username;
-                document.getElementById('email').textContent = userData.email;
-                document.getElementById('profilePhoto').src = userData.profilePhoto;
-        
-            } catch (error) {
-                console.error('Erro ao carregar o perfil do usuário:', error);
-            }
-        }
-        
-        // Função de logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            localStorage.removeItem('authToken'); // Remove o token
-            window.location.reload(); // Recarrega a página para atualizar o conteúdo
-        });
-        
-        // Chama a função para atualizar o conteúdo assim que a página carregar
-        document.addEventListener('DOMContentLoaded', atualizarConteudoParaUsuario);
+    }).then(response => response.json())
+    .then(data => {
+        // Atualiza a UI com as informações do usuário logado
+        document.getElementById('username').textContent = data.username;
+        document.getElementById('profilePhoto').src = data.profilePhoto;
+        // Outras informações que você deseja exibir
+    }).catch(err => console.error("Erro ao buscar dados do usuário:", err));
+} else {
+    // Exibe informações para usuários não logados (ex: link para login ou cadastro)
+    document.getElementById('loginMessage').textContent = 'Você não está logado. Por favor, faça login.';
+}
+
         </script>
         
 </body>
