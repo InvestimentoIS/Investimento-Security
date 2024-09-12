@@ -295,6 +295,25 @@ app.get('/verify', async (req, res) => {
     }
 });
 
+// Rota para verificar o status de autenticação
+app.get('/auth-status', (req, res) => {
+    if (req.session.userId) {
+        res.json({ isLoggedIn: true, username: req.session.username });
+    } else {
+        res.json({ isLoggedIn: false });
+    }
+});
+
+// Rota de logout
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao fazer logout. Tente novamente.' });
+        }
+        res.clearCookie('connect.sid'); // Limpa o cookie de sessão
+        res.status(200).json({ message: 'Logout bem-sucedido!' }); // Retorna status 200 ao frontend
+    });
+});
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
