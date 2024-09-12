@@ -30,6 +30,17 @@ app.use(bodyParser.json());
 // Servindo arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configurando sessões
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'supersecretkey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // Defina como true se estiver usando HTTPS em produção
+}));
+// Servir arquivos estáticos da pasta "Cadastro"
+app.use(express.static(path.join(__dirname, '..', 'Cadastro')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve a pasta de uploads
+
 // Conectando ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -40,6 +51,47 @@ mongoose.connect(process.env.MONGO_URI, {
 }).catch((err) => {
     console.error('Erro ao conectar ao MongoDB:', err);
 });
+
+// Função para enviar o e-mail de verificação usando Nodemailer
+function sendVerificationEmail(user) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        },
+        logger: true,
+        debug: true
+    });
+
+    const verificationUrl = `https://investimento-security.onrender.com/verify?userId=${user._id}`;
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: user.email,
+        subject: 'Verifique seu e-mail para ativar sua conta',
+        html: `
+            <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; color: #333;">
+                <h1 style="color: #4CAF50;">Seja bem-vindo!</h1>
+                <p>Para completar seu cadastro e ativar sua conta, clique no botão abaixo:</p>
+                <a href="${verificationUrl}" 
+                   style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                   Verificar E-mail
+                </a>
+                <p>Se você não solicitou este cadastro, ignore este e-mail.</p>
+                <p>Atenciosamente, <br> Equipe Investimento Security</p>
+            </div>
+        `,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.error('Erro ao enviar e-mail:', err);
+        } else {
+            console.log('E-mail enviado:', info.response);
+        }
+    });
+}
 
 // Configurando sessões usando MongoDB
 app.use(session({
@@ -234,47 +286,6 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor. Por favor, tente novamente.' });
     }
 });
-
-// Função para enviar o e-mail de verificação usando Nodemailer
-function sendVerificationEmail(user) {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        },
-        logger: true,
-        debug: true
-    });
-
-    const verificationUrl = `https://investimento-security.onrender.com/verify?userId=${user._id}`;
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: user.email,
-        subject: 'Verifique seu e-mail para ativar sua conta',
-        html: `
-            <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; color: #333;">
-                <h1 style="color: #4CAF50;">Seja bem-vindo!</h1>
-                <p>Para completar seu cadastro e ativar sua conta, clique no botão abaixo:</p>
-                <a href="${verificationUrl}" 
-                   style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-                   Verificar E-mail
-                </a>
-                <p>Se você não solicitou este cadastro, ignore este e-mail.</p>
-                <p>Atenciosamente, <br> Equipe Investimento Security</p>
-            </div>
-        `,
-    };
-
-    transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.error('Erro ao enviar e-mail:', err);
-        } else {
-            console.log('E-mail enviado:', info.response);
-        }
-    });
-}
 
 // Rota de verificação de e-mail
 app.get('/verify', async (req, res) => {
