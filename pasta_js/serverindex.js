@@ -10,10 +10,10 @@ const session = require('express-session');
 const multer = require('multer'); // Upload de arquivos
 const fs = require('fs');
 const MongoStore = require('connect-mongo'); // Armazenamento de sessões no MongoDB
+const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Importando o modelo de usuário
 
 const app = express();
-const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Modelo de usuário
 
 // Middleware para verificar o token JWT
 function verifyToken(req, res, next) {
@@ -132,20 +132,6 @@ if (!fs.existsSync(uploadDir)) {
     console.log(`Diretório 'uploads' criado em ${uploadDir}`);
 }
 
-// Definindo o modelo de usuário com Mongoose
-const UserSchema = new mongoose.Schema({
-    username: { type: String, unique: true, required: true },
-    email: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
-    isVerified: { type: Boolean, default: false },
-    profilePhoto: { type: String, default: '/uploads/default-profile.png' },
-    country: { type: String, default: 'Brasil' },
-    birthdate: { type: String, default: '01/01/2000' },
-    phone: { type: String, default: '(11) 99999-9999' }
-});
-
-const User = mongoose.model('User', UserSchema);
-
 // Middleware para verificar se o usuário está logado
 function isAuthenticated(req, res, next) {
     if (req.session.userId) {
@@ -155,7 +141,7 @@ function isAuthenticated(req, res, next) {
     }
 }
 
-// Rota para buscar os dados do usuário logado
+// Rota para buscar os dados do usuário logado (com sessão)
 app.get('/meu-perfil', isAuthenticated, async (req, res) => {
     try {
         const user = await User.findById(req.session.userId);
@@ -215,6 +201,7 @@ app.post('/upload-profile-photo', verifyToken, upload.single('profilePhoto'), as
         res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
     }
 });
+
 // Rota de registro
 app.post('/register', async (req, res) => {
     try {
@@ -311,7 +298,7 @@ app.get('/verify', async (req, res) => {
     try {
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).json({ error: 'Usuário não encontrado.' });
+            return res.status(404).json({ error: 'Usuário não encontrado' });
         }
 
         user.isVerified = true; // Atualiza o status para verificado
