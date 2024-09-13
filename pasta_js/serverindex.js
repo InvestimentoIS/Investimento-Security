@@ -12,6 +12,35 @@ const fs = require('fs');
 const MongoStore = require('connect-mongo'); // Armazenamento de sessões no MongoDB
 
 const app = express();
+const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Modelo de usuário
+
+// Middleware para verificar o token JWT
+function verifyToken(req, res, next) {
+    const token = req.headers['authorization']?.split(' ')[1]; // Extrai o token do cabeçalho
+
+    if (!token) {
+        return res.status(403).json({ message: 'Token não fornecido' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Token inválido' });
+        }
+        req.userId = decoded.id; // Armazena o ID do usuário decodificado
+        next();
+    });
+}
+
+// Rota protegida para buscar os dados do perfil do usuário
+app.get('/meu-perfil', verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select('-password'); // Busca o usuário sem a senha
+        res.status(200).json(user); // Retorna os dados do usuário
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar os dados do usuário' });
+    }
+});
 
 // Habilitar CORS com configuração para permitir credenciais
 const corsOptions = {
@@ -147,48 +176,45 @@ app.get('/meu-perfil', isAuthenticated, async (req, res) => {
     }
 });
 
-// Configuração do Multer para upload de imagem de perfil (ajustes em tamanho/tipo de arquivo)
+// Configuração do multer para salvar as imagens
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir); // Pasta para uploads
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Pasta onde os arquivos serão salvos
     },
-    filename: (req, file, cb) => {
-        cb(null, `${req.session.userId}-${Date.now()}${path.extname(file.originalname)}`);
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Define o nome do arquivo com timestamp
     }
 });
-
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png'];
-    if (!allowedTypes.includes(file.mimetype)) {
-        cb(new Error('Tipo de arquivo não permitido'), false);
-    } else {
-        cb(null, true);
-    }
-};
 
 const upload = multer({ 
-    storage,
-    fileFilter,
-    limits: { fileSize: 1024 * 1024 * 2 } // Limite de 2MB por arquivo
+    storage: storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // Limite de 2MB
+    fileFilter: function (req, file, cb) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg') {
+            return cb(new Error('Somente arquivos de imagem são permitidos (.jpg, .jpeg, .png)'));
+        }
+        cb(null, true);
+    }
 });
 
-// Rota para upload da foto de perfil
-app.post('/upload-profile-photo', isAuthenticated, upload.single('profilePhoto'), async (req, res) => {
+// Rota para fazer o upload da foto de perfil
+app.post('/upload-profile-photo', verifyToken, upload.single('profilePhoto'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     }
 
-    const newProfilePhoto = `/uploads/${req.file.filename}`;
+    const newProfilePhoto = `/uploads/${req.file.filename}`; // URL da nova foto
 
     try {
-        await User.updateOne({ _id: req.session.userId }, { profilePhoto: newProfilePhoto });
+        // Atualizar a foto de perfil no banco de dados
+        await User.updateOne({ _id: req.userId }, { profilePhoto: newProfilePhoto });
 
         res.status(200).json({ success: true, newProfilePhoto });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
     }
 });
-
 // Rota de registro
 app.post('/register', async (req, res) => {
     try {

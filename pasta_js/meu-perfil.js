@@ -1,10 +1,18 @@
 // Função para carregar os dados do perfil do usuário
 async function loadUserProfile() {
     try {
-        const response = await fetch('/meu-perfil'); // Chama a rota /meu-perfil
+        const token = sessionStorage.getItem('authToken'); // Verifica o token de autenticação
+
+        // Faz a requisição para obter os dados do perfil
+        const response = await fetch('/meu-perfil', {
+            headers: {
+                "Authorization": `Bearer ${token}` // Envia o token no cabeçalho
+            }
+        });
+
         if (response.ok) {
-            const user = await response.json();
-            console.log(user); // Verifica se os dados estão sendo carregados corretamente
+            const user = await response.json(); // Obtém os dados do usuário
+            console.log(user); // Verifica os dados no console (para depuração)
 
             // Preencher os campos automaticamente com os dados recebidos do backend
             document.getElementById('username').textContent = user.username;
@@ -18,39 +26,30 @@ async function loadUserProfile() {
         }
     } catch (error) {
         Swal.fire('Erro', 'Erro no servidor ao carregar os dados do perfil.', 'error');
+        console.error("Erro ao carregar dados do perfil:", error);
     }
 }
-app.post('/upload-profile-photo', upload.single('profilePhoto'), async (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
-    }
-
-    // URL relativa ao servidor
-    const newProfilePhoto = `/uploads/${req.file.filename}`;
-
-    try {
-        // Atualizar a foto de perfil do usuário no banco de dados
-        await User.updateOne({ _id: req.session.userId }, { profilePhoto: newProfilePhoto });
-
-        res.status(200).json({ success: true, newProfilePhoto });
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
-    }
-});
 
 // Função para fazer o upload da foto de perfil
 async function uploadProfilePhoto(event) {
     event.preventDefault();
-    const formData = new FormData(document.getElementById('upload-form'));
+    const formData = new FormData(document.getElementById('upload-form')); // Coleta os dados do formulário
 
     try {
+        const token = sessionStorage.getItem('authToken'); // Verifica o token de autenticação
+
+        // Faz a requisição para upload da foto
         const response = await fetch('/upload-profile-photo', {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: {
+                "Authorization": `Bearer ${token}` // Envia o token no cabeçalho
+            }
         });
 
         const data = await response.json();
         if (response.ok) {
+            // Atualiza a imagem de perfil com a nova foto
             document.getElementById('profile-photo').src = data.newProfilePhoto;
             Swal.fire('Sucesso', 'Foto de perfil atualizada com sucesso!', 'success');
         } else {
@@ -58,6 +57,7 @@ async function uploadProfilePhoto(event) {
         }
     } catch (error) {
         Swal.fire('Erro', 'Erro no servidor ao fazer o upload da foto.', 'error');
+        console.error('Erro no upload da foto:', error);
     }
 }
 
