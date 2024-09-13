@@ -205,30 +205,44 @@
     <script src="pasta_js/index.js"></script>
 
     <script>
-        // URL do seu backend
-        const backendURL = 'https://investimento-security.onrender.com'; // Ajuste para o seu backend
-        // Verifica se o usuário está logado
-const token = sessionStorage.getItem('authToken'); // Verifica o token de sessão (ou localStorage)
+        document.addEventListener("DOMContentLoaded", () => {
+            const backendURL = 'https://investimento-security.onrender.com'; // Ajuste para o seu backend
+            const token = sessionStorage.getItem('authToken'); // Verifica o token de sessão
 
-if (token) {
-    // Se o usuário está logado, faz uma requisição para buscar as informações
-    fetch(`${backendURL}/meu-perfil`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    }).then(response => response.json())
-    .then(data => {
-        // Atualiza a UI com as informações do usuário logado
-        document.getElementById('username').textContent = data.username;
-        document.getElementById('profilePhoto').src = data.profilePhoto;
-        // Outras informações que você deseja exibir
-    }).catch(err => console.error("Erro ao buscar dados do usuário:", err));
-} else {
-    // Exibe informações para usuários não logados (ex: link para login ou cadastro)
-    document.getElementById('loginMessage').textContent = 'Você não está logado. Por favor, faça login.';
-}
+            if (token) {
+                // Se o usuário está logado, faz uma requisição para buscar as informações
+                fetch(`${backendURL}/meu-perfil`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    // Atualiza a UI com as informações do usuário logado
+                    document.getElementById('username').textContent = data.username;
+                    document.getElementById('profilePhoto').src = data.profilePhoto;
 
-        </script>
+                    // Exibe a navbar para usuários logados
+                    document.getElementById("header-logado").style.display = "block";
+                    document.getElementById("header-nao-logado").style.display = "none";
+                }).catch(err => {
+                    console.error("Erro ao buscar dados do usuário:", err);
+                    // Em caso de erro, exibe a navbar para não logados
+                    document.getElementById("header-logado").style.display = "none";
+                    document.getElementById("header-nao-logado").style.display = "block";
+                });
+            } else {
+                // Se o usuário não está logado, exibe a navbar para não logados
+                document.getElementById("header-logado").style.display = "none";
+                document.getElementById("header-nao-logado").style.display = "block";
+            }
+
+            // Logout - Limpa a sessão e redireciona para a página de login
+            document.getElementById("logout-btn").addEventListener("click", () => {
+                sessionStorage.removeItem('authToken'); // Remove o token
+                window.location.href = "login.html";    // Redireciona para login
+            });
+        });
+    </script>
         
 </body>
 </html>
