@@ -11,7 +11,8 @@ const multer = require('multer'); // Upload de arquivos
 const fs = require('fs');
 const MongoStore = require('connect-mongo'); // Armazenamento de sessões no MongoDB
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Importando o modelo de usuário
+const User = require(path.resolve(__dirname, '../models/User'));
+ // Importando o modelo de usuário
 
 const app = express();
 
