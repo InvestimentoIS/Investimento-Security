@@ -206,43 +206,75 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const backendURL = 'https://investimento-security.onrender.com'; // Ajuste para o seu backend
-            const token = sessionStorage.getItem('authToken'); // Verifica o token de sessão
-
+            const backendURL = 'https://investimento-security.onrender.com'; // URL do backend
+            const token = sessionStorage.getItem('authToken'); // Obtém o token de autenticação
+    
+            // Elementos da interface que serão manipulados
+            const usernameElement = document.getElementById('username');
+            const profilePhotoElement = document.getElementById('profilePhoto');
+            const headerLogado = document.getElementById("header-logado");
+            const headerNaoLogado = document.getElementById("header-nao-logado");
+    
+            // Função para exibir a interface de usuário logado
+            function mostrarUsuarioLogado(data) {
+                if (usernameElement && profilePhotoElement) {
+                    usernameElement.textContent = data.username;
+                    profilePhotoElement.src = data.profilePhoto;
+                }
+    
+                if (headerLogado && headerNaoLogado) {
+                    headerLogado.style.display = "block";
+                    headerNaoLogado.style.display = "none";
+                }
+            }
+    
+            // Função para exibir a interface de usuário não logado
+            function mostrarUsuarioNaoLogado() {
+                if (headerLogado && headerNaoLogado) {
+                    headerLogado.style.display = "none";
+                    headerNaoLogado.style.display = "block";
+                }
+            }
+    
+            // Se o token de autenticação existe, buscar informações do usuário
             if (token) {
-                // Se o usuário está logado, faz uma requisição para buscar as informações
                 fetch(`${backendURL}/meu-perfil`, {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
-                }).then(response => response.json())
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            console.warn("Token inválido ou expirado.");
+                        } else {
+                            console.error(`Erro ao buscar perfil: ${response.status}`);
+                        }
+                        throw new Error("Falha ao buscar o perfil do usuário.");
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    // Atualiza a UI com as informações do usuário logado
-                    document.getElementById('username').textContent = data.username;
-                    document.getElementById('profilePhoto').src = data.profilePhoto;
-
-                    // Exibe a navbar para usuários logados
-                    document.getElementById("header-logado").style.display = "block";
-                    document.getElementById("header-nao-logado").style.display = "none";
-                }).catch(err => {
+                    mostrarUsuarioLogado(data);
+                })
+                .catch(err => {
                     console.error("Erro ao buscar dados do usuário:", err);
-                    // Em caso de erro, exibe a navbar para não logados
-                    document.getElementById("header-logado").style.display = "none";
-                    document.getElementById("header-nao-logado").style.display = "block";
+                    mostrarUsuarioNaoLogado();
                 });
             } else {
-                // Se o usuário não está logado, exibe a navbar para não logados
-                document.getElementById("header-logado").style.display = "none";
-                document.getElementById("header-nao-logado").style.display = "block";
+                mostrarUsuarioNaoLogado(); // Se não há token, exibir UI de não logado
             }
-
-            // Logout - Limpa a sessão e redireciona para a página de login
-            document.getElementById("logout-btn").addEventListener("click", () => {
-                sessionStorage.removeItem('authToken'); // Remove o token
-                window.location.href = "login.html";    // Redireciona para login
-            });
+    
+            // Função de logout
+            const logoutBtn = document.getElementById("logout-btn");
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    sessionStorage.removeItem('authToken'); // Remove o token de autenticação
+                    window.location.href = "login.html";    // Redireciona para a página de login
+                });
+            }
         });
     </script>
-        
+    
 </body>
 </html>
