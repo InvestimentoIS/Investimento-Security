@@ -7,13 +7,12 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const session = require('express-session');
-const multer = require('multer'); // Upload de arquivos
+const multer = require('multer');
 const fs = require('fs');
-const MongoStore = require('connect-mongo'); // Armazenamento de sessões no MongoDB
+const MongoStore = require('connect-mongo');
 const jwt = require('jsonwebtoken');
 
-const User = require(path.resolve(__dirname, '../models/User'));
- // Importando o modelo de usuário
+const User = require(path.resolve(__dirname, './models/User')); // Corrigir caminho relativo
 
 const app = express();
 
@@ -34,15 +33,14 @@ function verifyToken(req, res, next) {
     });
 }
 
-// Rota protegida para buscar os dados do perfil do usuário
-app.get('/meu-perfil', verifyToken, async (req, res) => {
-    try {
-        const user = await User.findById(req.userId).select('-password'); // Busca o usuário sem a senha
-        res.status(200).json(user); // Retorna os dados do usuário
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao buscar os dados do usuário' });
+// Middleware para verificar se o usuário está logado com sessão
+function isAuthenticated(req, res, next) {
+    if (req.session.userId) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Não autorizado. Por favor, faça login.' });
     }
-});
+}
 
 // Habilitar CORS com configuração para permitir credenciais
 const corsOptions = {
@@ -134,36 +132,6 @@ if (!fs.existsSync(uploadDir)) {
     console.log(`Diretório 'uploads' criado em ${uploadDir}`);
 }
 
-// Middleware para verificar se o usuário está logado
-function isAuthenticated(req, res, next) {
-    if (req.session.userId) {
-        next();
-    } else {
-        res.status(401).json({ error: 'Não autorizado. Por favor, faça login.' });
-    }
-}
-
-// Rota para buscar os dados do usuário logado (com sessão)
-app.get('/meu-perfil', isAuthenticated, async (req, res) => {
-    try {
-        const user = await User.findById(req.session.userId);
-        if (!user) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
-        }
-
-        res.status(200).json({
-            username: user.username,
-            email: user.email,
-            country: user.country,
-            birthdate: user.birthdate,
-            phone: user.phone,
-            profilePhoto: user.profilePhoto
-        });
-    } catch (error) {
-        res.status(500).json({ error: 'Erro no servidor' });
-    }
-});
-
 // Configuração do multer para salvar as imagens
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -183,24 +151,6 @@ const upload = multer({
             return cb(new Error('Somente arquivos de imagem são permitidos (.jpg, .jpeg, .png)'));
         }
         cb(null, true);
-    }
-});
-
-// Rota para fazer o upload da foto de perfil
-app.post('/upload-profile-photo', verifyToken, upload.single('profilePhoto'), async (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
-    }
-
-    const newProfilePhoto = `/uploads/${req.file.filename}`; // URL da nova foto
-
-    try {
-        // Atualizar a foto de perfil no banco de dados
-        await User.updateOne({ _id: req.userId }, { profilePhoto: newProfilePhoto });
-
-        res.status(200).json({ success: true, newProfilePhoto });
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
     }
 });
 
@@ -334,7 +284,70 @@ app.post('/logout', (req, res) => {
     });
 });
 
-// Iniciar o servidorr
+// Rota para buscar os dados do usuário logado com sessão
+app.get('/meu-perfil', isAuthenticated, async (req, res) => {
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        res.status(200).json({
+            username: user.username,
+            email: user.email,
+            country: user.country,
+            birthdate: user.birthdate,
+            phone: user.phone,
+            profilePhoto: user.profilePhoto
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro no servidor' });
+    }
+});
+
+// Rota para fazer o upload da foto de perfil
+app.post('/upload-profile-photo', verifyToken, upload.single('profilePhoto'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    }
+
+    const newProfilePhoto = `/uploads/${req.file.filename}`; // URL da nova foto
+
+    try {
+        // Atualizar a foto de perfil no banco de dados
+        await User.updateOne({ _id: req.userId }, { profilePhoto: newProfilePhoto });
+
+        res.status(200).json({ success: true, newProfilePhoto });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao salvar a nova foto de perfil.' });
+    }
+});
+// Protege a rota dashboard e outras páginas sensíveis
+app.get('/dashboard', verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Renderiza a página do usuário logado com os dados corretos
+        res.status(200).json({
+            username: user.username,
+            email: user.email,
+            balance: user.balance,
+            investments: user.investments
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar dados do usuário.' });
+    }
+});
+
+// Protege outras rotas sensíveis
+app.get('/comprar-vender', verifyToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/comprar-vender.html'));
+});
+
+// Iniciar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

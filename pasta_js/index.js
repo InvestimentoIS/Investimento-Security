@@ -23,3 +23,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+
+    // Verifica se o usuário está autenticado
+    if (!token) {
+        window.location.href = 'login.html'; // Redireciona para a página de login se não estiver autenticado
+    } else {
+        fetch('/auth-status', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.isLoggedIn) {
+                window.location.href = 'login.html'; // Redireciona se a resposta indicar que não está logado
+            } else {
+                // Renderiza as informações do usuário logado aqui, se necessário
+                console.log('Usuário logado:', data.username);
+            }
+        })
+        .catch(err => {
+            console.error('Erro ao verificar autenticação:', err);
+            window.location.href = 'login.html'; // Redireciona em caso de erro
+        });
+    }
+});
