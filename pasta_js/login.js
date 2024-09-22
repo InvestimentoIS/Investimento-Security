@@ -1,5 +1,5 @@
 // URL do backend hospedado no Render
-const backendURL = 'https://investimento-security.onrender.com'; // Verifique se essa URL está correta
+const backendURL = 'https://investimento-security.onrender.com'; // Verifique se esta URL está correta
 
 // Função para alternar a visibilidade da senha
 function togglePasswordVisibility() {
@@ -21,14 +21,16 @@ const token = sessionStorage.getItem('authToken'); // Usando sessionStorage para
 
 if (token) {
     // O usuário está logado, faz uma requisição para obter informações do usuário
-    fetch(`${backendURL}/api/user-info`, {
+    fetch(`${backendURL}/meu-perfil`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
-    }).then(response => response.json())
+    })
+    .then(response => response.json())
     .then(data => {
         console.log("Usuário logado:", data.username);
         // Aqui você pode atualizar a UI com as informações do usuário, se necessário
+        window.location.href = "https://investimentois.github.io/Investimento-Security/index.html"; // Redireciona para a página principal
     })
     .catch(err => console.error("Erro ao buscar dados do usuário:", err));
 } else {
