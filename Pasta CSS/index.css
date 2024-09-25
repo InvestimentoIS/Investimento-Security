@@ -7,10 +7,11 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #333;
 }
 
+/* Estilo do cabeçalho */
 header {
     background-color: #282c34;
     padding: 1rem;
@@ -44,39 +45,72 @@ header {
     background-color: #444;
 }
 
+/* Estilo dos botões de login e cadastro */
 .cadastro-button {
-    background-color: #f0a500;
-    color: #fff;
-    border: none;
+    background-color: #4CAF50;
+    color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
 }
 
 .cadastro-button:hover {
-    background-color: #d18d00;
+    background-color: #45a049;
+}
+
+/* Estilo para ícones */
+.icone-usuario,
+.icone-notificacoes {
+    width: 30px;
+    cursor: pointer;
+}
+
+/* Estilo para dropdowns */
+.dropdown {
+    position: relative;
 }
 
 .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    list-style: none;
+    background-color: white;
+    color: black;
     padding: 0.5rem;
-    margin-top: 0.5rem;
+    list-style: none;
+    border: 1px solid #ddd;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
 }
 
-.icone-usuario, .icone-notificacoes {
-    width: 30px;
+/* Menu mobile */
+.menu-icon {
+    display: none;
     cursor: pointer;
 }
 
-/* Estilo para o conteúdo principal */
-main {
-    padding: 2rem;
-    text-align: center;
+.mobile {
+    display: none;
+    flex-direction: column;
+}
+
+.mobile li {
+    background-color: #282c34;
+    padding: 1rem;
+    border-bottom: 1px solid #444;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .desktop {
+        display: none; /* Esconde o menu de desktop */
+    }
+
+    .mobile {
+        display: flex;
+    }
+
+    .menu-icon {
+        display: block; /* Exibe o ícone de menu móvel */
+    }
 }

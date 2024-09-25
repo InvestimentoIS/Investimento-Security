@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investiment Security</title>
+    <title>Investimento Security</title>
     <link rel="stylesheet" href="Pasta CSS/index.css">
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <!-- Para Usuários Não Logados -->
-        <nav class="navbar" id="header-nao-logado">
+        <nav class="navbar">
+            <!-- Logo -->
             <div class="logo">
-                <h1><a href="index.html">Investiment Security</a></h1>
+                <h1><a href="index.html">Investimento Security</a></h1>
             </div>
-            <div class="menu-icon" id="menu-icon">
-                <img src="Fotos/menu preto.png" alt="Menu">
-            </div>
-            <ul class="nav-list" id="nav-list-nao-logado">
+
+            <!-- Menu de navegação para desktop -->
+            <ul class="nav-list desktop" id="nav-list-nao-logado">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="acoes.html">Ações</a></li>
                 <li><a href="investidores.html">Investidores</a></li>
@@ -25,59 +24,46 @@
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
             </ul>
-        </nav>
 
-        <!-- Para Usuários Logados -->
-        <nav class="navbar" id="header-logado" style="display: none;">
-            <div class="logo">
-                <h1><a href="dashboard.html">Investimento Security</a></h1>
-            </div>
-            <div class="menu-icon" id="menu-icon">
-                <img src="Fotos/menu preto.png" alt="Menu">
-            </div>
-            <ul class="nav-list" id="nav-list-logado">
+            <!-- Menu de navegação para usuários logados (desktop) -->
+            <ul class="nav-list desktop" id="nav-list-logado" style="display: none;">
                 <li><a href="dashboard.html">Dashboard</a></li>
-
-                <!-- Submenu de Investimentos -->
                 <li class="dropdown">
                     <a href="#">Investimentos</a>
                     <ul class="dropdown-menu">
                         <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
                         <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
-                        <li><a href="comprar-vender.html">Vender/Comprar</a></li>
+                        <li><a href="comprar-vender.html">Comprar/Vender</a></li>
                     </ul>
                 </li>
-
                 <li><a href="depositar.html">Depósito/Saque</a></li>
-                
-                <!-- Notificações -->
-                <li>
-                    <a href="notificacoes.html">
-                        <img src="Fotos/Icone de notificação 2.png" alt="Notificações" class="icone-notificacoes">
-                    </a>
-                </li>
-                
-                <li><a href="suporte.html">Suporte</a></li>
-                
-                <!-- Ícone do Perfil com Dropdown -->
+                <li><a href="notificacoes.html"><img src="Fotos/notificacoes.png" alt="Notificações" class="icone-notificacoes"></a></li>
                 <li class="dropdown perfil-usuario">
-                    <a href="#">
-                        <img src="Fotos/Icone de perfil.png" alt="Perfil" class="icone-usuario">
-                    </a>
+                    <a href="#"><img src="Fotos/perfil.png" alt="Perfil" class="icone-usuario"></a>
                     <ul class="dropdown-menu">
                         <li><a href="meu-perfil.html">Perfil</a></li>
-                        <li><a href="configuracoes.html">CG</a></li>
+                        <li><a href="configuracoes.html">Configurações</a></li>
                         <li><button id="logout-btn" class="logout-button">Sair</button></li>
                     </ul>
                 </li>
+            </ul>
+
+            <!-- Ícone de menu para dispositivos móveis -->
+            <div class="menu-icon" id="menu-icon">
+                <img src="Fotos/menu.png" alt="Menu">
+            </div>
+
+            <!-- Menu "hambúrguer" para dispositivos móveis -->
+            <ul class="nav-list mobile" id="nav-list-mobile" style="display: none;">
+                <!-- Será preenchido dinamicamente no JS -->
             </ul>
         </nav>
     </header>
 
     <!-- Conteúdo Principal -->
     <main>
-        <h1>Bem-vindo ao Investiment Security</h1>
-        <p>O melhor lugar para gerenciar seus investimentos com segurança e praticidade.</p>
+        <h1>Bem-vindo ao Investimento Security</h1>
+        <p>Gerencie seus investimentos com segurança e praticidade.</p>
     </main>
 
     <!-- Scripts -->
