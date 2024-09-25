@@ -26,6 +26,7 @@ header {
 .logo h1 a {
     color: #fff;
     text-decoration: none;
+    font-size: 24px;
 }
 
 .nav-list {
@@ -92,12 +93,36 @@ header {
 .mobile {
     display: none;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #282c34;
+    width: 250px;
+    padding-top: 60px;
+    z-index: 1000;
 }
 
 .mobile li {
     background-color: #282c34;
     padding: 1rem;
     border-bottom: 1px solid #444;
+}
+
+.mobile a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+}
+
+.mobile .dropdown-menu {
+    position: static;
+    background-color: #383c44;
+}
+
+.mobile .dropdown:hover .dropdown-menu {
+    display: block;
 }
 
 /* Responsividade */
@@ -112,5 +137,9 @@ header {
 
     .menu-icon {
         display: block; /* Exibe o ícone de menu móvel */
+    }
+
+    .logo h1 a {
+        font-size: 18px; /* Reduz o tamanho do logo no mobile */
     }
 }

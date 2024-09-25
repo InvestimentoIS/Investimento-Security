@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para alternar o menu móvel
     menuIcon.addEventListener('click', () => {
-        mobileNav.style.display = mobileNav.style.display === 'none' ? 'block' : 'none';
+        if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
+            mobileNav.style.display = 'block';
+        } else {
+            mobileNav.style.display = 'none';
+        }
     });
 
     // Verifica se o usuário está autenticado
