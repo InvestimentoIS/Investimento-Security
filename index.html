@@ -13,7 +13,8 @@
         <!-- Para Usuários Não Logados -->
         <nav class="navbar" id="header-nao-logado">
             <div class="logo">
-                <h1><a href="index.html">Investiment Security</a></h1>
+                <!-- Substituindo o nome da empresa pelo logo -->
+                <a href="index.html"><img src="Fotos/Banco.png" alt="Logo Investiment Security"></a>
             </div>
             <div class="menu-icon" id="menu-icon-nao-logado">
                 <img src="Fotos/menu preto.png" alt="Menu">
@@ -24,22 +25,21 @@
                 <li><a href="investidores.html">Investidores</a></li>
                 <li><a href="contato.html">Contato</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="register.html" class="cadastro-button">Cadastrar</a></li>
+                <!-- Alterar cor do botão de cadastro -->
+                <li><a href="register.html" class="btn-cadastro" style="background-color: #f39c12;">Cadastrar</a></li>
             </ul>
         </nav>
 
         <!-- Para Usuários Logados -->
         <nav class="navbar" id="header-logado" style="display: none;">
             <div class="logo">
-                <h1><a href="dashboard.html">Investimento Security</a></h1>
+                <a href="dashboard.html"><img src="Fotos/logo.png" alt="Logo Investimento Security"></a>
             </div>
             <div class="menu-icon" id="menu-icon-logado">
                 <img src="Fotos/menu preto.png" alt="Menu">
             </div>
             <ul class="nav-list" id="nav-list-logado">
                 <li><a href="dashboard.html">Dashboard</a></li>
-
-                <!-- Submenu de Investimentos -->
                 <li class="dropdown">
                     <a href="#">Investimentos</a>
                     <ul class="dropdown-menu">
@@ -48,19 +48,13 @@
                         <li><a href="comprar-vender.html">Vender/Comprar</a></li>
                     </ul>
                 </li>
-
                 <li><a href="depositar.html">Depósito/Saque</a></li>
-                
-                <!-- Notificações -->
                 <li>
                     <a href="notificacoes.html">
                         <img src="Fotos/Icone de notificação 2.png" alt="Notificações" class="icone-notificacoes">
                     </a>
                 </li>
-                
                 <li><a href="suporte.html">Suporte</a></li>
-                
-                <!-- Ícone do Perfil com Dropdown -->
                 <li class="dropdown perfil-usuario">
                     <a href="#">
                         <img src="Fotos/Icone de perfil.png" alt="Perfil" class="icone-usuario">
@@ -97,7 +91,7 @@
                 <p>Nossos sistemas são seguros e confiáveis.</p>
             </div>
             <div class="diferencial-item">
-                <img src="Fotos/Innovation free icons designed by Freepik.jpeg" alt="Inovação"> <!-- Ajuste: Nome simplificado e sem espaços -->
+                <img src="Fotos/Innovation free icons designed by Freepik.jpeg" alt="Inovação">
                 <h3>Inovações em Trading</h3>
                 <p>Trabalhamos com as melhores tecnologias.</p>
             </div>
@@ -137,7 +131,7 @@
         <div class="parceiros-logos">
             <img src="Fotos/ALIEXPRESS.png" alt="Parceiro Aliexpress">
             <img src="Fotos/BINANCE.png" alt="Parceiro Binance">
-            <img src="Fotos/MASTERCADR.png" alt="Parceiro Mastercard"> <!-- Ajuste: Nome da imagem corrigido -->
+            <img src="Fotos/MASTERCADR.png" alt="Parceiro Mastercard">
         </div>
         <h3>Certificações e Reconhecimentos</h3>
         <ul>
@@ -206,4 +200,3 @@
     <script src="pasta_js/index.js"></script>
 </body>
 </html>
-

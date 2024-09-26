@@ -12,17 +12,26 @@ header {
     color: #fff;
     padding: 15px 20px;
     position: relative;
+    width: 100%; /* Faz o cabeçalho cobrir toda a largura da tela */
+    height: auto; /* Altura automática para adaptar ao conteúdo */
+    display: flex;
+    justify-content: space-between; /* Alinha logo e menu à esquerda e direita */
+    align-items: center; /* Centraliza verticalmente os itens */
+    box-sizing: border-box; /* Inclui padding no tamanho total */
 }
 
+/* Navbar */
 .navbar {
     display: flex;
-    justify-content: space-between; /* Alinha os itens à esquerda e direita */
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
+/* Logo */
 .logo {
     text-align: left;
-    flex: 1; /* Faz com que a logo ocupe o espaço à esquerda */
+    padding-left: 20px; /* Adiciona espaçamento para alinhar o logo à esquerda */
 }
 
 .logo h1 {
@@ -32,10 +41,92 @@ header {
 
 .logo a {
     color: #fff;
-    text-decoration: none; /* Remove o sublinhado */
+    text-decoration: none;
 }
 
-/* Menu móvel - ajustado para logado e não logado */
+.logo img {
+    max-width: 150px; /* Limita a largura máxima do logo */
+    height: auto; /* Mantém a proporção do logo */
+    display: block; /* Remove espaços em branco ao redor da imagem */
+    margin: 0; /* Remove a centralização */
+}
+
+/* Ajuste para telas médias (tablets) */
+@media (min-width: 768px) {
+    .logo img {
+        max-width: 200px; /* Aumenta o tamanho do logo para telas maiores */
+    }
+}
+
+/* Ajuste para telas grandes (desktops) */
+@media (min-width: 1024px) {
+    .logo img {
+        max-width: 250px; /* Limita o tamanho do logo em telas grandes */
+    }
+}
+
+/* Menu principal */
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Alinha os itens de navegação à direita */
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease; /* Transição suave para exibições de menus */
+}
+
+.nav-list li {
+    margin-left: 20px; /* Espaçamento entre os itens */
+}
+
+.nav-list li a {
+    color: #fff; /* Cor do texto nos links */
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.nav-list li a.cadastro-button {
+    background-color: #f39c12; /* Cor do botão de cadastro */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.nav-list li a:hover {
+    background-color: #004a99; /* Cor de fundo ao passar o mouse */
+    border-radius: 5px; /* Mantém as bordas arredondadas ao passar o mouse */
+}
+
+/* Menu desktop */
+.navbar-menu {
+    display: flex;
+    gap: 20px; /* Espaçamento entre os itens */
+    align-items: center;
+}
+
+.navbar-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.navbar-menu a:hover {
+    background-color: #003366;
+    border-radius: 5px;
+}
+
+.navbar-menu .btn-cadastro {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-menu .btn-cadastro:hover {
+    background-color: #d48806;
+}
+
+/* Menu móvel */
 .menu-icon {
     display: none;
     cursor: pointer;
@@ -51,13 +142,16 @@ header {
         display: block;
     }
 
+    .navbar-menu {
+        display: none; /* Esconde o menu desktop no mobile */
+    }
     /* Estilos para o menu de usuários não logados */
     #nav-list-nao-logado, #nav-list-logado {
         position: fixed;
         top: 0;
         right: -100%;
         height: 100%;
-        width: 50%; /* O menu agora ocupa 50% da largura */
+        width: 50%; /* O menu ocupa 50% da largura no mobile */
         background-color: #333;
         flex-direction: column;
         justify-content: flex-start;
@@ -94,6 +188,20 @@ header {
 
     .nav-list li a:hover {
         background-color: #444;
+    }
+
+    /* Botão de Cadastro no Mobile */
+    .nav-list .btn-cadastro {
+        background-color: #f39c12; /* Cor do botão de cadastro */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .nav-list .btn-cadastro:hover {
+        background-color: #d48806;
     }
 
     /* Estilos ajustados para dropdown no menu mobile */
@@ -210,9 +318,12 @@ header {
     margin: 0 auto;
 }
 
+/* Melhorando a visibilidade do texto */
 .banner h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para aumentar o contraste */
+    color: #ffdd33; /* Mudando a cor do texto para dar mais visibilidade */
 }
 
 .cta-buttons a {
@@ -499,4 +610,3 @@ footer {
         font-size: 12px;
     }
 }
-
