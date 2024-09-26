@@ -7,6 +7,7 @@ if (menuIcon && navList) {
     // Função para abrir/fechar o menu no celular
     menuIcon.addEventListener('click', function () {
         navList.classList.toggle('show'); // Exibe ou oculta o menu
+        console.log('Menu clicado, classe "show" foi ' + (navList.classList.contains('show') ? 'adicionada' : 'removida')); // Verifica se a classe foi adicionada ou removida
     });
 
     // Fecha o menu se clicar fora dele
@@ -16,13 +17,28 @@ if (menuIcon && navList) {
         // Verifica se o clique foi fora do menu ou do ícone do menu
         if (!navList.contains(target) && !menuIcon.contains(target)) {
             navList.classList.remove('show'); // Fecha o menu
+            console.log('Menu fechado ao clicar fora dele.');
         }
     });
+  // Função para abrir/fechar o menu móvel
+  function toggleMenu() {
+    const navList = document.querySelector('.nav-list');
+    navList.classList.toggle('show');
+  }
 
+  // Fecha o menu quando o usuário clica fora dele
+  document.addEventListener('click', function(event) {
+    const menuIcon = document.querySelector('.menu-icon');
+    const navList = document.querySelector('.nav-list');
+    if (!menuIcon.contains(event.target) && !navList.contains(event.target)) {
+      navList.classList.remove('show');
+    }
+  });
     // Oculta o menu ao redimensionar a janela
     window.addEventListener('resize', function () {
         if (window.innerWidth > 768) {
             navList.classList.remove('show'); // Fecha o menu em telas maiores
+            console.log('Menu fechado ao redimensionar para uma largura maior que 768px.');
         }
     });
 } else {

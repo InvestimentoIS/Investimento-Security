@@ -35,35 +35,58 @@ header {
     text-decoration: none;
 }
 
-/* Menu principal */
-.nav-list {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end; /* Alinha os itens de navegação à direita esclusivo para celular */
-    margin: 0;
-    padding: 0;
-    transition: transform 0.3s ease;
-}
-
-.nav-list li {
-    margin-left: 20px;
-}
-
-.nav-list li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-}
-
-.nav-list li a.cadastro-button {
-    background-color: #f39c12;
-    border-radius: 5px;
-}
-
-.nav-list li a:hover {
-    background-color: #004a99;
-    border-radius: 5px;
-}
+/* Menu móvel */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+  
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100%;
+        width: 50%;
+        background-color: #333;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        z-index: 999;
+        transition: right 0.3s ease;
+    }
+  
+    .nav-list.show {
+        right: 0;
+    }
+  
+    .nav-list li {
+        margin: 20px 0;
+        width: 100%;
+    }
+  
+    .nav-list li a {
+        font-size: 18px;
+        color: #fff;
+        text-align: left;
+        padding: 10px 0;
+    }
+  
+    .nav-list li a:hover {
+        background-color: #444;
+    }
+  }
+  
 
 /* Submenu de Investimentos dropdown */
 .nav-list .dropdown {
