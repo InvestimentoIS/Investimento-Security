@@ -15,7 +15,7 @@
             <div class="logo">
                 <h1><a href="index.html">Investiment Security</a></h1>
             </div>
-            <div class="menu-icon" id="menu-icon">
+            <div class="menu-icon" id="menu-icon-nao-logado">
                 <img src="Fotos/menu preto.png" alt="Menu">
             </div>
             <ul class="nav-list" id="nav-list-nao-logado">
@@ -33,7 +33,7 @@
             <div class="logo">
                 <h1><a href="dashboard.html">Investimento Security</a></h1>
             </div>
-            <div class="menu-icon" id="menu-icon">
+            <div class="menu-icon" id="menu-icon-logado">
                 <img src="Fotos/menu preto.png" alt="Menu">
             </div>
             <ul class="nav-list" id="nav-list-logado">
@@ -74,6 +74,7 @@
             </ul>
         </nav>
     </header>
+
     <!-- Banner Inicial -->
     <section class="banner">
         <div class="banner-content">
@@ -203,79 +204,6 @@
     </footer>
 
     <script src="pasta_js/index.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const backendURL = 'https://.onrender.com'; // Exemplo da URL do backend
-            const token = sessionStorage.getItem('authToken'); // Obtém o token de autenticação
-    
-            // Elementos da interface que serão manipulados
-            const usernameElement = document.getElementById('username');
-            const profilePhotoElement = document.getElementById('profilePhoto');
-            const headerLogado = document.getElementById("header-logado");
-            const headerNaoLogado = document.getElementById("header-nao-logado");
-    
-            // Função para exibir a interface de usuário logado
-            function mostrarUsuarioLogado(data) {
-                if (usernameElement && profilePhotoElement) {
-                    usernameElement.textContent = data.username;
-                    profilePhotoElement.src = data.profilePhoto;
-                }
-    
-                if (headerLogado && headerNaoLogado) {
-                    headerLogado.style.display = "block";
-                    headerNaoLogado.style.display = "none";
-                }
-            }
-    
-            // Função para exibir a interface de usuário não logado
-            function mostrarUsuarioNaoLogado() {
-                if (headerLogado && headerNaoLogado) {
-                    headerLogado.style.display = "none";
-                    headerNaoLogado.style.display = "block";
-                }
-            }
-    
-            // Se o token de autenticação existe, buscar informações do usuário
-            if (token) {
-                fetch(`${backendURL}/meu-perfil`, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            console.warn("Token inválido ou expirado.");
-                        } else {
-                            console.error(`Erro ao buscar perfil: ${response.status}`);
-                        }
-                        throw new Error("Falha ao buscar o perfil do usuário.");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    mostrarUsuarioLogado(data);
-                })
-                .catch(err => {
-                    console.error("Erro ao buscar dados do usuário:", err);
-                    mostrarUsuarioNaoLogado();
-                });
-            } else {
-                mostrarUsuarioNaoLogado(); // Se não há token, exibir UI de não logado
-            }
-    
-            // Função de logout
-            const logoutBtn = document.getElementById("logout-btn");
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", () => {
-                    sessionStorage.removeItem('authToken'); // Remove o token de autenticação
-                    window.location.href = "login.html";    // Redireciona para a página de login
-                });
-            }
-        });
-    </script>
-    
 </body>
 </html>
 

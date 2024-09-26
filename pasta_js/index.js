@@ -1,48 +1,63 @@
-// Seleciona o ícone do menu e o menu
-const menuIcon = document.getElementById('menu-icon');
-const navList = document.getElementById('nav-list');
+// Função para abrir/fechar o menu no celular (usuário não logado)
+const menuIconNaoLogado = document.getElementById('menu-icon-nao-logado');
+const navListNaoLogado = document.getElementById('nav-list-nao-logado');
 
-// Verifica se os elementos existem antes de adicionar event listeners
-if (menuIcon && navList) {
+// Função para abrir/fechar o menu no celular (usuário logado)
+const menuIconLogado = document.getElementById('menu-icon-logado');
+const navListLogado = document.getElementById('nav-list-logado');
+
+// Verifica se os elementos do menu de usuário não logado existem antes de adicionar event listeners
+if (menuIconNaoLogado && navListNaoLogado) {
     // Função para abrir/fechar o menu no celular
-    menuIcon.addEventListener('click', function () {
-        navList.classList.toggle('show'); // Exibe ou oculta o menu
-        console.log('Menu clicado, classe "show" foi ' + (navList.classList.contains('show') ? 'adicionada' : 'removida')); // Verifica se a classe foi adicionada ou removida
+    menuIconNaoLogado.addEventListener('click', function () {
+        navListNaoLogado.classList.toggle('show'); // Exibe ou oculta o menu
+        console.log('Menu não logado clicado, classe "show" foi ' + (navListNaoLogado.classList.contains('show') ? 'adicionada' : 'removida'));
     });
 
     // Fecha o menu se clicar fora dele
     document.addEventListener('click', function (event) {
-        const target = event.target; // O elemento que foi clicado
+        const target = event.target;
 
-        // Verifica se o clique foi fora do menu ou do ícone do menu
-        if (!navList.contains(target) && !menuIcon.contains(target)) {
-            navList.classList.remove('show'); // Fecha o menu
-            console.log('Menu fechado ao clicar fora dele.');
+        if (!navListNaoLogado.contains(target) && !menuIconNaoLogado.contains(target)) {
+            navListNaoLogado.classList.remove('show');
+            console.log('Menu não logado fechado ao clicar fora dele.');
         }
     });
-  // Função para abrir/fechar o menu móvel
-  function toggleMenu() {
-    const navList = document.querySelector('.nav-list');
-    navList.classList.toggle('show');
-  }
 
-  // Fecha o menu quando o usuário clica fora dele
-  document.addEventListener('click', function(event) {
-    const menuIcon = document.querySelector('.menu-icon');
-    const navList = document.querySelector('.nav-list');
-    if (!menuIcon.contains(event.target) && !navList.contains(event.target)) {
-      navList.classList.remove('show');
-    }
-  });
     // Oculta o menu ao redimensionar a janela
     window.addEventListener('resize', function () {
         if (window.innerWidth > 768) {
-            navList.classList.remove('show'); // Fecha o menu em telas maiores
-            console.log('Menu fechado ao redimensionar para uma largura maior que 768px.');
+            navListNaoLogado.classList.remove('show'); // Fecha o menu em telas maiores
+            console.log('Menu não logado fechado ao redimensionar para uma largura maior que 768px.');
         }
     });
-} else {
-    console.error("Elemento 'menu-icon' ou 'nav-list' não foi encontrado no DOM!");
+}
+
+// Verifica se os elementos do menu de usuário logado existem antes de adicionar event listeners
+if (menuIconLogado && navListLogado) {
+    // Função para abrir/fechar o menu no celular
+    menuIconLogado.addEventListener('click', function () {
+        navListLogado.classList.toggle('show'); // Exibe ou oculta o menu
+        console.log('Menu logado clicado, classe "show" foi ' + (navListLogado.classList.contains('show') ? 'adicionada' : 'removida'));
+    });
+
+    // Fecha o menu se clicar fora dele
+    document.addEventListener('click', function (event) {
+        const target = event.target;
+
+        if (!navListLogado.contains(target) && !menuIconLogado.contains(target)) {
+            navListLogado.classList.remove('show');
+            console.log('Menu logado fechado ao clicar fora dele.');
+        }
+    });
+
+    // Oculta o menu ao redimensionar a janela
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+            navListLogado.classList.remove('show'); // Fecha o menu em telas maiores
+            console.log('Menu logado fechado ao redimensionar para uma largura maior que 768px.');
+        }
+    });
 }
 
 // Função para verificar se o usuário está logado
