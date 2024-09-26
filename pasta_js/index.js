@@ -1,66 +1,82 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
-    const desktopNavLogado = document.getElementById('nav-list-logado');
-    const desktopNavNaoLogado = document.getElementById('nav-list-nao-logado');
-    const mobileNav = document.getElementById('nav-list-mobile');
-    const menuIcon = document.getElementById('menu-icon');
 
-    // Função para alternar o menu móvel
-    menuIcon.addEventListener('click', () => {
-        if (mobileNav.style.display === 'none' || mobileNav.style.display === '') {
-            mobileNav.style.display = 'block';
-        } else {
-            mobileNav.style.display = 'none';
-        }
-    });
+// Seleciona o ícone do menu e o menu
+const menuIcon = document.getElementById('menu-icon');
+const navList = document.getElementById('nav-list');
 
-    // Verifica se o usuário está autenticado
-    if (token) {
-        // Usuário logado
-        desktopNavNaoLogado.style.display = 'none'; // Esconde o menu para não logados
-        desktopNavLogado.style.display = 'flex'; // Mostra o menu para logados
-
-        // Preenche o menu móvel com itens de usuário logado
-        mobileNav.innerHTML = `
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li class="dropdown">
-                <a href="#">Investimentos</a>
-                <ul class="dropdown-menu">
-                    <li><a href="acoes-garantidas.html">Ações Garantidas</a></li>
-                    <li><a href="acoes-nao-garantidas.html">Ações Não Garantidas</a></li>
-                    <li><a href="comprar-vender.html">Comprar/Vender</a></li>
-                </ul>
-            </li>
-            <li><a href="depositar.html">Depósito/Saque</a></li>
-            <li><a href="notificacoes.html"><img src="Fotos/notificacoes.png" alt="Notificações"></a></li>
-            <li class="dropdown perfil-usuario">
-                <a href="#"><img src="Fotos/perfil.png" alt="Perfil"></a>
-                <ul class="dropdown-menu">
-                    <li><a href="meu-perfil.html">Perfil</a></li>
-                    <li><a href="configuracoes.html">Configurações</a></li>
-                    <li><button id="logout-btn">Sair</button></li>
-                </ul>
-            </li>
-        `;
-    } else {
-        // Usuário não logado
-        desktopNavLogado.style.display = 'none'; // Esconde o menu para logados
-        desktopNavNaoLogado.style.display = 'flex'; // Mostra o menu para não logados
-
-        // Preenche o menu móvel com itens de usuário não logado
-        mobileNav.innerHTML = `
-            <li><a href="index.html">Início</a></li>
-            <li><a href="acoes.html">Ações</a></li>
-            <li><a href="investidores.html">Investidores</a></li>
-            <li><a href="contato.html">Contato</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Cadastrar</a></li>
-        `;
-    }
-
-    // Lida com o logout
-    document.getElementById('logout-btn')?.addEventListener('click', () => {
-        localStorage.removeItem('token');
-        window.location.href = 'index.html';
-    });
+// Função para abrir/fechar o menu no celular
+menuIcon.addEventListener('click', function () {
+    navList.classList.toggle('show'); // Exibe ou oculta o menu
 });
+
+// Fecha o menu se clicar fora dele
+document.addEventListener('click', function (event) {
+    const target = event.target; // O elemento que foi clicado
+
+    // Verifica se o clique foi fora do menu ou do ícone do menu
+    if (!navList.contains(target) && !menuIcon.contains(target)) {
+        navList.classList.remove('show'); // Fecha o menu
+    }
+});
+
+// Oculta o menu ao redimensionar a janela
+window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) {
+        navList.classList.remove('show'); // Fecha o menu em telas maiores
+    }
+});
+
+// Função para verificar se o usuário está logado
+async function checkAuthStatus() {
+    try {
+        const response = await fetch('http://localhost:3003/auth-status');
+        const { isLoggedIn, username } = await response.json();
+
+        const headerLogado = document.getElementById('header-logado');
+        const headerNaoLogado = document.getElementById('header-nao-logado');
+        const usernameDisplay = document.getElementById('username-display');
+
+        if (isLoggedIn) {
+            // Exibe o cabeçalho para usuários logados
+            headerLogado.style.display = 'block';
+            headerNaoLogado.style.display = 'none';
+
+            // Exibe o nome do usuário
+            if (usernameDisplay) {
+                usernameDisplay.textContent = `Bem-vindo, ${username}`;
+            }
+        } else {
+            // Exibe o cabeçalho para usuários não logados
+            headerLogado.style.display = 'none';
+            headerNaoLogado.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Erro ao verificar o status de autenticação:', error);
+    }
+}
+
+// Verifica o status de autenticação quando a página carrega
+window.addEventListener('DOMContentLoaded', checkAuthStatus);
+
+// Função de logout
+async function logoutUser() {
+    try {
+        const response = await fetch('http://localhost:3003/logout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.ok) {
+            window.location.href = '/index.html'; // Redireciona para index.html após logout
+        } else {
+            console.error('Erro ao fazer logout.');
+        }
+    } catch (error) {
+        console.error('Erro ao fazer logout:', error);
+    }
+}
+
+// Adiciona um listener ao botão de logout
+const logoutButton = document.getElementById('logout-button');
+if (logoutButton) {
+    logoutButton.addEventListener('click', logoutUser);
+}
