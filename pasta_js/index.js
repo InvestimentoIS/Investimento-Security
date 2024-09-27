@@ -63,7 +63,18 @@ if (menuIconLogado && navListLogado) {
 // Função para verificar se o usuário está logado
 async function checkAuthStatus() {
     try {
-        const response = await fetch('http://localhost:3003/auth-status');
+        const response = await fetch('https://investimento-security.onrender.com/auth-status', {
+            method: 'GET',
+            credentials: 'include', // Inclui cookies de autenticação na solicitação
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+
         const { isLoggedIn, username } = await response.json();
 
         const headerLogado = document.getElementById('header-logado');
@@ -95,13 +106,14 @@ window.addEventListener('DOMContentLoaded', checkAuthStatus);
 // Função de logout
 async function logoutUser() {
     try {
-        const response = await fetch('https://investimento-security.onrender.com', {
+        const response = await fetch('https://investimento-security.onrender.com/logout', {
             method: 'POST',
+            credentials: 'include', // Inclui cookies para o logout
             headers: { 'Content-Type': 'application/json' }
         });
 
         if (response.ok) {
-            window.location.href = '/index.html'; // Redireciona para index.html após logout
+            window.location.href = 'https://investimentois.github.io/Investimento-Security/index.html'; // Redireciona para index.html após logout
         } else {
             console.error('Erro ao fazer logout.');
         }
