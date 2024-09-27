@@ -95,7 +95,7 @@ window.addEventListener('DOMContentLoaded', checkAuthStatus);
 // Função de logout
 async function logoutUser() {
     try {
-        const response = await fetch('http://localhost:3003/logout', {
+        const response = await fetch('https://investimento-security.onrender.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
