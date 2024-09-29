@@ -1,4 +1,3 @@
-
 require('dotenv').config(); // Certifique-se de que está no topo do arquivo
 const express = require('express');
 const mongoose = require('mongoose');
@@ -226,6 +225,7 @@ app.post('/login', async (req, res) => {
 
         // Iniciar sessão
         req.session.userId = user._id;
+        req.session.username = user.username; // Adiciona o nome de usuário à sessão
 
         res.status(200).json({ 
             success: true, 
